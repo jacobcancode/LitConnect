@@ -1,6 +1,6 @@
 ---
 layout: post 
-title: Vote for the GOAT
+title: Review and Discuss
 search_exclude: true
 permalink: /voteforthegoat/home
 menu: nav/vote_for_the_goat.html
@@ -38,9 +38,9 @@ menu: nav/vote_for_the_goat.html
     }
 </style>
 
-## Welcome to Vote for the GOAT!
+## Welcome to Review and Relate
 
-We're excited to bring you "Vote for the GOAT," a fun and interactive project from Mr. Brown's class! Here, students can dive into different topics, cast their votes, and have some great conversations. Each group has their own theme, so there's something for everyone to get excited about. Let’s jump into what each group is up to and how you can get involved!
+In this Zone, view the book off the week, with the moderators honest review and 5 star raiting, and then enjoy disscussing with other readers, in the discussion chat, your thoughts and opionions on the moderators review, and have conversations with others about your own feelings. 
 
 ### Group Themes and Activities
 
