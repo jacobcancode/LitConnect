@@ -2,7 +2,7 @@
 layout: page
 title: Economy Cars
 description: Economy Car Information and Chatroom
-permalink: /voteforthegoat/nighthawkCars/economyCars/
+permalink: /review
 ---
 
 
@@ -15,11 +15,7 @@ permalink: /voteforthegoat/nighthawkCars/economyCars/
 <body>
         <table style="width: 100%; text-align: center; border-collapse: separate; border-spacing: 10px;">
             <tr>
-                <td><a href="{{site.baseurl}}/voteforthegoat/nighthawkCars" class="button">Nighthawk Cars (Home Page)</a></td>
                 <td><a href="{{site.baseurl}}/voteforthegoat/nighthawkCars/studentCars" class="button">Student Cars</a></td>
-                <td><a href="{{site.baseurl}}/voteforthegoat/nighthawkCars/vintageCars" class="button">Vintage Cars</a></td>
-                <td><a href="{{site.baseurl}}/voteforthegoat/nighthawkCars/luxuryCars" class="button">Luxury Cars</a></td>
-                <td><a href="{{site.baseurl}}/voteforthegoat/nighthawkCars/economyCars" class="button">Economy Cars</a></td>
             </tr>
         </table>
 </body>
