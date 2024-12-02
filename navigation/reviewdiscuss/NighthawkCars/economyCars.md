@@ -1,25 +1,10 @@
 ---
 layout: page
-title: Economy Cars
-description: Economy Car Information and Chatroom
+title: Review and Discuss 
+description: Have fun with your Peers!!
 permalink: /review
 ---
 
-
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navigation Bar</title>
-</head>
-<body>
-        <table style="width: 100%; text-align: center; border-collapse: separate; border-spacing: 10px;">
-            <tr>
-                <td><a href="{{site.baseurl}}/voteforthegoat/nighthawkCars/studentCars" class="button">Student Cars</a></td>
-            </tr>
-        </table>
-</body>
-</html>
 
 <html lang="en">
 <head>
@@ -210,10 +195,10 @@ permalink: /review
 
 <body>
 
-<h3>Examples</h3>
+<h3>This Week's Books!</h3>
 <div>
-    <p>Honda Civic</p>
-    <img src="https://media.ed.edmunds-media.com/honda/civic/2023/oem/2023_honda_civic_sedan_si_fq_oem_1_1280.jpg" alt="civic" style="width:300px;height:200px;">
+    <p>Hunger Games: By Suzanne Collins</p>
+    <img src="{{site.baseurl}}/images/book1.png" height="60" title="Home" alt="">
     <p>Toyota Corolla</p>
     <img src="https://hips.hearstapps.com/hmg-prod/images/2025-toyota-corolla-fx-102-6674930515eb4.jpg?crop=0.482xw:0.483xh;0.205xw,0.250xh&resize=768:*" alt="toyota corolla" style="width:300px;height:200px;">
     <p>Kia Forte</p>
@@ -226,15 +211,13 @@ permalink: /review
 <table>
     <tr>
         <td><p></p></td>
-        <td><p>Average Price</p></td>
-        <td><p>Lowest Price</p></td>
-        <td><p>Highest Price</p></td>
+        <td><p>Rating</p></td>
+        <td><p>Feedback</p></td>
     </tr>
     <tr>
-        <td><p>Honda Civic</p></td>
-        <td><p>$27,795</p></td>
-        <td><p>$23,950</p></td>
-        <td><p>$30,545</p></td> 
+        <td><p>Hunger Games</p></td>
+        <td><p>5 stars</p></td>
+        <td><p>Wonderful book, loved the plot and story dynamics, 100% recommended</p></td>
     </tr>
     <tr>
         <td><p>Toyota Corolla</p></td>
