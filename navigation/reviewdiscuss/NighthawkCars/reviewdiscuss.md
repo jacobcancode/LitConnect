@@ -10,7 +10,7 @@ permalink: /review
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Cars</title>
+    <title>Review Section</title>
     <style>
         body {
             background: linear-gradient(135deg, #333333, orange, #ffffff); /* 180deg for top-to-bottom gradient */
