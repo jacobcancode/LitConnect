@@ -198,7 +198,7 @@ permalink: /review
 <h3>This Week's Books!</h3>
 <div>
     <p>Hunger Games: By Suzanne Collins</p>
-    <img src="{{site.baseurl}}/images/book1.png" height="60" title="Home" alt="">
+    <img src="{{site.baseurl}}/images/book1.png" height="200" title="Home" alt="">
     <p>Toyota Corolla</p>
     <img src="https://hips.hearstapps.com/hmg-prod/images/2025-toyota-corolla-fx-102-6674930515eb4.jpg?crop=0.482xw:0.483xh;0.205xw,0.250xh&resize=768:*" alt="toyota corolla" style="width:300px;height:200px;">
     <p>Kia Forte</p>
