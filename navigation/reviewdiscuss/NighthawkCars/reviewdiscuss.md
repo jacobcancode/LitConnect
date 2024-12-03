@@ -5,8 +5,10 @@ description: Have fun with your Peers!!
 permalink: /review
 ---
 
+<html lang="en">
 
-<meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Review Section</title>
     <style>
@@ -28,7 +30,7 @@ permalink: /review
             border-bottom: 4px solid #000000;
             font-weight: bold;
             text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8),
-                         2px 2px 0 rgba(255, 255, 255, 0.6);
+                2px 2px 0 rgba(255, 255, 255, 0.6);
             border-radius: 10px;
             padding: 10px;
         }
@@ -179,74 +181,81 @@ permalink: /review
         }
     </script>
 
+    <!-- Backend Fetching -->
+    <h2>Discussion</h2>
+    <textarea placeholder="Enter your thoughts or comments here..." id="comment"></textarea>
+    <button class="regularButton" onclick="addComment()">
+        <p class="buttonP">Add Comment</p>
+    </button>
 
+    <div class="message-box" id="messageBox">
+        <p><strong>Messages:</strong></p>
+    </div>
 
- 
-<!-- Backend Fetching -->
-<h2>Discussion</h2>
-<textarea placeholder="Enter your thoughts or comments here..." id="comment"></textarea>
-<button class="regularButton" onclick="addComment()"><p class="buttonP">Add Comment</p></button>
+    <script type="module">
+        import { pythonURI, fetchOptions } from '../../../assets/js/api/config.js';
+        const channelID = 22;
+        const commentTitle = "economyCars";
 
-<div class="message-box" id="messageBox">
-    <p><strong>Messages:</strong></p>
-</div>
- <script type="module">
-import { pythonURI, fetchOptions } from '../../../assets/js/api/config.js';
-const channelID = 22;
-const commentTitle = "economyCars";
-async function addComment() {
-    const argumentText = document.getElementById('comment').value.trim();
-    if (!argumentText) {
-        alert('Please enter a comment.');
-        return;
-    }
-    const argumentData = {
-        title: commentTitle,
-        comment: argumentText,
-        channel_id: channelID,
-        user_name: localStorage.getItem('username') || 'Guest'
-    };
-    try {
-        const response = await fetch(`${pythonURI}/api/post`, {
-            ...fetchOptions,
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(argumentData)
+        async function addComment() {
+            const argumentText = document.getElementById('comment').value.trim();
+            if (!argumentText) {
+                alert('Please enter a comment.');
+                return;
+            }
+            const argumentData = {
+                title: commentTitle,
+                comment: argumentText,
+                channel_id: channelID,
+                user_name: localStorage.getItem('username') || 'Guest'
+            };
+            try {
+                const response = await fetch(`${pythonURI}/api/post`, {
+                    ...fetchOptions,
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(argumentData)
+                });
+                if (!response.ok) throw new Error('Failed to submit comment: ' + response.statusText);
+                document.getElementById('comment').value = ''; // Clear input field
+                fetchComments(); // Refresh comments list
+            } catch (error) {
+                console.error('Error submitting comment:', error);
+                alert('Error submitting comment: ' + error.message);
+            }
+        }
+
+        async function fetchComments() {
+            try {
+                const response = await fetch(`${pythonURI}/api/posts/filter`, {
+                    ...fetchOptions,
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ channel_id: channelID })
+                });
+                if (!response.ok) throw new Error('Failed to fetch comments: ' + response.statusText);
+                const argumentsData = await response.json();
+                // Reverse the order of the comments so the latest comes first
+                argumentsData.reverse();
+                const messageBox = document.getElementById('messageBox');
+                messageBox.innerHTML = "<p><strong>Messages :</strong></p>"; // Clear existing comments
+                argumentsData.forEach(arg => {
+                    const commentElement = document.createElement("p");
+                    commentElement.textContent = `${arg.user_name}: ${arg.comment}`;
+                    messageBox.appendChild(commentElement);
+                });
+            } catch (error) {
+                console.error('Error fetching comments:', error);
+                alert('Error fetching comments: ' + error.message);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            fetchComments(channelID); // Fetch initial comments on page load
         });
-        if (!response.ok) throw new Error('Failed to submit comment: ' + response.statusText);
-        document.getElementById('comment').value = ''; // Clear input field
-        fetchComments(); // Refresh comments list
-    } catch (error) {
-        console.error('Error submitting comment:', error);
-        alert('Error submitting comment: ' + error.message);
-    }
-}
-async function fetchComments() {
-    try {
-        const response = await fetch(`${pythonURI}/api/posts/filter`, {
-            ...fetchOptions,
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ channel_id: channelID })
-        });
-        if (!response.ok) throw new Error('Failed to fetch comments: ' + response.statusText);
-        const argumentsData = await response.json();
-        // Reverse the order of the comments so the latest comes first
-        argumentsData.reverse();
-        const messageBox = document.getElementById('messageBox');
-        messageBox.innerHTML = "<p><strong>Messages :</strong></p>"; // Clear existing comments
-        argumentsData.forEach(arg => {
-            const commentElement = document.createElement("p");
-            commentElement.textContent = `${arg.user_name}: ${arg.comment}`;
-            messageBox.appendChild(commentElement);
-        });
-    } catch (error) {
-        console.error('Error fetching comments:', error);
-        alert('Error fetching comments: ' + error.message);
-    }
-}
-window.addEventListener('load', () => {
-    fetchComments(channelID); // Fetch initial comments on page load
-});
-window.addComment = addComment; // Expose the function globally
+
+        window.addComment = addComment; // Expose the function globally
     </script>
+</body>
+
+</html>
