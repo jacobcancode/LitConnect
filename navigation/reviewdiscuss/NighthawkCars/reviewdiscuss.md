@@ -199,11 +199,26 @@ permalink: /review
 <div>
     <p>Hunger Games: By Suzanne Collins</p>
     <img src="{{site.baseurl}}/images/book1.png" height="400" title="Home" alt="">
-    <p>Toyota Corolla</p>
+    <!-- Moderator Rating Section -->
+<div class="moderator-rating">
+  <h2>Moderator's Rating</h2>
+  <div class="star-rating" style="color: gold;">
+    <span>&#9733;</span>
+    <span>&#9733;</span>
+    <span>&#9733;</span>
+    <span>&#9733;</span>
+    <span>&#9733;</span>
+  </div>
+  <div class="feedback-box">
+    <h3>Moderator's Feedback</h3>
+    <p class="feedback-content">
+      Wonderful book and story plot! I really like the idea of the story and how two people are willing to sacrifice their lives for each other's love. Definitely 5/5 stars.
+    </p>
+  </div>
 
-</div>
 
-<!DOCTYPE html>
+
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
