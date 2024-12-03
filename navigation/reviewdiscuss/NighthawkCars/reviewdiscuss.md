@@ -183,9 +183,57 @@ permalink: /review
         <span class="star" data-value="4">&#9733;</span>
         <span class="star" data-value="5">&#9733;</span>
     </div>
-    <p id="rating-display">Your Rating: 0</p>
-    <div id="thank-you-message">
-        Thank you for rating! Feel free to discuss your thoughts and the moderator's opinion below.
+    <script>
+    // Fix for Star Rating functionality
+    const stars = document.querySelectorAll('.star-rating .star');
+    const ratingDisplay = document.getElementById('rating-display');
+    const thankYouMessage = document.getElementById('thank-you-message');
+
+    stars.forEach((star) => {
+        star.addEventListener('mouseover', () => {
+            // Highlight stars on hover
+            const rating = star.getAttribute('data-value');
+            highlightStars(rating);
+        });
+
+        star.addEventListener('mouseout', () => {
+            // Reset stars after hover
+            resetStars();
+        });
+
+        star.addEventListener('click', () => {
+            // Set selected rating and show thank-you message
+            const rating = star.getAttribute('data-value');
+            setRating(rating);
+            thankYouMessage.style.display = 'block'; // Show thank-you message
+        });
+    });
+
+    function highlightStars(rating) {
+        stars.forEach((star) => {
+            const value = star.getAttribute('data-value');
+            star.classList.toggle('hover', value <= rating);
+        });
+    }
+
+    function resetStars() {
+        stars.forEach((star) => {
+            star.classList.remove('hover');
+        });
+    }
+
+    function setRating(rating) {
+        // Highlight stars up to the selected rating
+        stars.forEach((star) => {
+            const value = star.getAttribute('data-value');
+            star.classList.toggle('selected', value <= rating);
+        });
+
+        // Update rating display
+        ratingDisplay.textContent = `Your Rating: ${rating}`;
+    }
+</script>
+
     </div>
 
     <h2>Discussion</h2>
