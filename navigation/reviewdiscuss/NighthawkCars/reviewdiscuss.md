@@ -198,47 +198,12 @@ permalink: /review
 <h3>This Week's Books!</h3>
 <div>
     <p>Hunger Games: By Suzanne Collins</p>
-    <img src="{{site.baseurl}}/images/book1.png" height="200" title="Home" alt="">
+    <img src="{{site.baseurl}}/images/book1.png" height="400" title="Home" alt="">
     <p>Toyota Corolla</p>
-    <img src="https://hips.hearstapps.com/hmg-prod/images/2025-toyota-corolla-fx-102-6674930515eb4.jpg?crop=0.482xw:0.483xh;0.205xw,0.250xh&resize=768:*" alt="toyota corolla" style="width:300px;height:200px;">
-    <p>Kia Forte</p>
-    <img src="https://file.kelleybluebookimages.com/kbb/base/house/2012/2012-Kia-Forte-FrontSide_KIFT111_640x480.jpg?downsize=382:*"  alt="kia" style="width:300px;height:200px;">
-    <p>Chevorlet Trax</p>
-    <img src="https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2024/suvs/trax/masthead/02-images/2024-trax-mov-masthead.png?imwidth=960" alt="Trax" style="width:450px;height:200px;">
+
 </div>
 
-<h3>Pricing</h3>
-<table>
-    <tr>
-        <td><p></p></td>
-        <td><p>Rating</p></td>
-        <td><p>Feedback</p></td>
-    </tr>
-    <tr>
-        <td><p>Hunger Games</p></td>
-        <td><p>5 stars</p></td>
-        <td><p>Wonderful book, loved the plot and story dynamics, 100% recommended</p></td>
-    </tr>
-    <tr>
-        <td><p>Toyota Corolla</p></td>
-        <td><p>$25,500</p></td>
-        <td><p>$23,185</p></td>
-        <td><p>$27,900</p></td>
-    </tr>
-    <tr>
-        <td><p>Kia Forte</p></td>
-        <td><p>$23,500</p></td>
-        <td><p>$21,145</p></td>
-        <td><p>$26,000</p></td>
-    </tr>
-    <tr>
-        <td><p>Chevorlet Trax</p></td>
-        <td><p>$22,800</p></td>
-        <td><p>$21,495</p></td>
-        <td><p>$24,000</p></td>
-    </tr>
-</table>
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -249,31 +214,53 @@ permalink: /review
       font-family: Arial, sans-serif;
       text-align: center;
       margin: 50px;
+      background: #f9f9f9;
     }
 
     .star-rating {
-      font-size: 2rem;
-      color: gray;
+      font-size: 3rem;
+      color: #ddd;
       cursor: pointer;
+      display: inline-flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
     }
 
     .star {
-      transition: color 0.2s;
+      transition: color 0.3s ease, transform 0.2s ease;
     }
 
-    .star.selected,
     .star:hover,
-    .star:hover ~ .star {
-      color: gold;
+    .star.selected,
+    .star.hover {
+      color: #f7d106;
+      transform: scale(1.2);
     }
 
     #rating-display {
       margin-top: 20px;
+      font-size: 1.4rem;
+      color: #333;
+    }
+
+    #thank-you-message {
+      margin-top: 20px;
       font-size: 1.2rem;
+      color: #444;
+      display: none;
+      background: #e7f4e9;
+      padding: 10px;
+      border: 1px solid #c2e3cc;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
+  <h1>Your Rating</h1>
+  <p>Please rate the book and share your thoughts.</p>
+
+  <!-- Star Rating Section -->
   <div class="star-rating">
     <span class="star" data-value="1">&#9733;</span>
     <span class="star" data-value="2">&#9733;</span>
@@ -281,11 +268,16 @@ permalink: /review
     <span class="star" data-value="4">&#9733;</span>
     <span class="star" data-value="5">&#9733;</span>
   </div>
+
   <p id="rating-display">Your Rating: 0</p>
+  <div id="thank-you-message">
+    Thank you for rating! Feel free to discuss your thoughts and the moderator's opinion below.
+  </div>
 
   <script>
     const stars = document.querySelectorAll('.star');
     const ratingDisplay = document.getElementById('rating-display');
+    const thankYouMessage = document.getElementById('thank-you-message');
 
     stars.forEach(star => {
       star.addEventListener('click', () => {
@@ -295,6 +287,8 @@ permalink: /review
         star.classList.add('selected');
         const rating = star.getAttribute('data-value');
         ratingDisplay.textContent = `Your Rating: ${rating}`;
+        // Show thank you message
+        thankYouMessage.style.display = 'block';
       });
 
       star.addEventListener('mouseover', () => {
@@ -315,23 +309,6 @@ permalink: /review
 </body>
 </html>
 
-<script>
-        // Define messages for each button
-        const messages = {
-            button1: "You voted for Honda Civic! Thank you for voting!",
-            button2: "You voted for Toyota Corolla! Thank you for voting!",
-            button3: "You voted for Kia Forte! Thank you for voting!",
-            button4: "You voted for Chevorlet Trax! Thank you for voting!",
-        };
-
-        // Add event listeners to each button
-        for (let buttonId in messages) {
-            const button = document.getElementById(buttonId);
-            button.addEventListener('click', function() {
-                alert(messages[buttonId]);
-            });
-        }
-    </script>
 
 <h2>Discussion</h2>
 <textarea placeholder="Enter your thoughts or comments here..." id="comment"></textarea>
