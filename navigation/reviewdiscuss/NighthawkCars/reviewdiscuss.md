@@ -239,13 +239,81 @@ permalink: /review
     </tr>
 </table>
 
-<h3>Voting</h3>
-<div>
-    <button id="button1" class="regularButton"><p class="buttonP">Honda Civic</p></button>
-    <button id="button2" class="regularButton"><p class="buttonP">Toyota Corolla</p></button>
-    <button id="button3" class="regularButton"><p class="buttonP">Kia Forte</p></button>
-    <button id="button4" class="regularButton"><p class="buttonP">Chevorlet Trax</p></button>
-</div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Star Rating</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+
+    .star-rating {
+      font-size: 2rem;
+      color: gray;
+      cursor: pointer;
+    }
+
+    .star {
+      transition: color 0.2s;
+    }
+
+    .star.selected,
+    .star:hover,
+    .star:hover ~ .star {
+      color: gold;
+    }
+
+    #rating-display {
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="star-rating">
+    <span class="star" data-value="1">&#9733;</span>
+    <span class="star" data-value="2">&#9733;</span>
+    <span class="star" data-value="3">&#9733;</span>
+    <span class="star" data-value="4">&#9733;</span>
+    <span class="star" data-value="5">&#9733;</span>
+  </div>
+  <p id="rating-display">Your Rating: 0</p>
+
+  <script>
+    const stars = document.querySelectorAll('.star');
+    const ratingDisplay = document.getElementById('rating-display');
+
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        // Clear previous selections
+        stars.forEach(s => s.classList.remove('selected'));
+        // Highlight selected stars
+        star.classList.add('selected');
+        const rating = star.getAttribute('data-value');
+        ratingDisplay.textContent = `Your Rating: ${rating}`;
+      });
+
+      star.addEventListener('mouseover', () => {
+        stars.forEach(s => {
+          if (s.getAttribute('data-value') <= star.getAttribute('data-value')) {
+            s.classList.add('hover');
+          } else {
+            s.classList.remove('hover');
+          }
+        });
+      });
+
+      star.addEventListener('mouseout', () => {
+        stars.forEach(s => s.classList.remove('hover'));
+      });
+    });
+  </script>
+</body>
+</html>
 
 <script>
         // Define messages for each button
