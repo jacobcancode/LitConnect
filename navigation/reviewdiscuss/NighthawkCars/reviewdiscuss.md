@@ -30,7 +30,7 @@ permalink: /review
             border-bottom: 4px solid #000000;
             font-weight: bold;
             text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8),
-                2px 2px 0 rgba(255, 255, 255, 0.6);
+                         2px 2px 0 rgba(255, 255, 255, 0.6);
             border-radius: 10px;
             padding: 10px;
         }
@@ -61,45 +61,42 @@ permalink: /review
             color: black !important;
         }
 
-        textarea {
-            width: 300px;
-            height: 80px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            padding: 10px;
-            font-size: 1rem;
-            resize: none;
-        }
-
-        #messageBox {
-            width: 80%;
-            max-width: 500px;
-            height: 200px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 1px solid #ffffff;
-            border-radius: 5px;
-            padding: 10px;
-            margin-top: 10px;
-            overflow-y: scroll;
-            color: white;
-        }
-
-        #messageBox p {
-            margin: 5px 0;
-        }
-
-        .regularButton {
-            background-color: #4caf50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
+        .star-rating {
+            font-size: 3rem;
+            color: #ddd;
             cursor: pointer;
-            font-size: 1rem;
+            display: inline-flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        .regularButton:hover {
-            background-color: #45a049;
+        .star {
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .star:hover,
+        .star.selected,
+        .star.hover {
+            color: #f7d106;
+            transform: scale(1.2);
+        }
+
+        #rating-display {
+            margin-top: 20px;
+            font-size: 1.4rem;
+            color: white;
+        }
+
+        #thank-you-message {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #ffffff;
+            display: none;
+            background: #4caf50;
+            padding: 10px;
+            border: 1px solid #388e3c;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -126,10 +123,68 @@ permalink: /review
         </div>
     </div>
 
-    <!-- Discussion Section -->
+    <!-- Star Rating Section -->
+    <h1>Your Rating</h1>
+    <p>Please rate the book and share your thoughts.</p>
+    <div class="star-rating">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+    <div id="rating-display">Your Rating: 0</div>
+    <div id="thank-you-message">Thank you for rating! Your feedback is appreciated.</div>
+
+    <script>
+        const stars = document.querySelectorAll('.star-rating .star');
+        const ratingDisplay = document.getElementById('rating-display');
+        const thankYouMessage = document.getElementById('thank-you-message');
+        let userRating = 0;
+
+        stars.forEach((star) => {
+            star.addEventListener('mouseover', () => {
+                const rating = star.getAttribute('data-value');
+                highlightStars(rating);
+            });
+
+            star.addEventListener('mouseout', resetStars);
+
+            star.addEventListener('click', () => {
+                const rating = star.getAttribute('data-value');
+                userRating = rating; // Store user rating
+                setRating(rating);
+                thankYouMessage.style.display = 'block'; // Show thank-you message
+                alert(`You rated this book ${rating} out of 5!`); // Prompt message
+            });
+        });
+
+        function highlightStars(rating) {
+            stars.forEach((star) => {
+                const value = star.getAttribute('data-value');
+                star.classList.toggle('hover', value <= rating);
+            });
+        }
+
+        function resetStars() {
+            stars.forEach((star) => {
+                star.classList.remove('hover');
+            });
+        }
+
+        function setRating(rating) {
+            stars.forEach((star) => {
+                const value = star.getAttribute('data-value');
+                star.classList.toggle('selected', value <= rating);
+            });
+            ratingDisplay.textContent = `Your Rating: ${rating}`;
+        }
+    </script>
+
+    <!-- Backend Fetching -->
     <h2>Discussion</h2>
     <textarea placeholder="Enter your thoughts or comments here..." id="comment"></textarea>
-    <button class="regularButton" onclick="addComment()">Add Comment</button>
+    <button class="regularButton" onclick="addComment()"><p class="buttonP">Add Comment</p></button>
 
     <div class="message-box" id="messageBox">
         <p><strong>Messages:</strong></p>
@@ -139,7 +194,6 @@ permalink: /review
         import { pythonURI, fetchOptions } from '../../../assets/js/api/config.js';
         const channelID = 22;
         const commentTitle = "economyCars";
-
         async function addComment() {
             const argumentText = document.getElementById('comment').value.trim();
             if (!argumentText) {
@@ -167,7 +221,6 @@ permalink: /review
                 alert('Error submitting comment: ' + error.message);
             }
         }
-
         async function fetchComments() {
             try {
                 const response = await fetch(`${pythonURI}/api/posts/filter`, {
@@ -178,9 +231,9 @@ permalink: /review
                 });
                 if (!response.ok) throw new Error('Failed to fetch comments: ' + response.statusText);
                 const argumentsData = await response.json();
-                argumentsData.reverse(); // Latest comments first
+                argumentsData.reverse();
                 const messageBox = document.getElementById('messageBox');
-                messageBox.innerHTML = "<p><strong>Messages:</strong></p>"; // Clear existing messages
+                messageBox.innerHTML = "<p><strong>Messages :</strong></p>"; // Clear existing comments
                 argumentsData.forEach(arg => {
                     const commentElement = document.createElement("p");
                     commentElement.textContent = `${arg.user_name}: ${arg.comment}`;
@@ -191,13 +244,14 @@ permalink: /review
                 alert('Error fetching comments: ' + error.message);
             }
         }
-
         window.addEventListener('load', () => {
             fetchComments(channelID); // Fetch initial comments on page load
         });
-
         window.addComment = addComment; // Expose the function globally
     </script>
 </body>
 
 </html>
+
+
+
