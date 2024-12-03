@@ -61,42 +61,45 @@ permalink: /review
             color: black !important;
         }
 
-        .star-rating {
-            font-size: 3rem;
-            color: #ddd;
-            cursor: pointer;
-            display: inline-flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
+        textarea {
+            width: 300px;
+            height: 80px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 1rem;
+            resize: none;
         }
 
-        .star {
-            transition: color 0.3s ease, transform 0.2s ease;
-        }
-
-        .star:hover,
-        .star.selected,
-        .star.hover {
-            color: #f7d106;
-            transform: scale(1.2);
-        }
-
-        #rating-display {
-            margin-top: 20px;
-            font-size: 1.4rem;
+        #messageBox {
+            width: 80%;
+            max-width: 500px;
+            height: 200px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+            overflow-y: scroll;
             color: white;
         }
 
-        #thank-you-message {
-            margin-top: 20px;
-            font-size: 1.2rem;
-            color: #ffffff;
-            display: none;
-            background: #4caf50;
-            padding: 10px;
-            border: 1px solid #388e3c;
+        #messageBox p {
+            margin: 5px 0;
+        }
+
+        .regularButton {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .regularButton:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -123,70 +126,10 @@ permalink: /review
         </div>
     </div>
 
-    <!-- Star Rating Section -->
-    <h1>Your Rating</h1>
-    <p>Please rate the book and share your thoughts.</p>
-    <div class="star-rating">
-        <span class="star" data-value="1">&#9733;</span>
-        <span class="star" data-value="2">&#9733;</span>
-        <span class="star" data-value="3">&#9733;</span>
-        <span class="star" data-value="4">&#9733;</span>
-        <span class="star" data-value="5">&#9733;</span>
-    </div>
-    <div id="rating-display">Your Rating: 0</div>
-    <div id="thank-you-message">Thank you for rating! Your feedback is appreciated.</div>
-
-    <script>
-        const stars = document.querySelectorAll('.star-rating .star');
-        const ratingDisplay = document.getElementById('rating-display');
-        const thankYouMessage = document.getElementById('thank-you-message');
-        let userRating = 0;
-
-        stars.forEach((star) => {
-            star.addEventListener('mouseover', () => {
-                const rating = star.getAttribute('data-value');
-                highlightStars(rating);
-            });
-
-            star.addEventListener('mouseout', resetStars);
-
-            star.addEventListener('click', () => {
-                const rating = star.getAttribute('data-value');
-                userRating = rating; // Store user rating
-                setRating(rating);
-                thankYouMessage.style.display = 'block'; // Show thank-you message
-                alert(`You rated this book ${rating} out of 5!`); // Prompt message
-            });
-        });
-
-        function highlightStars(rating) {
-            stars.forEach((star) => {
-                const value = star.getAttribute('data-value');
-                star.classList.toggle('hover', value <= rating);
-            });
-        }
-
-        function resetStars() {
-            stars.forEach((star) => {
-                star.classList.remove('hover');
-            });
-        }
-
-        function setRating(rating) {
-            stars.forEach((star) => {
-                const value = star.getAttribute('data-value');
-                star.classList.toggle('selected', value <= rating);
-            });
-            ratingDisplay.textContent = `Your Rating: ${rating}`;
-        }
-    </script>
-
-    <!-- Backend Fetching -->
+    <!-- Discussion Section -->
     <h2>Discussion</h2>
     <textarea placeholder="Enter your thoughts or comments here..." id="comment"></textarea>
-    <button class="regularButton" onclick="addComment()">
-        <p class="buttonP">Add Comment</p>
-    </button>
+    <button class="regularButton" onclick="addComment()">Add Comment</button>
 
     <div class="message-box" id="messageBox">
         <p><strong>Messages:</strong></p>
@@ -235,10 +178,9 @@ permalink: /review
                 });
                 if (!response.ok) throw new Error('Failed to fetch comments: ' + response.statusText);
                 const argumentsData = await response.json();
-                // Reverse the order of the comments so the latest comes first
-                argumentsData.reverse();
+                argumentsData.reverse(); // Latest comments first
                 const messageBox = document.getElementById('messageBox');
-                messageBox.innerHTML = "<p><strong>Messages :</strong></p>"; // Clear existing comments
+                messageBox.innerHTML = "<p><strong>Messages:</strong></p>"; // Clear existing messages
                 argumentsData.forEach(arg => {
                     const commentElement = document.createElement("p");
                     commentElement.textContent = `${arg.user_name}: ${arg.comment}`;
