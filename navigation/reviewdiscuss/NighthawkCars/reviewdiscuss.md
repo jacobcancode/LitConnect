@@ -6,7 +6,7 @@ permalink: /review
 ---
 
 
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -324,6 +324,7 @@ permalink: /review
 </body>
 </html>
 
+<body>
 
 <h2>Discussion</h2>
 <textarea placeholder="Enter your thoughts or comments here..." id="comment"></textarea>
@@ -392,5 +393,4 @@ window.addEventListener('load', () => {
 });
 window.addComment = addComment; // Expose the function globally
     </script>
-    </body>
-</html>
+  
