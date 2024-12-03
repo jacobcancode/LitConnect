@@ -6,11 +6,7 @@ permalink: /review
 ---
 
 
-
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Review Section</title>
     <style>
@@ -87,71 +83,23 @@ permalink: /review
         #rating-display {
             margin-top: 20px;
             font-size: 1.4rem;
-            color: #333;
+            color: white;
         }
 
         #thank-you-message {
             margin-top: 20px;
             font-size: 1.2rem;
-            color: #444;
+            color: #ffffff;
             display: none;
-            background: #e7f4e9;
+            background: #4caf50;
             padding: 10px;
-            border: 1px solid #c2e3cc;
+            border: 1px solid #388e3c;
             border-radius: 5px;
-        }
-
-        .message-box {
-            background-color: #000000;
-            border: 4px solid #ffffff;
-            padding: 10px;
-            height: 420px;
-            overflow-y: auto;
-            margin-top: 40px;
-        }
-
-        #comment {
-            width: 100%;
-            height: 100px;
-            padding: 15px;
-            font-size: 16px;
-            border-radius: 8px;
-            border: 3px solid #C0C0C0;
-            resize: vertical;
-        }
-
-        .regularButton {
-            all: unset;
-            background-color: white !important;
-            border: 2px solid #ccc;
-            border-radius: 12px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.1s ease;
-            font-weight: bold;
-            color: black !important;
-        }
-
-        .regularButton:hover {
-            background-color: lightgray !important;
-            transform: scale(1.05);
-        }
-
-        .regularButton:active {
-            background-color: grey !important;
-            transform: scale(0.95);
-        }
-
-        .buttonP {
-            all: unset !important;
-            color: black !important;
         }
     </style>
 </head>
 
 <body>
-
     <!-- Book Section -->
     <h3>This Week's Books!</h3>
     <p>Hunger Games: By Suzanne Collins</p>
@@ -183,60 +131,59 @@ permalink: /review
         <span class="star" data-value="4">&#9733;</span>
         <span class="star" data-value="5">&#9733;</span>
     </div>
+    <div id="rating-display">Your Rating: 0</div>
+    <div id="thank-you-message">Thank you for rating! Your feedback is appreciated.</div>
+
     <script>
-    // Fix for Star Rating functionality
-    const stars = document.querySelectorAll('.star-rating .star');
-    const ratingDisplay = document.getElementById('rating-display');
-    const thankYouMessage = document.getElementById('thank-you-message');
+        const stars = document.querySelectorAll('.star-rating .star');
+        const ratingDisplay = document.getElementById('rating-display');
+        const thankYouMessage = document.getElementById('thank-you-message');
+        let userRating = 0;
 
-    stars.forEach((star) => {
-        star.addEventListener('mouseover', () => {
-            // Highlight stars on hover
-            const rating = star.getAttribute('data-value');
-            highlightStars(rating);
-        });
-
-        star.addEventListener('mouseout', () => {
-            // Reset stars after hover
-            resetStars();
-        });
-
-        star.addEventListener('click', () => {
-            // Set selected rating and show thank-you message
-            const rating = star.getAttribute('data-value');
-            setRating(rating);
-            thankYouMessage.style.display = 'block'; // Show thank-you message
-        });
-    });
-
-    function highlightStars(rating) {
         stars.forEach((star) => {
-            const value = star.getAttribute('data-value');
-            star.classList.toggle('hover', value <= rating);
-        });
-    }
+            star.addEventListener('mouseover', () => {
+                const rating = star.getAttribute('data-value');
+                highlightStars(rating);
+            });
 
-    function resetStars() {
-        stars.forEach((star) => {
-            star.classList.remove('hover');
-        });
-    }
+            star.addEventListener('mouseout', resetStars);
 
-    function setRating(rating) {
-        // Highlight stars up to the selected rating
-        stars.forEach((star) => {
-            const value = star.getAttribute('data-value');
-            star.classList.toggle('selected', value <= rating);
+            star.addEventListener('click', () => {
+                const rating = star.getAttribute('data-value');
+                userRating = rating; // Store user rating
+                setRating(rating);
+                thankYouMessage.style.display = 'block'; // Show thank-you message
+                alert(`You rated this book ${rating} out of 5!`); // Prompt message
+            });
         });
 
-        // Update rating display
-        ratingDisplay.textContent = `Your Rating: ${rating}`;
-    }
-</script>
+        function highlightStars(rating) {
+            stars.forEach((star) => {
+                const value = star.getAttribute('data-value');
+                star.classList.toggle('hover', value <= rating);
+            });
+        }
 
-    </div>
+        function resetStars() {
+            stars.forEach((star) => {
+                star.classList.remove('hover');
+            });
+        }
 
-    <h2>Discussion</h2>
+        function setRating(rating) {
+            stars.forEach((star) => {
+                const value = star.getAttribute('data-value');
+                star.classList.toggle('selected', value <= rating);
+            });
+            ratingDisplay.textContent = `Your Rating: ${rating}`;
+        }
+    </script>
+
+
+
+ 
+<!-- Backend Fetching -->
+<h2>Discussion</h2>
 <textarea placeholder="Enter your thoughts or comments here..." id="comment"></textarea>
 <button class="regularButton" onclick="addComment()"><p class="buttonP">Add Comment</p></button>
 
