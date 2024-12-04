@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Chess [Forum Rules]
-permalink: /chess/rules
+permalink: /moderator_picks
 comments: true
 ---
 

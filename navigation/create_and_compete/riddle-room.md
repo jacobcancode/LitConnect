@@ -1,10 +1,9 @@
 ---
 layout: post 
-title: Create and Compete - Riddle Room
+title: Moderator's Picks Discussion Room
 search_exclude: true
-permalink: /create_and_compete/riddle
+permalink: /disscus
 menu: nav/create_and_compete.html
-author: Kush, Tarun, Vincent, and Nolan
 ---
 
 <link rel="stylesheet" href="{{site.baseurl}}/navigation/create_and_compete/riddle.css">
@@ -15,7 +14,7 @@ author: Kush, Tarun, Vincent, and Nolan
 
   <a href="{{site.baseurl}}/moderation/rules_riddle/">Moderation Rules</a>
 
-  <p>The main purpose of our riddle room is to have people think critically and collaborate with the other members of the channel to solve the riddle as fast as possible.</p>
+  <p>Discuss your rating and Moderator's rating/feedback with other curious readers!</p>
 
   <p>Room will consist of:</p>
   <ul>
