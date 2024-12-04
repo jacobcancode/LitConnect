@@ -1,282 +1,223 @@
 ---
 layout: post 
-title: Shared Interests
+title: Book Club Hub
 search_exclude: true
-permalink: /shared_interests/home
+permalink: /bookclubuub
 menu: nav/shared_interests.html
 ---
 
-Mr. Brown's period 1 class brings you the greatest platform for sharing and discussing your various interests. 
 
-<style>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Club Hub</title>
+  <style>
+    /* General styles for body and structure */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #004080;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
     .container {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        max-width: 1200px;
-        padding: 20px;
-        box-sizing: border-box;
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
-    .form-container {
-        display: flex;
-        flex-direction: column;
-        max-width: 800px;
-        width: 100%;
-        background-color: #2c3e50;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        color: #ecf0f1;
-    }
-    .form-container label {
-        margin-bottom: 5px;
-    }
-    .form-container input, .form-container textarea, .form-container select {
-        margin-bottom: 10px;
-        padding: 10px;
-        border-radius: 5px;
-        border: none;
-        width: 100%;
-    }
-    .form-container button {
-        padding: 10px;
-        border-radius: 5px;
-        border: none;
-        background-color: #34495e;
-        color: #ecf0f1;
-        cursor: pointer;
-    }
-</style>
 
-<div class="container">
-    <div class="form-container">
-        <h2>Select Group and Channel</h2>
-        <form id="selectionForm">
-            <label for="group_id">Group:</label>
-            <select id="group_id" name="group_id" required>
-                <option value="">Select a group</option>
-            </select>
-            <label for="channel_id">Channel:</label>
-            <select id="channel_id" name="channel_id" required>
-                <option value="">Select a channel</option>
-            </select>
-            <button type="submit">Select</button>
-        </form>
+    .section {
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      color: #004080;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #f1f1f1;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    input, textarea, select, button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #004080;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #003366;
+    }
+
+    .recommendations-list li {
+      background: #e6f7ff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Book Club Hub</h1>
+  </header>
+
+  <div class="container">
+    <!-- Books Section -->
+    <div class="section" id="books-section">
+      <h2>Books</h2>
+      <!-- Program with Output: Display list of books -->
+      <ul id="books-list"></ul>
     </div>
-</div>
 
-<div class="container">
-    <div class="form-container">
-        <h2>Add New Post</h2>
-        <form id="postForm">
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required>
-            <label for="comment">Comment:</label>
-            <textarea id="comment" name="comment" required></textarea>
-            <button type="submit">Add Post</button>
-        </form>
+    <!-- Reading List Section -->
+    <div class="section" id="reading-list-section">
+      <h2>Your Reading List</h2>
+      <!-- Program with Input and Output: Form to add books to reading list -->
+      <form id="reading-list-form">
+        <input type="text" id="reading-list-book" placeholder="Add a book to your reading list" required>
+        <button type="submit">Add to Reading List</button>
+      </form>
+      <!-- Program with a List: Display reading list -->
+      <ul id="reading-list"></ul>
     </div>
-</div>
 
-<div class="container">
-    <div id="data" class="data">
-        <div class="left-side">
-            <p id="count"></p>
-        </div>
-        <div class="details" id="details">
-        </div>
+    <!-- Recommendations Section -->
+    <div class="section" id="recommendations-section">
+      <h2>Book Recommendations</h2>
+      <!-- Program with a Dictionary: Provide recommendations based on genre -->
+      <label for="genre-select">Choose a Genre:</label>
+      <select id="genre-select">
+        <option value="Fiction">Fiction</option>
+        <option value="Science Fiction">Science Fiction</option>
+        <option value="Mystery">Mystery</option>
+      </select>
+      <button id="get-recommendations">Get Recommendations</button>
+      <!-- Output recommendations -->
+      <ul id="recommendations-list" class="recommendations-list"></ul>
     </div>
-</div>
 
-<script type="module">
-    // Import server URI and standard fetch options
-    import { pythonURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
+    <!-- Discussion Section -->
+    <div class="section" id="discussion-section">
+      <h2>Discussions</h2>
+      <!-- Program with Iteration: Form to post discussion comments -->
+      <form id="discussion-form">
+        <input type="text" id="discussion-user" placeholder="Your Name" required>
+        <textarea id="discussion-comment" placeholder="Your Comment" required></textarea>
+        <button type="submit">Post</button>
+      </form>
+      <!-- List of comments -->
+      <ul id="discussion-list"></ul>
+    </div>
+  </div>
 
-    /**
-     * Fetch groups for dropdown selection
-     * User picks from dropdown
-     */
-    async function fetchGroups() {
-        try {
-            const response = await fetch(`${pythonURI}/api/groups/filter`, {
-                ...fetchOptions,
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ section_name: "Shared Interest" }) // Adjust the section name as needed
-            });
-            if (!response.ok) {
-                throw new Error('Failed to fetch groups: ' + response.statusText);
-            }
-            const groups = await response.json();
-            const groupSelect = document.getElementById('group_id');
-            groups.forEach(group => {
-                const option = document.createElement('option');
-                option.value = group.name; // Use group name for payload
-                option.textContent = group.name;
-                groupSelect.appendChild(option);
-            });
-        } catch (error) {
-            console.error('Error fetching groups:', error);
-        }
-    }
+  <script>
+    // Data for books and genres
+    const books = [
+      { title: "To Kill a Mockingbird", author: "Harper Lee" },
+      { title: "1984", author: "George Orwell" },
+      { title: "The Great Gatsby", author: "F. Scott Fitzgerald" }
+    ];
+    const bookGenres = {
+      Fiction: ["To Kill a Mockingbird", "The Great Gatsby"],
+      "Science Fiction": ["1984", "Dune"],
+      Mystery: ["Sherlock Holmes", "Gone Girl"]
+    };
 
-    /**
-     * Fetch channels based on selected group
-     * User picks from dropdown
-     */
-    async function fetchChannels(groupName) {
-        try {
-            const response = await fetch(`${pythonURI}/api/channels/filter`, {
-                ...fetchOptions,
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ group_name: groupName })
-            });
-            if (!response.ok) {
-                throw new Error('Failed to fetch channels: ' + response.statusText);
-            }
-            const channels = await response.json();
-            const channelSelect = document.getElementById('channel_id');
-            channelSelect.innerHTML = '<option value="">Select a channel</option>'; // Reset channels
-            channels.forEach(channel => {
-                const option = document.createElement('option');
-                option.value = channel.id;
-                option.textContent = channel.name;
-                channelSelect.appendChild(option);
-            });
-        } catch (error) {
-            console.error('Error fetching channels:', error);
-        }
-    }
+    // Reading List and Discussions storage
+    const readingList = [];
+    const discussions = [];
 
-    /**
-      * Handle group selection change
-      * Channel Dropdown refresh to match group_id change
-      */
-    document.getElementById('group_id').addEventListener('change', function() {
-        const groupName = this.value;
-        if (groupName) {
-            fetchChannels(groupName);
-        } else {
-            document.getElementById('channel_id').innerHTML = '<option value="">Select a channel</option>'; // Reset channels
-        }
+    // Program with Output: Display the list of books
+    const booksList = document.getElementById("books-list");
+    books.forEach(book => {
+      const li = document.createElement("li");
+      li.textContent = `${book.title} by ${book.author}`;
+      booksList.appendChild(li);
     });
 
-    /**
-     * Handle form submission for selection
-     * Select Button: Computer fetches and displays posts
-     */
-    document.getElementById('selectionForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const groupId = document.getElementById('group_id').value;
-        const channelId = document.getElementById('channel_id').value;
-        if (groupId && channelId) {
-            fetchData(channelId);
-        } else {
-            alert('Please select both group and channel.');
-        }
+    // Program with Input and Output: Add to the reading list
+    const readingListForm = document.getElementById("reading-list-form");
+    readingListForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const book = document.getElementById("reading-list-book").value;
+      readingList.push(book); // Program with a List: Manage reading list
+      document.getElementById("reading-list-book").value = ""; // Clear input field
+
+      const li = document.createElement("li");
+      li.textContent = book;
+      document.getElementById("reading-list").appendChild(li);
     });
 
-    /**
-     * Handle form submission for adding a post
-     * Add Form Button: Computer handles form submission with request
-     */
-    document.getElementById('postForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
+    // Program with a Dictionary: Provide book recommendations by genre
+    const recommendationsButton = document.getElementById("get-recommendations");
+    recommendationsButton.addEventListener("click", () => {
+      const genre = document.getElementById("genre-select").value;
+      const recommendations = bookGenres[genre] || [];
 
-        // Extract data from form
-        const title = document.getElementById('title').value;
-        const comment = document.getElementById('comment').value;
-        const channelId = document.getElementById('channel_id').value;
-
-        // Create API payload
-        const postData = {
-            title: title,
-            comment: comment,
-            channel_id: channelId
-        };
-
-        // Trap errors
-        try {
-            // Send POST request to backend, purpose is to write to database
-            const response = await fetch(`${pythonURI}/api/post`, {
-                ...fetchOptions,
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(postData)
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to add post: ' + response.statusText);
-            }
-
-            // Successful post
-            const result = await response.json();
-            alert('Post added successfully!');
-            document.getElementById('postForm').reset();
-            fetchData(channelId);
-        } catch (error) {
-            // Present alert on error from backend
-            console.error('Error adding post:', error);
-            alert('Error adding post: ' + error.message);
-        }
+      const recommendationsList = document.getElementById("recommendations-list");
+      recommendationsList.innerHTML = ""; // Clear previous recommendations
+      recommendations.forEach(book => {
+        const li = document.createElement("li");
+        li.textContent = book;
+        recommendationsList.appendChild(li);
+      });
     });
 
-    /**
-     * Fetch posts based on selected channel
-     * Handle response: Fetch and display posts
-     */
-    async function fetchData(channelId) {
-        try {
-            const response = await fetch(`${pythonURI}/api/posts/filter`, {
-                ...fetchOptions,
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ channel_id: channelId })
-            });
-            if (!response.ok) {
-                throw new Error('Failed to fetch posts: ' + response.statusText);
-            }
+    // Program with Iteration: Add and display discussion comments
+    const discussionForm = document.getElementById("discussion-form");
+    discussionForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const user = document.getElementById("discussion-user").value;
+      const comment = document.getElementById("discussion-comment").value;
+      discussions.push({ user, comment });
 
-            // Parse the JSON data
-            const postData = await response.json();
+      document.getElementById("discussion-user").value = "";
+      document.getElementById("discussion-comment").value = "";
 
-            // Extract posts count
-            const postCount = postData.length || 0;
+      const li = document.createElement("li");
+      li.textContent = `${user}: ${comment}`;
+      document.getElementById("discussion-list").appendChild(li);
+    });
+  </script>
+</body>
+</html>
 
-            // Update the HTML elements with the data
-            document.getElementById('count').innerHTML = `<h2>Count ${postCount}</h2>`;
-
-            // Get the details div
-            const detailsDiv = document.getElementById('details');
-            detailsDiv.innerHTML = ''; // Clear previous posts
-
-            // Iterate over the postData and create HTML elements for each item
-            postData.forEach(postItem => {
-                const postElement = document.createElement('div');
-                postElement.className = 'post-item';
-                postElement.innerHTML = `
-                    <h3>${postItem.title}</h3>
-                    <p><strong>Channel:</strong> ${postItem.channel_name}</p>
-                    <p><strong>User:</strong> ${postItem.user_name}</p>
-                    <p>${postItem.comment}</p>
-                `;
-                detailsDiv.appendChild(postElement);
-            });
-
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }
-
-    // Fetch groups when the page loads
-    fetchGroups();
-</script>
