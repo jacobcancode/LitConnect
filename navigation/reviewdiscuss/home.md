@@ -1,6 +1,6 @@
 ---
 layout: post 
-title: Review and Discuss
+title: Moderator's Picks
 search_exclude: true
 permalink: /voteforthegoat/home
 menu: nav/vote_for_the_goat.html
