@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Review and Discuss 
+title: Moderator's Picks
 description: Have fun with your Peers!!
 permalink: /review
 ---
