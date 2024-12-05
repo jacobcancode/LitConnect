@@ -2,7 +2,7 @@
 layout: post
 title: Welcome to LitConnect—Where Ideas Meet and Books Come Alive
 search_exclude: true
-description: Login and explore our social media hub for everything DNHS 
+description: A social connectivity website made to foster engagement between readers
 hide: true
 menu: nav/home.html
 ---
