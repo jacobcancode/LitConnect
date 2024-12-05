@@ -1,8 +1,8 @@
 ---
 layout: page
-title: DNHS Cafe Store
+title: LitConnect Cafe Store
 description: Purchase coffee using your d'nero you earned from helping!
-permalink: /dnhscafestore/
+permalink: /cafe
 ---
 <style>
 body { 
@@ -39,7 +39,7 @@ body {
 }
 </style>
 
-# ☕ Welcome to DNHS Cafe
+# ☕ Welcome to LitConnect Cafe
 
 **Come for the coffee, stay for the cozy vibes.**  
 *Enjoy a range of your favorite brews using dneros, our exclusive currency!*
@@ -110,9 +110,9 @@ updatePointsDisplay(); // Initial display update
 
 2. Message us to confirm your order.
 
-3. Enjoy the cozy vibes and delicious flavors of DNHS Cafe!
+3. Enjoy the cozy vibes and delicious flavors of LitConnect Cafe!
 
-*Thank you for visiting DNHS Cafe! We hope our cozy corner brings you a taste of joy and warmth.*
+*Thank you for visiting LitConnect Cafe! We hope our cozy corner brings you a taste of joy and warmth as you read. Make sure to check out the Moderators Weekly Books!*
 
 <style>
 body {
@@ -170,6 +170,6 @@ img {
 </style>
 
 
-<a href="{{site.baseurl}}/dnhscafestudyroom">
-<button style="background-color: #e4bc84; color: white; padding: 10px"> Take Me To DNHS Cafe Study Room! </button>
+<a href="{{site.baseurl}}/chat">
+<button style="background-color: #e4bc84; color: white; padding: 10px"> Take Me To LitConnect Moderator's Picks Discussion Room! </button>
 </a>
