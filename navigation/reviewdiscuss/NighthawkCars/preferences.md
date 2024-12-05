@@ -76,6 +76,15 @@ permalink: /preferences
                     <button onclick="changeMenuTheme('blue')"><p>Blue</p></button>
                     <button onclick="changeMenuTheme('red')"><p>Red</p></button>
                 </div>
+            </td>
+            <td class="dropdownp4">
+                <a class="dropbtn">Text Color</a>
+                <div class="dropdown-content">
+                    <button onclick="changeTextColor('black')"><p>Black</p></button>
+                    <button onclick="changeTextColor('white')"><p>White</p></button>
+                    <button onclick="changeTextColor('blue')"><p>Blue</p></button>
+                    <button onclick="changeTextColor('red')"><p>Red</p></button>
+                </div>
             </td>     
         </tr>
         <br>
@@ -89,15 +98,8 @@ permalink: /preferences
             if (theme === 'dark') {
                 document.body.style.background = 'linear-gradient(135deg, #333333, #555555, #000000)';
                 // Change text color to light (white)
-                document.querySelectorAll('p').forEach(p => {
-                    p.style.color = 'white';
-                });
             } else if (theme === 'light') {
                 document.body.style.background = 'linear-gradient(135deg, #ffffff, #f0f0f0, #cccccc)';
-                // Change text color to dark (black)
-                document.querySelectorAll('p').forEach(p => {
-                    p.style.color = 'black';
-                });
             }
         }
         function changeMenuTheme(theme) {
@@ -121,6 +123,15 @@ permalink: /preferences
                 }
             });
         }
+        function changeTextColor(theme) {
+            // creating list to store colors
+            const menuElements = document.querySelectorAll('p');
+            // changing color based on button clicked
+            menuElements.forEach(p => {
+                p.style.color = theme;
+            });
+        }
+
     </script>
 </body>
 </html>
