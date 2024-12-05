@@ -2,7 +2,7 @@
 layout: post 
 title: Moderator's Picks Discussion Room
 search_exclude: true
-permalink: /disscus
+permalink: /room
 menu: nav/create_and_compete.html
 ---
 
