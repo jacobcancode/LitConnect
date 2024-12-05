@@ -87,11 +87,17 @@ permalink: /preferences
     <script>
         function changeBackground(theme) {
             if (theme === 'dark') {
-                // change background color to dark gradient
                 document.body.style.background = 'linear-gradient(135deg, #333333, #555555, #000000)';
+                // Change text color to light (white)
+                document.querySelectorAll('p').forEach(p => {
+                    p.style.color = 'white';
+                });
             } else if (theme === 'light') {
-                // change background color to light gradient
                 document.body.style.background = 'linear-gradient(135deg, #ffffff, #f0f0f0, #cccccc)';
+                // Change text color to dark (black)
+                document.querySelectorAll('p').forEach(p => {
+                    p.style.color = 'black';
+                });
             }
         }
         function changeMenuTheme(theme) {
