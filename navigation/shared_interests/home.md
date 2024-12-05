@@ -1,6 +1,6 @@
 ---
 layout: post 
-title: WORK IN PROGRESS 
+title: Book Club Hub
 search_exclude: true
 permalink: /bookclubuub
 menu: nav/shared_interests.html
