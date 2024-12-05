@@ -131,7 +131,6 @@ permalink: /preferences
                 p.style.color = theme;
             });
         }
-
     </script>
 </body>
 </html>
