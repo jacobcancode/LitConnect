@@ -1,33 +1,42 @@
 ---
 layout: post
-title: Chess [Forum Rules]
+title: Moderator's Picks Community Rules
 permalink: /moderator_picks
 comments: true
 ---
 
-#### 1. Respect all Players
-Be courteous and respectful towards all members. Disrespectful language, personal attacks, and inappropriate comments will not be tolerated.
+### Community Rules
 
-#### 2. Stay On-Topic
-Conversations should be chess-related. Off-topic discussions and unrelated posts may be removed to maintain the focus on chess and related activities.
+1. **Be Respectful**  
+   - Treat all members with kindness and respect, regardless of their opinions or background.  
+   - Avoid personal attacks, harassment, or discriminatory language.
 
-#### 3. No Cheating
-Play fair. Using external assistance, bots, or analysis engines to gain an unfair advantage is strictly prohibited and may result in a ban.
+2. **Keep It Relevant**  
+   - Stay on topic in discussions and posts.  
+   - Avoid spamming or flooding the community with irrelevant content.  
 
-#### 4. Constructive Criticism Only
-When discussing strategies or analyzing games, provide constructive feedback. Criticize ideas, not individuals, to foster a positive learning environment.
+3. **Follow Content Guidelines**  
+   - Refrain from sharing offensive, illegal, or explicit material.  
+   - Ensure that shared content complies with the platform’s rules and copyright laws.
 
-#### 5. No Spamming or Advertising
-Refrain from posting repetitive messages, spamming, or advertising unrelated content. This platform is for genuine chess interaction and discussions.
+4. **No Hate Speech or Bullying**  
+   - Do not post anything that promotes hate, violence, or harm toward individuals or groups.  
+   - Bullying or targeted harassment will not be tolerated.
+
+5. **Engage Constructively**  
+   - Foster meaningful and thoughtful discussions.  
+   - Provide constructive feedback rather than being overly critical or dismissive.  
+
+6. **Protect Privacy**  
+   - Do not share personal information about yourself or others.  
+   - Respect the confidentiality of private discussions and information.
+
+7. **Report Rule Violations**  
+   - If you notice rule-breaking content or behavior, report it to moderators instead of engaging directly.  
+   - Provide clear and accurate details when reporting.
+
+8. **Have Fun and Contribute Positively**  
+   - Participate in the community with good intentions.  
+   - Encourage creativity, learning, and collaboration among members.
 
 
-#### 6. Keep it Safe for Everyone
-No sharing of personal information or content that may harm others' privacy and safety. Protecting everyone's privacy is a priority.
-
-#### 7. Respect Moderators
-Follow guidance from moderators and admins. If you have concerns about moderation, reach out to the team respectfully.
-
-#### 8. Reporting Violations
-If you observe any rule violations, report them to the moderation team promptly. Help us maintain a welcoming community.
-
-> We reserve the right to remove any posts or individuals from this forum for any perceived violations of the rules.
