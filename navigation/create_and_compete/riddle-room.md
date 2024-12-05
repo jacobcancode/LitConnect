@@ -6,36 +6,28 @@ permalink: /room
 menu: nav/create_and_compete.html
 ---
 
-<link rel="stylesheet" href="{{site.baseurl}}/navigation/create_and_compete/riddle.css">
+<link rel="stylesheet" href="{{site.baseurl}}/navigation/create_and_compete/chat.css">
 
 <details>
   <br>
   <summary>Room Details</summary>
 
-  <a href="{{site.baseurl}}/moderation/rules_riddle/">Moderation Rules</a>
+  <a href="{{site.baseurl}}/moderation/rules_chat/">Moderation Rules</a>
 
-  <p>Discuss your rating and Moderator's rating/feedback with other curious readers!</p>
+  <p>Discuss your thoughts and Ratings on Moderator's Picks!</p>
 
   <p>Room will consist of:</p>
   <ul>
-    <li>Daily riddle which is optionally pinned to the top of our channel</li>
-    <li>Answers will be posted at the end of the day</li>
-    <li>Chat box where members of the channel can collaborate to solve the riddle</li>
-    <li>AI which posts the answer if someone gets it, else posts the answer at the end of the day</li>
+    <li>Chat box where members of the channel can collaborate and share ideas</li>
     <li>Profanity is censored</li>
+    <li>Moderators will oversee discussions to ensure they stay respectful and productive</li>
   </ul>
 </details>
-
-
-<div id="riddle-container">
-    <h4 style="text-align: center;">Riddle of the Day</h4>
-    <p id="riddle-text"></p>
-</div>
 
 <div id="chat-container">
     <div id="chat-box"></div>
     <div id="users-list">
-        <h4 style="color: #4A4848;" >Users</h4>
+        <h4 style="color: #4A4848;">Users</h4>
         <ul id="userList">
             <li>System</li>
         </ul>
@@ -47,33 +39,12 @@ menu: nav/create_and_compete.html
     <button id="send-button" onclick="sendMessage()">Send</button>
 </div>
 
-<div class="input-group">
-    <input type="text" id="answer-input" placeholder="Enter your answer(with no extra characters)...">
-    <button id="check-answer" onclick="checkAnswer()">Check Answer</button>
-</div>
-
 <script>
     const chatBox = document.getElementById('chat-box');
     const messageInput = document.getElementById('message-input');
-    const answerInput = document.getElementById('answer-input');
     const userList = document.getElementById('userList');
-    const riddleText = document.getElementById('riddle-text');
     const users = new Set(['System']);
     let username;
-    let currentRiddle;
-
-    function displayRiddle() {
-        const riddles = [
-            { question: "What has keys but can't open locks?", answer: "piano" },
-            { question: "What has a head, a tail, but no body?", answer: "coin" },
-            { question: "What comes once in a minute, twice in a moment, but never in a thousand years?", answer: "m" },
-            { question: "I'm tall when I'm young, and I'm short when I'm old. What am I?", answer: "candle" },
-            { question: "What has to be broken before you can use it?", answer: "egg" }
-        ];
-        const riddleIndex = new Date().getDate() % riddles.length;
-        currentRiddle = riddles[riddleIndex];
-        riddleText.textContent = currentRiddle.question;
-    }
 
     function requestUsername() {
         while (true) {
@@ -112,17 +83,6 @@ menu: nav/create_and_compete.html
         }
     }
 
-    function checkAnswer() {
-        const userAnswer = answerInput.value.trim().toLowerCase();
-        if (userAnswer === currentRiddle.answer) {
-            displayMessage(`${username} got it right!`, true);
-        } else {
-            displayMessage(`${username} guessed wrong! Try again.`, true);
-        }
-        answerInput.value = '';
-    }
-
-    displayMessage("Welcome to the Riddle Room Chat!", true);
+    displayMessage("Welcome to the Chat Room!", true);
     requestUsername();
-    displayRiddle();
 </script>
