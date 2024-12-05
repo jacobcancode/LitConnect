@@ -12,7 +12,7 @@ permalink: /preferences
     <title>Select page preferences:</title>
     <style>
         body {
-            background: linear-gradient(135deg, #333333, orange, #ffffff); /* Default background gradient */
+            background: linear-gradient(135deg, #333333, #555555, #000000)
             color: #ffffff;
             font-family: Arial, sans-serif;
             min-height: 100vh;
