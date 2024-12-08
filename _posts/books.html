@@ -1,1 +1,67 @@
+---
+toc: true
+layout: post
+description: Select A Channel and Start Discussing!
+title: Backend Testing
+permalink: /backend
+comments: true
+---
 
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+</head>
+<body>
+    <h1>Reading Book List</h1>
+    <ul id="book-list"></ul>
+    <form id="book-form">
+        <input type="text" id="title" placeholder="Book Title" required />
+        <input type="text" id="author" placeholder="Author" required />
+        <button type="submit">Add Book</button>
+    </form>
+
+    <script>
+        const apiBaseUrl = 'http://127.0.0.1:3000/api/books';
+
+        // Fetch the current list of books
+        fetch(apiBaseUrl)
+            .then(response => response.json())
+            .then(books => {
+                const bookList = document.getElementById('book-list');
+                books.forEach(book => {
+                    const li = document.createElement('li');
+                    li.textContent = `${book.title} by ${book.author}`;
+                    bookList.appendChild(li);
+                });
+            });
+
+        // Add new book
+        document.getElementById('book-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+
+            const newBook = { title, author };
+
+            fetch(apiBaseUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newBook),
+            })
+            .then(response => response.json())
+            .then(book => {
+                const bookList = document.getElementById('book-list');
+                const li = document.createElement('li');
+                li.textContent = `${book.title} by ${book.author}`;
+                bookList.appendChild(li);
+            });
+
+            document.getElementById('book-form').reset();
+        });
+    </script>
+</body>
+</html>
