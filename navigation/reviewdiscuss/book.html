@@ -11,86 +11,82 @@ comments: true
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Reading List</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #2c3e50; /* Dark background for better readability */
-            color: #ecf0f1;  /* Light text color for better contrast */
-            text-align: center;
-            padding: 20px;
+            background-color: #333; /* Dark background */
+            color: #f1f1f1; /* Light text */
             margin: 0;
+            padding: 0;
         }
 
-        h1 {
-            color: #f39c12;  /* A bright gold color for the title */
-            margin-bottom: 20px;
+        h1, h2 {
+            text-align: center;
+        }
+
+        #about-me, #reading-list {
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: #444; /* Slightly lighter background for sections */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
         ul {
             list-style-type: none;
             padding: 0;
-            margin-top: 20px;
-            font-size: 18px;
         }
 
         li {
-            background-color: #34495e; /* Slightly lighter dark background for list items */
-            padding: 10px;
             margin: 5px 0;
+            padding: 10px;
+            background-color: #555;
             border-radius: 5px;
-            text-align: left;
-        }
-
-        h2 {
-            color: #ecf0f1;  /* Light text color for headings */
-            margin-top: 30px;
         }
 
         input, button {
             padding: 10px;
             margin: 5px;
+            border: none;
             border-radius: 5px;
-            border: 1px solid #bdc3c7;
         }
 
         input {
-            width: 250px;
+            width: calc(50% - 20px);
+            background-color: #666;
+            color: #f1f1f1;
         }
 
         button {
-            background-color: #f39c12;  /* Bright gold button for better visibility */
+            background-color: #007BFF;
             color: white;
             cursor: pointer;
         }
 
         button:hover {
-            background-color: #e67e22;  /* Darker gold on hover */
-        }
-
-        /* Additional styling for form container */
-        form {
-            margin-top: 20px;
-        }
-
-        /* Style the container of the book list */
-        .book-list-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #34495e;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <h1>Personalized Reading List</h1>
+    <h1>Global Reading List</h1>
 
-    <div class="book-list-container">
-        <h2>Recommended Books</h2>
-        <ul id="book-list"></ul>
+    <!-- About Me Section -->
+    <div id="about-me">
+        <h2>About Me</h2>
+        <ul id="user-info-list">
+            <!-- User info will be displayed here -->
+        </ul>
+    </div>
 
-        <h2>Add a New Book</h2>
+    <!-- Reading List Section -->
+    <div id="reading-list">
+        <h2>Reading List</h2>
+        <ul id="book-list">Loading...</ul>
+
+        <h3>Add a New Book</h3>
         <form id="book-form">
             <input type="text" id="title" placeholder="Book Title" required>
             <input type="text" id="author" placeholder="Author" required>
@@ -99,11 +95,33 @@ comments: true
     </div>
 
     <script>
-        const apiBaseUrl = 'http://127.0.0.1:3000/api/books';
+        const userApiUrl = 'http://127.0.0.1:3000/api/user';
+        const booksApiUrl = 'http://127.0.0.1:3000/api/books';
 
-        // Function to fetch and display the book list
+        // Fetch and display user information in list format
+        async function fetchUserInfo() {
+            const response = await fetch(userApiUrl);
+            const userInfo = await response.json();
+            const userInfoList = document.getElementById('user-info-list');
+            userInfoList.innerHTML = ''; // Clear existing content
+
+            // Populate the list with user information
+            const userItems = [
+                `Name: ${userInfo.name}`,
+                `Age: ${userInfo.age}`,
+                `City: ${userInfo.city}`,
+                `Hobbies: ${userInfo.hobbies.join(", ")}`
+            ];
+            userItems.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                userInfoList.appendChild(li);
+            });
+        }
+
+        // Fetch and display the book list
         async function fetchBooks() {
-            const response = await fetch(apiBaseUrl);
+            const response = await fetch(booksApiUrl);
             const books = await response.json();
             const bookList = document.getElementById('book-list');
             bookList.innerHTML = ''; // Clear the list
@@ -123,7 +141,7 @@ comments: true
             const newBook = { title, author };
 
             // Send the new book to the backend
-            await fetch(apiBaseUrl, {
+            await fetch(booksApiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -139,8 +157,10 @@ comments: true
             fetchBooks();
         });
 
-        // Load the book list on page load
+        // Load user info and book list on page load
+        fetchUserInfo();
         fetchBooks();
     </script>
 </body>
 </html>
+
