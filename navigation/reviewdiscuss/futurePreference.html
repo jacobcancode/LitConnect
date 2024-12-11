@@ -1,0 +1,59 @@
+---
+toc: true
+layout: post
+description: Eventually will turn into preferences page
+title: Change Site Preferences
+permalink: /preferences_2
+comments: true
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Data Fetcher</title>
+</head>
+<body>
+
+    <div id="data-container">
+        <h1>Static Data</h1>
+        <ul id="data-list">
+            <!-- Dynamic list items will go here -->
+        </ul>
+        <p id="error-message" class="error"></p>
+    </div>
+
+    <script>
+        // Function to fetch static data from the backend
+        function fetchData() {
+            fetch('http://localhost:3000/api/staticData')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch data');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const dataList = document.getElementById('data-list');
+                    dataList.innerHTML = ''; // Clear previous content
+
+                    // Loop through the fetched data and add each item to the list
+                    data.forEach(item => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = item;
+                        dataList.appendChild(listItem);
+                    });
+                })
+                .catch(error => {
+                    const errorMessage = document.getElementById('error-message');
+                    errorMessage.textContent = error.message;
+                });
+        }
+
+        // Call fetchData function on page load
+        window.onload = fetchData;
+    </script>
+
+</body>
+</html>
