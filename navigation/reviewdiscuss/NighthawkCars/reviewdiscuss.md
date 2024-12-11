@@ -104,8 +104,8 @@ permalink: /review
 <body>
     <!-- Book Section -->
     <h3>This Week's Books!</h3>
-    <p>Hunger Games: By Suzanne Collins</p>
-    <img src="{{site.baseurl}}/images/book1.png" height="400" alt="Book Cover">
+    <p>Hunger Games: By JK Rowlings</p>
+    <img src="{{site.baseurl}}/images/harry.png" height="400" alt="Book Cover">
     <div class="moderator-rating">
         <h2>Moderator's Rating</h2>
         <div class="star-rating" style="color: gold;">
@@ -118,7 +118,7 @@ permalink: /review
         <div class="feedback-box">
             <h3>Moderator's Feedback</h3>
             <p class="feedback-content">
-                Wonderful book and story plot! I really like the idea of the story and how two people are willing to sacrifice their lives for each other's love. Definitely 5/5 stars.
+                Wonderful book and story plot! I like the idea of the story and the plot twist at the end!
             </p>
         </div>
     </div>
