@@ -1,0 +1,90 @@
+---
+toc: true
+layout: post
+description: Page Preferences
+title: Preferences
+permalink: /preferences_2
+comments: true
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preferences Example</title>
+  <style>
+    #preferencesDisplay {
+      padding: 20px;
+      border: 1px solid #ccc;
+      width: 300px;
+      margin-top: 20px;
+    }
+
+    /* Adding a simple style for the menu section */
+    #menu {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    /* Example styling for menu items */
+    .menu-item {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to the Preferences Page</h1>
+
+  <div id="preferencesDisplay">
+    <h3>Preferences:</h3>
+    <p id="background"></p>
+    <p id="menu"></p>
+    <p id="text"></p>
+  </div>
+
+  <!-- Adding a simple menu to demonstrate color changes -->
+  <div id="menu">
+    <div class="menu-item">Home</div>
+    <div class="menu-item">About</div>
+    <div class="menu-item">Contact</div>
+  </div>
+
+  <script>
+    // Function to fetch preferences from the backend
+    function loadPreferences() {
+      fetch('http://localhost:8887/api/preferences')  // Adjust URL if needed
+        .then(response => response.json())
+        .then(data => {
+          // Update the page with the preferences
+          document.getElementById('background').innerText = `Background: ${data.background}`;
+          document.getElementById('menu').innerText = `Menu: ${data.menu}`;
+          document.getElementById('text').innerText = `Text: ${data.text}`;
+
+          // Apply the background color to the body
+          document.body.style.color = data.background;
+
+          // Apply text color to <p> elements
+          let pColors = document.querySelectorAll('p');
+          pColors.forEach(p => {
+            p.style.color = data.text;
+          });
+
+          // Change menu text color
+          let menuItems = document.querySelectorAll('.menu-item');
+          menuItems.forEach(item => {
+            item.style.color = data.menu;  // Apply menu color to each item
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching preferences:', error);
+        });
+    }
+
+    // Automatically load preferences when the page loads
+    window.onload = loadPreferences;
+  </script>
+
+</body>
+</html>
