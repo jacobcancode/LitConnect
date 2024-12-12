@@ -46,7 +46,6 @@ comments: true
 
   <div id="preferencesDisplay">
     <h3>Preferences:</h3>
-    <p id="background"></p>
     <p id="menu"></p>
     <p id="text"></p>
   </div>
@@ -60,7 +59,6 @@ comments: true
 
   <!-- Buttons for changing the colors -->
   <div id="colorButtons">
-    <button class="color-button" id="changeBackground">Change Background</button>
     <button class="color-button" id="changeText">Change Text</button>
     <button class="color-button" id="changeMenu">Change Menu</button>
   </div>
@@ -72,12 +70,8 @@ comments: true
         .then(response => response.json())
         .then(data => {
           // Update the page with the preferences
-          document.getElementById('background').innerText = `Background: ${data.background}`;
           document.getElementById('menu').innerText = `Menu: ${data.menu}`;
           document.getElementById('text').innerText = `Text: ${data.text}`;
-
-          // Apply the background color to the body
-          document.body.style.backgroundColor = data.background;
 
           // Apply text color to <p> elements
           let pColors = document.querySelectorAll('p');
@@ -113,14 +107,6 @@ comments: true
         console.error('Error updating preferences:', error);
       });
     }
-
-    // Change the background color
-    document.getElementById('changeBackground').addEventListener('click', function() {
-      const newBackgroundColor = prompt('Enter a new background color (e.g., "lightblue")');
-      if (newBackgroundColor) {
-        updatePreferences({ background: newBackgroundColor });
-      }
-    });
 
     // Change the text color
     document.getElementById('changeText').addEventListener('click', function() {
