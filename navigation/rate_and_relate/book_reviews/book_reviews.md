@@ -1,10 +1,9 @@
 ---
 layout: post 
-title: Book Reviews
+title: Book Gallary
 search_exclude: true
 permalink: rate_and_relate/book_reviews/
 menu: nav/rate_and_relate.html
-author: Soumini, Ahmad, Nikith, Kush
 ---
 <style>
   body {
