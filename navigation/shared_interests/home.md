@@ -5,7 +5,6 @@ search_exclude: true
 permalink: /bookclubuub
 menu: nav/shared_interests.html
 ---
-Up
 <html lang="en">
 <head>
   <meta charset="UTF-8">
