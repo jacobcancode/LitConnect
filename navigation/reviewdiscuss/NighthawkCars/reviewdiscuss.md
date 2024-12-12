@@ -104,7 +104,7 @@ permalink: /review
 <body>
     <!-- Book Section -->
     <h3>This Week's Books!</h3>
-    <p>Hunger Games: By JK Rowlings</p>
+    <p>Harry Potter and The Goblet of Fire: By JK Rowlings</p>
     <img src="{{site.baseurl}}/images/harry.png" height="400" alt="Book Cover">
     <div class="moderator-rating">
         <h2>Moderator's Rating</h2>
