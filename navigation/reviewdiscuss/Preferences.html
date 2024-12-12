@@ -31,6 +31,13 @@ comments: true
     .menu-item {
       margin-bottom: 5px;
     }
+
+    /* Button styles */
+    .color-button {
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -51,6 +58,13 @@ comments: true
     <div class="menu-item">Contact</div>
   </div>
 
+  <!-- Buttons for changing the colors -->
+  <div id="colorButtons">
+    <button class="color-button" id="changeBackground">Change Background</button>
+    <button class="color-button" id="changeText">Change Text</button>
+    <button class="color-button" id="changeMenu">Change Menu</button>
+  </div>
+
   <script>
     // Function to fetch preferences from the backend
     function loadPreferences() {
@@ -63,7 +77,7 @@ comments: true
           document.getElementById('text').innerText = `Text: ${data.text}`;
 
           // Apply the background color to the body
-          document.body.style.color = data.background;
+          document.body.style.backgroundColor = data.background;
 
           // Apply text color to <p> elements
           let pColors = document.querySelectorAll('p');
@@ -81,6 +95,48 @@ comments: true
           console.error('Error fetching preferences:', error);
         });
     }
+
+    // Function to send updated preferences to the backend
+    function updatePreferences(updatedData) {
+      fetch('http://localhost:8887/api/preferences', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        loadPreferences();  // Reload the updated preferences
+      })
+      .catch(error => {
+        console.error('Error updating preferences:', error);
+      });
+    }
+
+    // Change the background color
+    document.getElementById('changeBackground').addEventListener('click', function() {
+      const newBackgroundColor = prompt('Enter a new background color (e.g., "lightblue")');
+      if (newBackgroundColor) {
+        updatePreferences({ background: newBackgroundColor });
+      }
+    });
+
+    // Change the text color
+    document.getElementById('changeText').addEventListener('click', function() {
+      const newTextColor = prompt('Enter a new text color (e.g., "black")');
+      if (newTextColor) {
+        updatePreferences({ text: newTextColor });
+      }
+    });
+
+    // Change the menu color
+    document.getElementById('changeMenu').addEventListener('click', function() {
+      const newMenuColor = prompt('Enter a new menu color (e.g., "green")');
+      if (newMenuColor) {
+        updatePreferences({ menu: newMenuColor });
+      }
+    });
 
     // Automatically load preferences when the page loads
     window.onload = loadPreferences;
