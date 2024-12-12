@@ -18,7 +18,7 @@ menu: nav/home.html
             <div class="dropdown-content">
                 <a href="{{site.baseurl}}/backend_a">Personallized Reading List Fun</a>
                 <a href="{{site.baseurl}}/backend_s">About Creators</a>
-                <a href="{{site.baseurl}}/preferences_2">Future Preferences</a>
+                <a href="{{site.baseurl}}/preferences_2">Preferences</a>
             </div>
         </td>
     </tr>
