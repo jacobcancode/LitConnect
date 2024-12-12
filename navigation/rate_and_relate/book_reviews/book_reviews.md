@@ -2,7 +2,7 @@
 layout: post 
 title: Book Gallary
 search_exclude: true
-permalink: rate_and_relate/book_reviews/
+permalink: /gal
 menu: nav/rate_and_relate.html
 ---
 <style>
