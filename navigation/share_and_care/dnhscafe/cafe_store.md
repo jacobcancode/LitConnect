@@ -170,6 +170,6 @@ img {
 </style>
 
 
-<a href="{{site.baseurl}}/chat">
+<a href="{{site.baseurl}}/pull">
 <button style="background-color: #e4bc84; color: white; padding: 10px"> Take Me To LitConnect Moderator's Picks Discussion Room! </button>
 </a>
