@@ -24,7 +24,7 @@ menu: nav/home.html
     </tr>
 </table>
 
-<a href="{{site.baseurl}}/preferences">Page Preferences</a>
+
 
 <img src="https://cdn.pixabay.com/photo/2024/04/19/12/13/ai-generated-8706226_640.png">
 
