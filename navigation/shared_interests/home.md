@@ -92,12 +92,12 @@ menu: nav/shared_interests.html
     <!-- Reading List Section -->
     <div class="section" id="reading-list-section">
       <h2>Your Reading List</h2>
-      <!-- Input: Dropdown to select a book to add to the reading list -->
+      <!-- Input: Text input to type a book to add to the reading list -->
       <!-- College Board Requirement:
         - Use a list (or collection type) to represent the user's reading list -->
       <form id="reading-list-form">
-        <label for="reading-list-book">Choose a Book to Add:</label>
-        <select id="reading-list-book"></select>
+        <label for="reading-list-input">Enter a Book to Add:</label>
+        <input type="text" id="reading-list-input" placeholder="Type a book name here" required>
         <button type="submit">Add to Reading List</button>
       </form>
       <!-- Output: Display the reading list in a dropdown format -->
@@ -181,18 +181,22 @@ menu: nav/shared_interests.html
     const readingListDropdown = document.getElementById("reading-list-dropdown");
     const readingListForm = document.getElementById("reading-list-form");
 
-    // Add books to the reading list dropdown when selected
+    // Add books to the reading list dropdown when typed and submitted
     readingListForm.addEventListener("submit", event => {
       event.preventDefault();
-      const selectedBook = document.getElementById("reading-list-book").value;
+      const inputField = document.getElementById("reading-list-input");
+      const newBook = inputField.value;
 
-      // Add selected book to the reading list array
-      readingList.push(selectedBook);
+      // Add the new book to the reading list array
+      readingList.push(newBook);
 
       // Update the dropdown with the new book
       const option = document.createElement("option");
-      option.textContent = selectedBook;
+      option.textContent = newBook;
       readingListDropdown.appendChild(option);
+
+      // Clear the input field
+      inputField.value = "";
     });
 
     // Output: Genre-based book recommendations in dropdown
@@ -232,3 +236,4 @@ menu: nav/shared_interests.html
   </script>
 </body>
 </html>
+
