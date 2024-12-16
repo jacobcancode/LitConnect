@@ -4,7 +4,7 @@ if (location.hostname === "localhost") {
 } else if (location.hostname === "127.0.0.1") {
         pythonURI = "http://127.0.0.1:8887";
 } else {
-        pythonURI =  "https://ahaanv19.github.io/LitConnect/login";
+        pythonURI =  "https://ahaanv19.github.io/";
 }
 export var javaURI;
 if (location.hostname === "localhost") {
@@ -12,7 +12,7 @@ if (location.hostname === "localhost") {
 } else if (location.hostname === "127.0.0.1") {
         javaURI = "http://127.0.0.1:8887"; //rey
 } else {
-        javaURI = "https://ahaanv19.github.io/LitConnect/login";
+        javaURI = "https://ahaanv19.github.io/";
 }
 
 export const fetchOptions = {
@@ -39,7 +39,7 @@ export function login(options) {
         document.getElementById(options.message).textContent = "";
 
         // Fetch JWT
-        fetch('http://localhost:3000/', requestOptions)
+        fetch('http://localhost:3000', requestOptions)
         .then(response => {
                 // Trap error response from Web API
                 if (!response.ok) {
