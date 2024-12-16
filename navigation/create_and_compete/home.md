@@ -68,6 +68,7 @@ menu: nav/create_and_compete.html
         .author-info {
             padding: 1.5rem;
             flex: 1;
+            color: #222; /* Darker text color for better contrast */
         }
 
         .author-info h2 {
