@@ -22,7 +22,7 @@ menu: nav/create_and_compete.html
 
         body {
             background-color: #f9f9f9;
-            color: #333;
+            color: #000;
             line-height: 1.6;
         }
 
@@ -68,7 +68,7 @@ menu: nav/create_and_compete.html
         .author-info {
             padding: 1.5rem;
             flex: 1;
-            color: #222; /* Darker text color for better contrast */
+            color: #000;
         }
 
         .author-info h2 {
@@ -156,3 +156,4 @@ menu: nav/create_and_compete.html
 
 </body>
 </html>
+
