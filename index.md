@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Welcome to LitConnect—Where Ideas Meet and Books Come Alive
+title: LitConnect
 search_exclude: true
-description: A social connectivity website made to foster engagement between readers. Click on top headers to view our main pages, or click on these links!
+description: Welcome to LitConnect, a social connectivity website made to foster engagement between readers. Click on top headers to view our main pages, or click view the intro menu to customize your experience!
 hide: true
 menu: nav/home.html
 ---
