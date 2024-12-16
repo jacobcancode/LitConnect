@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function getCredentials(baseurl) {
     const URL = pythonURI + '/api/id';
-    return fetch('http://localhost:3000/', fetchOptions)
+    return fetch(URL, fetchOptions)
         .then(response => { // API response handler 
             if (response.status !== 200) {
                 console.error("HTTP status code: " + response.status);
