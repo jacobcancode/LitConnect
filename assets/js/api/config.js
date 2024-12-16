@@ -4,7 +4,7 @@ if (location.hostname === "localhost") {
 } else if (location.hostname === "127.0.0.1") {
         pythonURI = "http://127.0.0.1:8887";
 } else {
-        pythonURI =  "http://127.0.0.1:8887";
+        pythonURI =  "https://ahaanv19.github.io/";
 }
 export var javaURI;
 if (location.hostname === "localhost") {
@@ -12,7 +12,7 @@ if (location.hostname === "localhost") {
 } else if (location.hostname === "127.0.0.1") {
         javaURI = "http://127.0.0.1:8887"; //rey
 } else {
-        javaURI = "http://127.0.0.1:8887";
+        javaURI = "https://ahaanv19.github.io/";
 }
 
 export const fetchOptions = {
