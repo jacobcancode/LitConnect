@@ -87,7 +87,7 @@ footer a {
 
 <body>
   <div class="content">
-    <h2>Discover your next favorite book and connect with fellow readers from around the world.</h2>
+    <h2 class="menu-item">Discover your next favorite book and connect with fellow readers from around the world.</h2>
     <img src="https://cdn.pixabay.com/photo/2024/04/19/12/13/ai-generated-8706226_640.png" alt="LitConnect Visual">
   </div>
 
