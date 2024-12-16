@@ -24,7 +24,7 @@ menu: nav/vote_for_the_goat.html
     }
 
     .group-theme {
-        background: #000;
+        background: #ff69b4;
         color: #e0e0e0;
         padding: 15px;
         border-radius: 10px;
