@@ -1,16 +1,16 @@
 export var pythonURI;
 if (location.hostname === "localhost") {
-        pythonURI = "http://localhost:3000";
+        pythonURI = "http://localhost:8887";
 } else if (location.hostname === "127.0.0.1") {
-        pythonURI = "http://127.0.0.1:3000";
+        pythonURI = "http://127.0.0.1:8887";
 } else {
         pythonURI =  "https://ahaanv19.github.io/";
 }
 export var javaURI;
 if (location.hostname === "localhost") {
-        javaURI = "http://localhost:3000";
+        javaURI = "http://localhost:8887";
 } else if (location.hostname === "127.0.0.1") {
-        javaURI = "http://127.0.0.1:3000"; //rey
+        javaURI = "http://127.0.0.1:8887"; //rey
 } else {
         javaURI = "https://ahaanv19.github.io/";
 }
