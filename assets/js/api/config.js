@@ -39,7 +39,7 @@ export function login(options) {
         document.getElementById(options.message).textContent = "";
 
         // Fetch JWT
-        fetch('http://localhost:3000', requestOptions)
+        fetch(URL, requestOptions)
         .then(response => {
                 // Trap error response from Web API
                 if (!response.ok) {
