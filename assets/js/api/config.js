@@ -29,7 +29,7 @@ export const fetchOptions = {
 export function login(options) {
         // Modify the options to use the POST method and include the request body.
         const requestOptions  = {
-                ...fetchOptions, // This will copy all properties from options
+                ...options, // This will copy all properties from options
                 method: options.method, // Override the method property
                 cache: options.cache, // Set the cache property
                 body: JSON.stringify(options.body)
@@ -38,8 +38,11 @@ export function login(options) {
         // Clear the message area
         document.getElementById(options.message).textContent = "";
 
+        // Define the URL
+        const URL = 'https://ahaanv19.github.io/api/id'; // Corrected URL
+
         // Fetch JWT
-        fetch(URI, requestOptions)
+        fetch(URL, requestOptions)
         .then(response => {
                 // Trap error response from Web API
                 if (!response.ok) {
@@ -53,9 +56,7 @@ export function login(options) {
                 options.callback();
         })
         .catch(error => {
-                // Handle network errors
-                console.log('Possible CORS or Service Down error: ' + error);
-                document.getElementById(options.message).textContent = 'Possible CORS or service down error: ' + error;
+                console.error('There has been a problem with your fetch operation:', error);
         });
 }
 
