@@ -22,7 +22,7 @@ menu: nav/create_and_compete.html
 
         body {
             background-color: #f9f9f9;
-            color: #000;
+            color: #333; /* Updated text color for better contrast */
             line-height: 1.6;
         }
 
@@ -68,7 +68,7 @@ menu: nav/create_and_compete.html
         .author-info {
             padding: 1.5rem;
             flex: 1;
-            color: #000;
+            color: #333; /* Ensures the text is dark enough for better readability */
         }
 
         .author-info h2 {
@@ -88,7 +88,7 @@ menu: nav/create_and_compete.html
             text-align: center;
             padding: 1rem;
             background-color: #1d4ed8;
-            color: #fff;
+            color: #f9f9f9; /* Updated to ensure good contrast with the blue background */
             margin-top: 2rem;
         }
     </style>
@@ -156,4 +156,3 @@ menu: nav/create_and_compete.html
 
 </body>
 </html>
-
