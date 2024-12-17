@@ -22,7 +22,7 @@ export const fetchOptions = {
     credentials: 'include', // include, same-origin, omit
     headers: {
         'Content-Type': 'application/json',
-        'X-Origin': 'client' // New custom header to identify source
+        //'X-Origin': 'client' // New custom header to identify source
     },
 };
 // User Login Function 
