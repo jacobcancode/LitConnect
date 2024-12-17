@@ -4,7 +4,7 @@ if (location.hostname === "localhost") {
 } else if (location.hostname === "127.0.0.1") {
         pythonURI = "http://127.0.0.1:8887";
 } else {
-        pythonURI =  "https://ahaanv19.github.io/";
+        pythonURI = "http://127.0.0.1:8887";
 }
 export var javaURI;
 if (location.hostname === "localhost") {
@@ -12,7 +12,7 @@ if (location.hostname === "localhost") {
 } else if (location.hostname === "127.0.0.1") {
         javaURI = "http://127.0.0.1:8887"; //rey
 } else {
-        javaURI = "https://ahaanv19.github.io/";
+        javaURI = "http://127.0.0.1:8887";
 }
 
 export const fetchOptions = {
@@ -23,6 +23,7 @@ export const fetchOptions = {
     headers: {
         'Content-Type': 'application/json',
         //'X-Origin': 'client' // New custom header to identify source
+        //'X-API-Key': 'YOUR_API_KEY'
     },
 };
 // User Login Function 
@@ -39,7 +40,7 @@ export function login(options) {
         document.getElementById(options.message).textContent = "";
 
         // Define the URL
-        const URL = 'https://ahaanv19.github.io/api/id'; // Corrected URL
+        //const URL = 'https://ahaanv19.github.io/api/id'; // Corrected URL
 
         // Fetch JWT
         fetch(URL, requestOptions)
