@@ -27,21 +27,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function getCredentials(baseurl) {
     const URL = pythonURI + '/api/id';
-    return fetch(URL, fetchOptions)
-        .then(response => { // API response handler 
-            if (response.status !== 200) {
-                console.error("HTTP status code: " + response.status);
-                return null; // prepares to stop the chain by returning null.
+    const username = 'your_username'; // Replace with your actual username
+    const password = 'your_password'; // Replace with your actual password
+    const credentials = btoa(`${username}:${password}`); // Encode credentials in base64
+
+    const fetchOptionsWithAuth = {
+        ...fetchOptions,
+        headers: {
+            ...fetchOptions.headers,
+            'Authorization': `Basic ${credentials}`
+        }
+    };
+
+    return fetch(URL, fetchOptionsWithAuth)
+        .then(response => {
+            if (!response.ok) {
+                if (response.status === 401) {
+                    // Handle 401 specifically
+                    console.error("Authentication failed");
+                    // Redirect to login, display error message, etc.
+                    return Promise.reject(new Error("401 Unauthorized"));
+                }
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-            return response.json(); // plans to continue the chain with the data.
+            return response.json(); // Or response.text() etc.
         })
-        .then(data => { // Data handler from the previous promise  
-            if (data === null) return null; // stops the chain, returns null.
-            console.log(data); // logs data with should contain uid, name, etc.
-            return data; // returns data to caller 
-        })
-        .catch(err => { // General error handler
-            console.error("Fetch error: ", err);
-            return null;
+        .catch(error => {
+            console.error("Error fetching data:", error);
+            // Appropriate error handling
         });
 }
