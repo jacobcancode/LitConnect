@@ -170,4 +170,3 @@ menu: nav/create_and_compete.html
 
 </body>
 </html>
-
