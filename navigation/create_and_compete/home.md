@@ -6,7 +6,6 @@ permalink: /create_and_compete/home
 menu: nav/create_and_compete.html
 ---
 
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,8 +21,8 @@ menu: nav/create_and_compete.html
         }
 
         body {
-            background-color: #f9f9f9;
-            color: #222; /* Darker text for readability */
+            background-color: #f8f9fa; /* Light background for less strain */
+            color: #000; /* Black text for strong contrast */
             line-height: 1.8;
         }
 
@@ -35,7 +34,7 @@ menu: nav/create_and_compete.html
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
         }
 
@@ -51,7 +50,8 @@ menu: nav/create_and_compete.html
         }
 
         .author-card {
-            background: #f4f4f4; /* Light gray for contrast */
+            background: #fff; /* White background for author card */
+            border: 1px solid #d3d3d3;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             overflow: hidden;
@@ -64,34 +64,39 @@ menu: nav/create_and_compete.html
             width: 250px;
             object-fit: cover;
             flex-shrink: 0;
+            border-right: 1px solid #d3d3d3; /* Separation from text */
         }
 
         .author-info {
             padding: 1.5rem;
             flex: 1;
-            color: #222; /* Ensures readability on a light background */
+            color: #222; /* Darker text for readability */
         }
 
         .author-info h2 {
             margin-bottom: 0.5rem;
-            color: #1a237e; /* Slightly darker blue for headings */
+            color: #1d4ed8; /* Distinct color for author names */
+            font-size: 1.8rem; /* Larger heading */
         }
 
         .author-info p {
             margin-bottom: 1rem;
-            font-size: 1rem;
+            font-size: 1.2rem; /* Slightly larger font for readability */
+            color: #333; /* Strong text for descriptions */
         }
 
         .author-info strong {
             display: block;
             margin-top: 1rem;
-            font-size: 1.1rem;
-            color: #1a237e;
+            font-size: 1.3rem;
+            color: #1d4ed8; /* Consistent with headings */
         }
 
         .author-info ul {
-            margin: 0.5rem 0 0 1rem;
+            margin: 0.5rem 0 0 1.5rem;
             list-style-type: disc;
+            font-size: 1.1rem; /* Larger text for book titles */
+            color: #333; /* Ensure list items are readable */
         }
 
         footer {
@@ -103,7 +108,7 @@ menu: nav/create_and_compete.html
         }
 
         footer p {
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
     </style>
 </head>
