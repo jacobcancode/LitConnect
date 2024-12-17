@@ -6,6 +6,7 @@ permalink: /create_and_compete/home
 menu: nav/create_and_compete.html
 ---
 
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,8 +23,8 @@ menu: nav/create_and_compete.html
 
         body {
             background-color: #f9f9f9;
-            color: #333; /* Updated text color for better contrast */
-            line-height: 1.6;
+            color: #222; /* Darker text for readability */
+            line-height: 1.8;
         }
 
         header {
@@ -40,7 +41,7 @@ menu: nav/create_and_compete.html
 
         header p {
             font-size: 1.2rem;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         .container {
@@ -50,9 +51,9 @@ menu: nav/create_and_compete.html
         }
 
         .author-card {
-            background: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            background: #f4f4f4; /* Light gray for contrast */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
             overflow: hidden;
             margin: 1.5rem 0;
             display: flex;
@@ -68,28 +69,41 @@ menu: nav/create_and_compete.html
         .author-info {
             padding: 1.5rem;
             flex: 1;
-            color: #333; /* Ensures the text is dark enough for better readability */
+            color: #222; /* Ensures readability on a light background */
         }
 
         .author-info h2 {
             margin-bottom: 0.5rem;
-            color: #1d4ed8;
+            color: #1a237e; /* Slightly darker blue for headings */
         }
 
         .author-info p {
             margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .author-info strong {
+            display: block;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            color: #1a237e;
         }
 
         .author-info ul {
             margin: 0.5rem 0 0 1rem;
+            list-style-type: disc;
         }
 
         footer {
             text-align: center;
             padding: 1rem;
             background-color: #1d4ed8;
-            color: #f9f9f9; /* Updated to ensure good contrast with the blue background */
+            color: #f9f9f9;
             margin-top: 2rem;
+        }
+
+        footer p {
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -151,8 +165,9 @@ menu: nav/create_and_compete.html
 
     <!-- Footer -->
     <footer>
-        &copy; 2024 Global Reading Recommendations | Made with ❤️
+        <p>&copy; 2024 Global Reading Recommendations | Made with ❤️</p>
     </footer>
 
 </body>
 </html>
+
