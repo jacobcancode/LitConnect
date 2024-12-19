@@ -91,8 +91,6 @@ show_reading_time: false
             <input type="text" id="newUsername" name="newUsername" required>
             <label for="newPassword">Password:</label>
             <input type="password" id="newPassword" name="newPassword" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
             <button type="submit">Sign Up</button>
         </form>
     </div>

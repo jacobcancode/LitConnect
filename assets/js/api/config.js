@@ -1,5 +1,11 @@
-export const pythonURI = 'http://127.0.0.1:8887'; // Update this to your actual backend URL
-
+export var pythonURI;
+if (location.hostname === "localhost") {
+        pythonURI = "http://localhost:8887";
+} else if (location.hostname === "127.0.0.1") {
+        pythonURI = "http://127.0.0.1:8887";
+} else {
+        pythonURI = "http://127.0.0.1:8887";
+}
 export var javaURI;
 if (location.hostname === "localhost") {
         javaURI = "http://localhost:8887";
@@ -10,11 +16,15 @@ if (location.hostname === "localhost") {
 }
 
 export const fetchOptions = {
-    method: 'GET', // Default method
+    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'include', // include, same-origin, omit
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        //'X-Origin': 'client' // New custom header to identify source
+        //'X-API-Key': 'YOUR_API_KEY'
     },
-    credentials: 'include' // Include credentials
 };
 // User Login Function 
 export function login(options) {
