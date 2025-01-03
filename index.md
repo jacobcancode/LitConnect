@@ -2,7 +2,6 @@
 layout: post
 title: LitConnect
 search_exclude: true
-description: Welcome to LitConnect, a social connectivity website made to foster engagement between readers. Click on top headers to view our main pages, or click view the intro menu to customize your experience!
 hide: true
 menu: nav/home.html
 ---
@@ -12,7 +11,7 @@ html, body {
   height: 100%;              
   margin: 0;                 
   padding: 0;                
-  background-color: #6a1b9a !important; /* Purple background for entire page and !important to disregard pre-set theme*/
+  background-color: #6a1b9a !important; /* Purple background for entire page */
 }
 
 body {
@@ -24,23 +23,10 @@ body {
   height: 100%; 
 }
 
-table {
-  width: 100%;
-  margin: 20px 0;
-  border-collapse: collapse;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-td {
-  padding: 15px;
-  text-align: center;
-  vertical-align: middle;
-}
-
 .content {
-  text-align: center;
   padding: 30px 20px;
-  flex-grow: 1; 
+  margin: 10px; /* Adjust margin to move text up */
+  text-align: left; /* Align text to the left */
 }
 
 .content img {
@@ -50,7 +36,6 @@ td {
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 
 footer {
   text-align: center;
@@ -65,40 +50,62 @@ footer a {
   text-decoration: none;
   font-weight: bold;
 }
+
+/* Bookshelf styles */
+.bookshelf {
+  width: 300px; 
+  height: 20px; 
+  background-color: #8B4513; /* Shelf Color */
+  margin: 60px auto; /* Centered with margin */
+  position: relative; /* Position relative for absolute positioning of books */
+}
+
+.book {
+  position: absolute; 
+  bottom: 20px; /* Position books above the shelf */
+  color: black !important; /* Ensure text color is black */
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  font-size: 14px; /* Font size */
+  writing-mode: vertical-rl; /* Rotate text */
+  transform: rotate(180deg); /* Rotate text back to normal */
+}
+
+/* Resized books with adjusted spacing */
+.book1 { background-color: #FF6347; height: 120px; width: 40px; left: 20px; } /* Preferences */
+.book2 { background-color: #4682B4; height: 100px; width: 60px; left: 80px; } /* Moderators Picks */
+.book3 { background-color: #32CD32; height: 140px; width: 40px; left: 140px; } /* Personalized Reading List */
+.book4 { background-color: #FFD700; height: 100px; width: 55px; left: 220px; } /* About Creators */
 </style>
 
-<table>
-  <tr>
-    <td id="createandcompete" class="dropdownp4">
-      <a href="{{site.baseurl}}/voteforthegoat/home">
-        <img src="{{site.baseurl}}/images/favicon.ico" alt="Icon">
-      </a>
-    </td>
-    <td class="dropdownp4">
-      <button class="dropbtn">Intro</button>
-      <div class="dropdown-content">
-        <a href="{{site.baseurl}}/backend_a">Personalized Reading List Fun</a>
-        <a href="{{site.baseurl}}/backend_s">About Creators</a>
-        <a href="{{site.baseurl}}/preferences_2">Preferences</a>
-      </div>
-    </td>
-  </tr>
-</table>
+<div class="content">
+  <h3> Welcome to LitConnect, a social connectivity website made to foster engagement between readers. Click on top headers to view our main pages, or click to view the intro menu to customize your experience! 
+  </h3>
+</div>
 
-<body>
-  <div class="content">
-    <h2 class="menu-item">Discover your next favorite book and connect with fellow readers from around the world.</h2>
-    <img src="https://cdn.pixabay.com/photo/2024/04/19/12/13/ai-generated-8706226_640.png" alt="LitConnect Visual">
-  </div>
+<div class="bookshelf">
+    <a href="{{site.baseurl}}/preferences_2" class="book book1">Preferences</a>
+    <a href="{{site.baseurl}}/backend_s" class="book book2">Moderators Picks</a>
+    <a href="{{site.baseurl}}/backend_a" class="book book3">Personalized</a>
+    <a href="{{site.baseurl}}/backend_s" class="book book4">About Creators</a>
+</div>
 
-  <footer>
-    <p>© 2024 LitConnect | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
-  </footer>
-<body>
+
+<div class="content">
+  <h2 class="menu-item">Discover your next favorite book and connect with fellow readers from around the world.</h2>
+  <img src="https://cdn.pixabay.com/photo/2024/04/19/12/13/ai-generated-8706226_640.png" alt="LitConnect Visual">
+</div>
+
+<footer>
+  <p>© 2024 LitConnect | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+</footer>
+
+
 
 <script>
-  // Function to fetch preferences from the backend
-  function loadPreferences() {
+// Function to fetch preferences from the backend
+ function loadPreferences() {
     fetch('http://localhost:8887/api/preferences')  // Adjust URL if needed
       .then(response => response.json())
       .then(data => {
