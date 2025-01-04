@@ -25,8 +25,7 @@ body {
 
 .content {
   padding: 30px 20px;
-  margin: 10px; /* Adjust margin to move text up */
-  text-align: left; /* Align text to the left */
+  text-align: left;
 }
 
 .content img {
@@ -54,9 +53,10 @@ footer a {
 /* Bookshelf styles */
 .bookshelf {
   width: 300px; 
-  height: 20px; 
-  background-color: #8B4513; /* Shelf Color */
-  margin: 60px auto; /* Centered with margin */
+  height: 20px;
+  background-color: #8B4513; 
+  margin: 50px auto; 
+  margin-top: 200px;
   position: relative; /* Position relative for absolute positioning of books */
 }
 
@@ -67,16 +67,63 @@ footer a {
   text-align: center;
   font-weight: bold;
   padding: 10px;
-  font-size: 14px; /* Font size */
+  font-size: 14px; 
   writing-mode: vertical-rl; /* Rotate text */
   transform: rotate(180deg); /* Rotate text back to normal */
 }
 
-/* Resized books with adjusted spacing */
+/* Resized books */
 .book1 { background-color: #FF6347; height: 120px; width: 40px; left: 20px; } /* Preferences */
 .book2 { background-color: #4682B4; height: 100px; width: 60px; left: 80px; } /* Moderators Picks */
 .book3 { background-color: #32CD32; height: 140px; width: 40px; left: 140px; } /* Personalized Reading List */
 .book4 { background-color: #FFD700; height: 100px; width: 55px; left: 220px; } /* About Creators */
+
+.monitor {
+  width: 450px;  
+  height: 300px; 
+  background-color: #007FFF;
+  border: 7.5px solid black; /* Black border for monitor */
+  position: relative; 
+  margin: 80px auto;  
+  border-radius: 7.5px; /* Rounded corners */
+}
+
+.stand {
+  position: absolute;
+  bottom: -75px; /* Adjusted to position below the monitor */
+  left: 50%; 
+  transform: translateX(-50%); /* Center the stand */
+  width: 30px; 
+  height: 75px; 
+  background-color: black;
+}
+
+.base {
+  position: absolute;
+  bottom: -90px; /* Keep this as is for the base */
+  left: 50%; 
+  transform: translateX(-50%); /* Center the base */
+  width: 400px; 
+  height: 20px; 
+  background-color: black; 
+}
+
+/* Button Styles */
+.button {
+  display: block;
+  width: 300px; 
+  margin: 15px auto;
+  padding: 15px; 
+  background-color: #599BDE !important;
+  color: black !important; 
+  text-align: center;
+  border: 3px solid black; 
+  border-radius: 5px; 
+  text-decoration: none; 
+  font-weight: bold; 
+  margin-top: 30px; 
+}
+
 </style>
 
 <div class="content">
@@ -86,7 +133,7 @@ footer a {
 
 <div class="bookshelf">
     <a href="{{site.baseurl}}/preferences_2" class="book book1">Preferences</a>
-    <a href="{{site.baseurl}}/backend_s" class="book book2">Moderators Picks</a>
+    <a href="{{site.baseurl}}/voteforthegoat/home" class="book book2">Moderators Picks</a>
     <a href="{{site.baseurl}}/backend_a" class="book book3">Personalized</a>
     <a href="{{site.baseurl}}/backend_s" class="book book4">About Creators</a>
 </div>
@@ -95,6 +142,14 @@ footer a {
 <div class="content">
   <h2 class="menu-item">Discover your next favorite book and connect with fellow readers from around the world.</h2>
   <img src="https://cdn.pixabay.com/photo/2024/04/19/12/13/ai-generated-8706226_640.png" alt="LitConnect Visual">
+</div>
+
+<div class="monitor">
+  <div class="stand"></div>
+  <div class="base"></div>
+  <a href="{{site.baseurl}}/bookclubuub" class="button">Book Club Hub</a>
+  <a href="{{site.baseurl}}/create_and_compete/home" class="button">Author Spotlight</a>
+  <a href="{{site.baseurl}}/cafe" class="button">Cafe Store</a>
 </div>
 
 <footer>
