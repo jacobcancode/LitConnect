@@ -1,6 +1,6 @@
 title: LitConnect
 description: "Social Media for Del Norte High School"
-owner_name: John Mortensen
+owner_name: Ahaan Vaidyanathan
 github_username: Ahaanv19
 github_repo: "LitConnect" 
 baseurl: "/LitConnect"
@@ -15,10 +15,3 @@ minima:
 # remote_theme: pages-themes/time-machine@v0.2.0
 plugins:
   - jekyll-remote-theme
-header_pages:
-  - navigation/ai.md
-  - navigation/shared_interests/home.md
-  - navigation/reviewdiscuss/home.md
-  - navigation/share_and_care/dnhscafe/cafe_store.md
-  - navigation/create_and_compete/home.md
-  
