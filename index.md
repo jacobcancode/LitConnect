@@ -127,7 +127,7 @@ footer a {
 </style>
 
 <div class="content">
-  <h3> Welcome to LitConnect, a social connectivity website made to foster engagement between readers. Click on top headers to view our main pages, or click to view the intro menu to customize your experience! 
+  <h3> Welcome to LitConnect, a social connectivity website made to foster engagement between readers. Click on the links on the monitor to view our main pages, or click the spines of the books to customize your experience! 
   </h3>
 </div>
 

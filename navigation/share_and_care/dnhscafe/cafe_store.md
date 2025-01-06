@@ -1,6 +1,5 @@
 ---
 layout: page
-title: LitConnect Cafe Store
 description: Purchase coffee using your d'nero you earned from helping!
 permalink: /cafe
 ---
@@ -46,30 +45,6 @@ body {
 
 ---
 ## Menu
-
-### **House Favorites**
-
-- **Classic Espresso**  
-  A bold shot of espresso, perfect for a quick boost.  
-  **Price:** 5 dneros  
-
-- **Cappuccino**  
-  Steamed milk and frothy foam topped with a hint of cinnamon.  
-  **Price:** 8 dneros  
-
-- **Mocha Latte**  
-  A sweet blend of espresso, milk, and chocolate.  
-  **Price:** 10 dneros  
-
-### **Seasonal Specials**
-
-- **Pumpkin Spice Latte**  
-  The cozy flavors of fall in a cup, perfect for crisp days.  
-  **Price:** 12 dneros  
-
-- **Vanilla Caramel Macchiato**  
-  Creamy vanilla meets rich caramel for a truly indulgent treat.  
-  **Price:** 11 dneros  
 
 ### Points: <span id="userPoints">50</span> dneros
 
