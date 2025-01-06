@@ -3,7 +3,7 @@ import { pythonURI, fetchOptions } from './config.js';
 console.log("login.js loaded");
 
 document.addEventListener('DOMContentLoaded', function() {
-    const baseurl = document.querySelector('.trigger') ? document.querySelector('.trigger').getAttribute('data-baseurl') : 'http://127.0.0.1:5000';
+    const baseurl = document.querySelector('.trigger') ? document.querySelector('.trigger').getAttribute('data-baseurl') : 'http://127.0.0.1:8887';
     console.log("Base URL:", baseurl); // Debugging line
 
     // Ensure the login form exists before adding the event listener
