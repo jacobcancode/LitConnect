@@ -5,16 +5,6 @@ permalink: /login
 search_exclude: true
 show_reading_time: false 
 ---
-
-<script>
-    function openLoginPopup() {
-        window.open('/_includes/nav/login-popup.html', 'Login', 'width=400,height=500');
-    }
-
-    // Automatically open the login popup when the page loads
-    window.onload = openLoginPopup;
-</script>
-
 <style>
 .login-container {
     display: flex;
