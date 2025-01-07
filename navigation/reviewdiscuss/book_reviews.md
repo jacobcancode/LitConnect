@@ -1,6 +1,6 @@
 ---
 layout: post 
-title: Book Gallary
+title: Book Gallery
 search_exclude: true
 permalink: /gal
 menu: nav/rate_and_relate.html
