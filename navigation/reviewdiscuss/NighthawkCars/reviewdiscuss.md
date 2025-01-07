@@ -104,7 +104,7 @@ permalink: /review
 <body>
     <!-- Book Section -->
     <h3>This Week's Books!</h3>
-    <p>Harry Potter and The Goblet of Fire: By JK Rowlings</p>
+    <p>Harry Potter and The Goblet of Fire: By J.K. Rowling</p>
     <img src="{{site.baseurl}}/images/harry.png" height="400" alt="Book Cover">
     <div class="moderator-rating">
         <h2>Moderator's Rating</h2>
@@ -118,7 +118,7 @@ permalink: /review
         <div class="feedback-box">
             <h3>Moderator's Feedback</h3>
             <p class="feedback-content">
-                Wonderful book and story plot! I like the idea of the story and the plot twist at the end!
+                Harry Potter and the Goblet of Fire is a wonderful book! Its gripping plot twists and deepening character arcs, this installment elevates the series to new heights, making it a must-read for fans and newcomers alike.
             </p>
         </div>
     </div>

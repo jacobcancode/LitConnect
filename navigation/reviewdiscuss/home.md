@@ -1,6 +1,6 @@
 ---
 layout: post 
-title: Moderator's Picks
+title: Welcome to Moderator's Picks!
 search_exclude: true
 permalink: /voteforthegoat/home
 menu: nav/vote_for_the_goat.html
@@ -24,7 +24,7 @@ menu: nav/vote_for_the_goat.html
     }
 
     .group-theme {
-        background: #ff69b4;
+        background: #006633;
         color: #e0e0e0;
         padding: 15px;
         border-radius: 10px;
@@ -38,15 +38,13 @@ menu: nav/vote_for_the_goat.html
     }
 </style>
 
-## Welcome to Moderator's Picks!
-
-In this Zone, view the book off the week, with the moderators honest review and 5 star raiting, and then enjoy disscussing with other readers, in the discussion chat, your thoughts and opionions on the moderators review, and have conversations with others about your own feelings. 
+In this Zone, view the book of the week, with the moderators' honest review and rating out of 5 stars. Then you can enjoy disscussing with other readers in the discussion chat, sharing your thoughts and opionions on the moderators review, and have conversations with others about your own feelings. 
 
 ### Group Themes and Activities
 
 <div class="group-theme">
     <strong>Sneek Peek</strong>  
-    This weeks Book is..... THE HUNGER GAMES!! Check out the Moderators Review!
+    This weeks Book is..... HARRY POTTER AND THE GOBLET OF FIRE!! Check out the Moderators Review!
 </div>
 
 <script>
