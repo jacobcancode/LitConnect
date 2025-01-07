@@ -150,6 +150,7 @@ footer a {
   <a href="{{site.baseurl}}/bookclubuub" class="button">Book Club Hub</a>
   <a href="{{site.baseurl}}/create_and_compete/home" class="button">Author Spotlight</a>
   <a href="{{site.baseurl}}/cafe" class="button">Cafe Store</a>
+  <a href="{{site.baseurl}}/littest" class="button">Literary Personality Test</a>
 </div>
 
 <footer>
