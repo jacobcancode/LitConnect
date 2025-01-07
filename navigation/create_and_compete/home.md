@@ -96,7 +96,7 @@ menu: nav/create_and_compete.html
             margin: 0.5rem 0 0 1.5rem;
             list-style-type: disc;
             font-size: 1.1rem; /* Larger text for book titles */
-            color: #333; /* Ensure list items are readable */
+            color: #000; /* Black text for better readability */
         }
 
         footer {
