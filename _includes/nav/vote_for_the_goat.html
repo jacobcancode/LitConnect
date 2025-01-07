@@ -1,4 +1,11 @@
 <style>
+    html, body {
+        height: 100%;              
+        margin: 0;                 
+        padding: 0;                
+        background-color: #1f8e4c !important;
+    }
+    
     table {
         border-collapse: separate;
         border-spacing: 0;
@@ -23,22 +30,40 @@
         border-top-right-radius: 15px;
         border-bottom-right-radius: 15px;
     }
+
+    /* Bookshelf styles */
+.bookshelf {
+  width: 300px; 
+  height: 20px;
+  background-color: #8B4513; 
+  margin: 50px auto; 
+  margin-top: 200px;
+  position: relative; /* Position relative for absolute positioning of books */
+}
+
+.book {
+  position: absolute; 
+  bottom: 20px; /* Position books above the shelf */
+  color: black !important; /* Ensure text color is black */
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  font-size: 14px; 
+  writing-mode: vertical-rl; /* Rotate text */
+  transform: rotate(180deg); /* Rotate text back to normal */
+}
+
+/* Resized books */
+.book1 { background-color: #3A756B; height: 120px; width: 40px; left: 20px; } /* Book Gallery */
+.book2 { background-color: #9933FF; height: 100px; width: 60px; left: 60px; } /* Moderator Rules */
+.book3 { background-color: #4682B4; height: 180px; width: 55px; left: 145px; } /* Moderator Feedback and Rating */
+.book4 { background-color: #FF6347; height: 130px; width: 55px; left: 200px; } /* Discussion Room */
 </style>
 <table>
-    <tr>
-        <td id="createandcompete" class="dropdownp4">
-            <a href="{{site.baseurl}}/voteforthegoat/home">
-                <img src="{{site.baseurl}}/images/favicon.ico" alt="Icon">
-            </a>
-        </td>
-        <td class="dropdownp4">
-            <a class="dropbtn">Explore</a>
-            <div class="dropdown-content">
-                <a href="{{site.baseurl}}/review">Moderator Feedback and Rating</a>
-                <a href="{{site.baseurl}}/moderator_picks">Moderator Rules</a>
-                <a href="{{site.baseurl}}/pull">Discussion Room</a>
-                <a href="{{site.baseurl}}/gal">Book Gallary</a>
-            </div>
-        </td>
-    </tr>
+    <div class="bookshelf">
+        <a href="{{site.baseurl}}/gal" class="book book1">Book Gallery</a>
+        <a href="{{site.baseurl}}/moderator_picks" class="book book2">Moderator Rules</a>
+        <a href="{{site.baseurl}}/review" class="book book3">Moderator Feedback and Rating</a>
+        <a href="{{site.baseurl}}/pull" class="book book4">Discussion Room</a>
+    </div>
 </table>
