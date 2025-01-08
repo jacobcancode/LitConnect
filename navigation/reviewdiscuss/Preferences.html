@@ -107,8 +107,11 @@ comments: true
   </div>
 
   <div id="colorButtons" style="text-align: center;">
-    <button class="color-button" id="changeText">Change Text</button>
-    <button class="color-button" id="changeMenu">Change Menu</button>
+    <p>Change Text:</p>
+    <button class="color-button" id="white">White</button>
+    <button class="color-button" id="black">Black</button>
+
+    <button class="color-button" id="changeMenu">Change Menu Color</button>
   </div>
 
   <script>
@@ -151,11 +154,12 @@ comments: true
       });
     }
 
-    document.getElementById('changeText').addEventListener('click', function() {
-      const newTextColor = prompt('Enter a new text color (e.g., "black")');
-      if (newTextColor) {
-        updatePreferences({ text: newTextColor });
-      }
+    document.getElementById('white').addEventListener('click', function() {
+      updatePreferences({ text: 'white' });
+    });
+
+    document.getElementById('black').addEventListener('click', function() {
+      updatePreferences({ text: 'black' });
     });
 
     document.getElementById('changeMenu').addEventListener('click', function() {
