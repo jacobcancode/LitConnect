@@ -6,6 +6,7 @@ hide: true
 menu: nav/home.html
 ---
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -86,7 +87,7 @@ menu: nav/home.html
 
     .monitor {
       width: 450px;  
-      height: 300px; 
+      height: 400px; /* Increased height to fit all buttons */
       background-color: #007FFF;
       border: 7.5px solid black; /* Black border for monitor */
       position: relative; 
@@ -232,3 +233,5 @@ function loadPoints() {
   // Load points when the page is loaded
   window.onload = loadPoints;
 </script>
+</body>
+</html>
