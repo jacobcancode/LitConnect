@@ -163,32 +163,37 @@ menu: nav/home.html
     <p>© 2024 LitConnect | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
   </footer>
 
-  <script>
-    // Function to fetch points from the backend
-    function loadPoints() {
-      fetch('http://localhost:8887/api/points')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then(data => {
-          const points = document.getElementById('pointCounter');
-          if (points) {
-            if (data && data.points !== undefined) {
-              points.innerText = `Points: ${data.points}`;
-            } else {
-              console.error("Data does not contain 'points'");
-            }
-          } else {
-            console.error("Element with id 'pointCounter' not found");
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching points:', error);
-        });
-    }
+<script>
+
+// Function to fetch points from the backend
+function loadPoints() {
+  fetch('http://localhost:8887/api/points')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      const points = document.getElementById('pointCounter');
+      
+      // Check if points element is found
+      if (points) {
+        // Check if 'points' exists in the data
+        if (data && data.points !== undefined) {
+          points.innerText = `Points: ${data.points}`;
+        } else {
+          console.error("Data does not contain 'points'");
+        }
+      } else {
+        console.error("Element with id 'pointCounter' not found");
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching points:', error);
+    });
+}
+
 
     // Function to fetch preferences from the backend
     function loadPreferences() {
@@ -211,20 +216,19 @@ menu: nav/home.html
             p.style.color = data.text;
           });
 
-          let menuItems = document.querySelectorAll('.menu-item');
-          menuItems.forEach(item => {
-            item.style.color = data.menu;
-          });
-        })
-        .catch(error => {
-          console.error('Error fetching preferences:', error);
+        // Change menu text color
+        let menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach(item => {
+          item.style.color = data.menu;
         });
-    }
+      })
+      .catch(error => {
+        console.error('Error fetching preferences:', error);
+      });
+  }
 
-    window.onload = () => {
-      loadPreferences();
-      loadPoints();
-    };
-  </script>
-</body>
-</html>
+  // Load preferences when the page is loaded
+  window.onload = loadPreferences;
+  // Load points when the page is loaded
+  window.onload = loadPoints;
+</script>
