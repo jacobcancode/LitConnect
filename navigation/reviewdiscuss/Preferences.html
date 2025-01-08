@@ -93,6 +93,7 @@ comments: true
   <h1>Welcome to the Preferences Page</h1>
 
 <a href="https://ahaanv19.github.io/LitConnect/">Home</a>
+<p id="pointCounter">Points: 0</p>
   <div id="preferencesDisplay">
     <h3>Preferences:</h3>
     <p id="menu"></p>
@@ -164,7 +165,37 @@ comments: true
       }
     });
 
+    // Function to fetch points from the backend
+function loadPoints() {
+  fetch('http://localhost:8887/api/points')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      const points = document.getElementById('pointCounter');
+      
+      // Check if points element is found
+      if (points) {
+        // Check if 'points' exists in the data
+        if (data && data.points !== undefined) {
+          points.innerText = `Points: ${data.points}`;
+        } else {
+          console.error("Data does not contain 'points'");
+        }
+      } else {
+        console.error("Element with id 'pointCounter' not found");
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching points:', error);
+    });
+}
+
     window.onload = loadPreferences;
+    window.onload = loadPoints;
   </script>
 
 </body>
