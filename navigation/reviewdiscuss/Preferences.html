@@ -164,6 +164,43 @@ comments: true
       }
     });
 
+// Function to update points in the backend
+function updatePoints(updatedData) {
+  fetch('http://localhost:8887/api/points', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(updatedData)
+  })
+  .then(response => response.json())
+  .then(data => {
+    loadPoints();  // Reload the updated points from the backend
+  })
+  .catch(error => {
+    console.error('Error updating points:', error);
+  });
+}
+
+// Function to add 10 points every time the page loads
+function addPoints() {
+  fetch('http://localhost:8887/api/points')
+    .then(response => response.json())
+    .then(data => {
+      const newPoints = data.points + 10;  // Add 10 points
+      updatePoints({ points: newPoints });  // Send updated points to backend
+    })
+    .catch(error => {
+      console.error('Error adding points:', error);
+    });
+}
+
+// Automatically add 10 points when the page loads
+window.onload = function() {
+  addPoints();  // Add 10 points when the page loads
+};
+
+
     window.onload = loadPreferences;
   </script>
 
