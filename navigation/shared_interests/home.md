@@ -233,7 +233,64 @@ menu: nav/shared_interests.html
       document.getElementById("discussion-user").value = "";
       document.getElementById("discussion-comment").value = "";
     });
-  </script>
-</body>
-</html>
+ 
 
+# Book Recommendations
+
+This is a simple page that displays AI-generated book recommendations. The data is fetched from a backend that uses the [Google Books API](https://developers.google.com/books).
+
+## Book Recommendations
+
+<div id="recommendations"></div>
+
+<script>
+    // Function to fetch recommendations based on genre
+    function fetchRecommendations(genre = 'programming') {
+        fetch(`/recommendations?genre=${genre}`)
+            .then(response => response.json())
+            .then(data => {
+                let recommendationsContainer = document.getElementById('recommendations');
+                recommendationsContainer.innerHTML = '';  // Clear previous recommendations
+                
+                // Loop through each book and create HTML elements
+                data.forEach(book => {
+                    let bookDiv = document.createElement('div');
+                    bookDiv.classList.add('book');
+                    
+                    bookDiv.innerHTML = `
+                        <img src="${book.thumbnail}" alt="${book.title}">
+                        <h3>${book.title}</h3>
+                        <p><strong>Author(s):</strong> ${book.authors.join(', ')}</p>
+                        <p><strong>Rating:</strong> ${book.rating}</p>
+                        <p>${book.description}</p>
+                        <a href="${book.infoLink}" target="_blank">More Info</a>
+                    `;
+                    
+                    recommendationsContainer.appendChild(bookDiv);
+                });
+            })
+            .catch(error => console.error('Error fetching recommendations:', error));
+    }
+
+    // Fetch recommendations when the page loads
+    window.onload = function() {
+        fetchRecommendations();
+    }
+</script>
+
+### Style
+
+Here is the CSS for book cards:
+
+```css
+.book {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    float: left;
+}
+.book img {
+    width: 100px;
+    height: 150px;
+}
