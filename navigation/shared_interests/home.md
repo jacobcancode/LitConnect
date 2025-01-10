@@ -273,7 +273,8 @@ This is a simple page that displays AI-generated book recommendations. The data 
     }
 
     // Fetch recommendations when the page loads
-    window.onload = function() {
+  
+    document.addEventListener('DOMContentLoaded', function() {
         fetchRecommendations();
     }
 </script>
