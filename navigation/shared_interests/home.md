@@ -233,7 +233,43 @@ menu: nav/shared_interests.html
       document.getElementById("discussion-user").value = "";
       document.getElementById("discussion-comment").value = "";
     });
- 
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const genre = 'programming'; // Example genre
+      const recommendationsContainer = document.getElementById('recommendationsContainer');
+  
+      fetch(`http://127.0.0.1:8887/recommendations?genre=${genre}`, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data); // Handle the response data
+          data.forEach(book => {
+              let bookDiv = document.createElement('div');
+              bookDiv.classList.add('book');
+              
+              bookDiv.innerHTML = `
+                  <img src="${book.thumbnail}" alt="${book.title}">
+                  <h3>${book.title}</h3>
+                  <p><strong>Author(s):</strong> ${book.authors.join(', ')}</p>
+                  <p><strong>Rating:</strong> ${book.rating}</p>
+                  <p>${book.description}</p>
+                  <a href="${book.infoLink}" target="_blank">More Info</a>
+              `;
+              
+              recommendationsContainer.appendChild(bookDiv);
+          });
+      })
+      .catch(error => console.error('Error fetching recommendations:', error));
+  });
+  </script>
+  
+  <div id="recommendationsContainer"></div>
 
 # Book Recommendations
 
@@ -276,7 +312,7 @@ This is a simple page that displays AI-generated book recommendations. The data 
   
     document.addEventListener('DOMContentLoaded', function() {
         fetchRecommendations();
-    }
+    });
 </script>
 
 ### Style
