@@ -86,8 +86,8 @@ menu: nav/home.html
     .book4 { background-color: #FFD700; height: 100px; width: 55px; left: 220px; } /* About Creators */
 
     .monitor {
-      width: 450px;  
-      height: 400px; /* Increased height to fit all buttons */
+      width: 600px;  
+      height: 500px; /* Increased height to fit all buttons */
       background-color: #007FFF;
       border: 7.5px solid black; /* Black border for monitor */
       position: relative; 
@@ -100,7 +100,7 @@ menu: nav/home.html
       bottom: -75px; /* Adjusted to position below the monitor */
       left: 50%; 
       transform: translateX(-50%); /* Center the stand */
-      width: 30px; 
+      width: 40px; 
       height: 75px; 
       background-color: black;
     }
@@ -110,7 +110,7 @@ menu: nav/home.html
       bottom: -90px; /* Keep this as is for the base */
       left: 50%; 
       transform: translateX(-50%); /* Center the base */
-      width: 400px; 
+      width: 500px; 
       height: 20px; 
       background-color: black; 
     }
@@ -118,7 +118,7 @@ menu: nav/home.html
     /* Button Styles */
     .button {
       display: block;
-      width: 300px; 
+      width: 400px; 
       margin: 15px auto;
       padding: 15px; 
       background-color: #599BDE !important;
@@ -158,6 +158,7 @@ menu: nav/home.html
     <a href="{{site.baseurl}}/create_and_compete/home" class="button">Author Spotlight</a>
     <a href="{{site.baseurl}}/cafe" class="button">Cafe Store</a>
     <a href="{{site.baseurl}}/littest" class="button">Literary Personality Test</a>
+    <a href="{{site.baseurl}}/bookadaptationchecker" class="button">Book Adaptation Checker</a>
   </div>
 
   <footer>

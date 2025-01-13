@@ -4,13 +4,63 @@ title: Book Adaptation Checker
 search_exclude: true
 permalink: /bookadaptationchecker
 ---
+<style>
+  body {
+    background-color: #5070AF !important;
+    font-family: Lato, sans-serif !important; 
+    color: black !important; 
+    margin: 0;
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 24px; 
+    text-align: center; 
+    color: #2c3e50; 
+  }
+
+  #searchInput {
+    width: 100%;
+    max-width: 400px; 
+    padding: 10px; 
+    margin: 10px auto; 
+    display: block; 
+    border: 2px solid #3498db; 
+    border-radius: 5px; 
+    font-size: 16px; 
+  }
+
+  #searchButton, #getAllMoviesButton {
+    background-color: #3498db !important; 
+    color: white;
+    border: none; 
+    border-radius: 5px;
+    padding: 10px 20px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    margin: 10px auto;
+    display: block; 
+  }
+
+  #searchButton:hover, #getAllMoviesButton:hover {
+    background-color: #1C1CAF; 
+  }
+
+  #resultContainer {
+    margin-top: 20px; 
+    padding: 10px; 
+    border: 2px solid #3498db; 
+    border-radius: 5px; 
+    background-color: black; 
+  }
+</style>
 
 <h2>Enter a book below and click "Search" to check if there has been a film adaptation</h2>
 <input type="text" id="searchInput" placeholder="Enter book title">
 <button id="searchButton">Search</button>
 
 <h2>All Movies</h2>
-<button id="getAllMoviesButton">List of Books have Movie Adaptations</button>
+<button id="getAllMoviesButton">List of Books with Movie Adaptations</button>
 
 <div id="resultContainer"></div>
 
