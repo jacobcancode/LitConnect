@@ -70,7 +70,7 @@ permalink: /bookadaptationchecker
     const resultContainer = document.getElementById('resultContainer');
     
     try {
-        const response = await fetch(`http://127.0.0.1:5000/movies/search?title=${encodeURIComponent(title)}`);
+        const response = await fetch(`http://127.0.0.1:8887/movies/search?title=${encodeURIComponent(title)}`);
         const contentType = response.headers.get('content-type');
         if (!contentType || !contentType.includes('application/json')) {
             throw new Error('Unexpected response format');
@@ -91,7 +91,7 @@ document.getElementById('getAllMoviesButton').addEventListener('click', async ()
     const resultContainer = document.getElementById('resultContainer');
 
     try {
-        const response = await fetch('http://127.0.0.1:5000/movies');
+        const response = await fetch('http://127.0.0.1:8887/movies');
         const data = await response.json();
         
         resultContainer.innerHTML = '<h3>All Movies:</h3>';
