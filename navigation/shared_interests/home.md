@@ -238,8 +238,8 @@ menu: nav/shared_interests.html
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const genre = 'programming'; // Example genre
-      const recommendationsContainer = document.getElementById('recommendationsContainer');
-  
+      const recommendationsList = document.getElementById("recommendations-list");
+
       fetch(`http://127.0.0.1:8887/recommendations?genre=${genre}`, {
           method: 'GET',
           headers: {
@@ -249,31 +249,53 @@ menu: nav/shared_interests.html
       .then(response => response.json())
       .then(data => {
           console.log(data); // Handle the response data
+          recommendationsList.innerHTML = ""; // Clear previous recommendations
           data.forEach(book => {
-              let bookDiv = document.createElement('div');
-              bookDiv.classList.add('book');
-              
-              bookDiv.innerHTML = `
-                  <img src="${book.thumbnail}" alt="${book.title}">
-                  <h3>${book.title}</h3>
-                  <p><strong>Author(s):</strong> ${book.authors.join(', ')}</p>
-                  <p><strong>Rating:</strong> ${book.rating}</p>
-                  <p>${book.description}</p>
-                  <a href="${book.infoLink}" target="_blank">More Info</a>
-              `;
-              
-              recommendationsContainer.appendChild(bookDiv);
+              const option = document.createElement("option");
+              option.textContent = `${book.title} by ${book.author}`;
+              recommendationsList.appendChild(option);
           });
       })
       .catch(error => console.error('Error fetching recommendations:', error));
   });
   </script>
   
-  <div id="recommendationsContainer"></div>
+  <div id="recommendationsContainer">
+    <select id="recommendations-list"></select>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Output: Add discussion comments to list and display
+        const discussionForm = document.getElementById("discussion-form");
+        discussionForm.addEventListener("submit", event => {
+            event.preventDefault();
+            const user = document.getElementById("discussion-user").value;
+            const comment = document.getElementById("discussion-comment").value;
+
+            // Store discussion in list
+            discussions.push({ user, comment });
+
+            // Display the new comment in the list
+            const commentList = document.getElementById("comment-list");
+            const commentItem = document.createElement("li");
+            commentItem.textContent = `${user}: ${comment}`;
+            commentList.appendChild(commentItem);
+        });
+    });
+  </script>
+
+  <div id="comment-section">
+    <form id="discussion-form">
+        <input type="text" id="discussion-user" placeholder="Your name" required>
+        <textarea id="discussion-comment" placeholder="Your comment" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <ul id="comment-list"></ul>
+  </div>
 
 # Book Recommendations
 
-This is a simple page that displays AI-generated book recommendations. The data is fetched from a backend that uses the [Google Books API](https://developers.google.com/books).
 
 ## Book Recommendations
 
