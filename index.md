@@ -196,6 +196,11 @@ menu: nav/home.html
         <img src="{{site.baseurl}}/images/windowsfolder.png" alt="Book Adaptation Checker">
         <span>Book Recommendations</span>
     </a>
+
+    <a href="{{site.baseurl}}/tb" class="button">
+        <img src="{{site.baseurl}}/images/windowsfolder.png" alt="Book Adaptation Checker">
+        <span>Database</span>
+    </a>
 </div>
 
 
