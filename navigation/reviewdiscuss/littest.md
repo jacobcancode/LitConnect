@@ -37,6 +37,7 @@ description: A quiz that determines which literary character or author users mos
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 600px;
             width: 100%;
+            color: black !important;
         }
 
         .question {

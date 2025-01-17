@@ -86,13 +86,18 @@ menu: nav/home.html
     .book4 { background-color: #FFD700; height: 100px; width: 55px; left: 220px; } /* About Creators */
 
     .monitor {
-      width: 450px;  
-      height: 400px; /* Increased height to fit all buttons */
-      background-color: #007FFF;
-      border: 7.5px solid black; /* Black border for monitor */
-      position: relative; 
-      margin: 80px auto;  
-      border-radius: 7.5px; /* Rounded corners */
+    width: 800px;  
+    height: 500px; 
+    background-image: url('https://d7hftxdivxxvm.cloudfront.net/?quality=80&resize_to=width&src=https%3A%2F%2Fartsy-media-uploads.s3.amazonaws.com%2F2RNK1P0BYVrSCZEy_Sd1Ew%252F3417757448_4a6bdf36ce_o.jpg&width=910'); 
+    background-size: cover; 
+    background-position: center; 
+    border: 7.5px solid black; 
+    position: relative; 
+    margin: 80px auto;  
+    border-radius: 7.5px;
+    display: flex;              
+    flex-wrap: wrap;           
+    justify-content: center; 
     }
 
     .stand {
@@ -100,36 +105,43 @@ menu: nav/home.html
       bottom: -75px; /* Adjusted to position below the monitor */
       left: 50%; 
       transform: translateX(-50%); /* Center the stand */
-      width: 30px; 
+      width: 40px; 
       height: 75px; 
       background-color: black;
     }
 
     .base {
       position: absolute;
-      bottom: -90px; /* Keep this as is for the base */
+      bottom: -90px; 
       left: 50%; 
-      transform: translateX(-50%); /* Center the base */
-      width: 400px; 
+      transform: translateX(-50%); 
+      width: 500px; 
       height: 20px; 
       background-color: black; 
     }
 
     /* Button Styles */
     .button {
-      display: block;
-      width: 300px; 
-      margin: 15px auto;
-      padding: 15px; 
-      background-color: #599BDE !important;
-      color: black !important; 
-      text-align: center;
-      border: 3px solid black; 
-      border-radius: 5px; 
-      text-decoration: none; 
-      font-weight: bold; 
-      margin-top: 30px; 
+        display: block;
+        width: 60px;               
+        margin: 15px;              
+        text-align: center;     
+        text-decoration: none;      
+        font-weight: bold;   
+        font-size: 10px;      
     }
+
+    .button img {
+        width: 100%;               /* Make image fill the button width */
+        border-radius: 5px 5px 0 0; /* Round top corners of the image */
+    } 
+
+    .button span {
+        display: block;            /* Ensure text is on a new line */
+        padding: 5px 0;           /* Spacing for text */
+        color: black;              /* Text color */
+    }
+
   </style>
 </head>
 <body>
@@ -151,14 +163,41 @@ menu: nav/home.html
     <img src="https://cdn.pixabay.com/photo/2024/04/19/12/13/ai-generated-8706226_640.png" alt="LitConnect Visual">
   </div>
 
-  <div class="monitor">
+<div class="monitor">
     <div class="stand"></div>
     <div class="base"></div>
-    <a href="{{site.baseurl}}/bookclubuub" class="button">Book Club Hub</a>
-    <a href="{{site.baseurl}}/create_and_compete/home" class="button">Author Spotlight</a>
-    <a href="{{site.baseurl}}/cafe" class="button">Cafe Store</a>
-    <a href="{{site.baseurl}}/littest" class="button">Literary Personality Test</a>
-  </div>
+
+    <a href="{{site.baseurl}}/bookclubuub" class="button">
+        <img src="{{site.baseurl}}/images/windowsfolder.png" alt="Book Club Hub">
+        <span>Book Club Hub</span>
+    </a>
+    
+    <a href="{{site.baseurl}}/create_and_compete/home" class="button">
+        <img src="{{site.baseurl}}/images/windowsfolder.png" alt="Author Spotlight">
+        <span>Author Spotlight</span>
+    </a>
+    
+    <a href="{{site.baseurl}}/cafe" class="button">
+        <img src="{{site.baseurl}}/images/windowsfolder.png" alt="Cafe Store">
+        <span>Cafe Store</span>
+    </a>
+    
+    <a href="{{site.baseurl}}/littest" class="button">
+        <img src="{{site.baseurl}}/images/windowsfolder.png" alt="Literary Personality Test">
+        <span>Literary Personality Test</span>
+    </a>
+    
+    <a href="{{site.baseurl}}/bookadaptationchecker" class="button">
+        <img src="{{site.baseurl}}/images/windowsfolder.png" alt="Book Adaptation Checker">
+        <span>Book Adaptation Checker</span>
+    </a>
+
+    <a href="{{site.baseurl}}/bookrecomendations" class="button">
+        <img src="{{site.baseurl}}/images/windowsfolder.png" alt="Book Adaptation Checker">
+        <span>Book Recommendations</span>
+    </a>
+</div>
+
 
   <footer>
     <p>© 2024 LitConnect | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>

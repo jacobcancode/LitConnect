@@ -234,6 +234,62 @@ menu: nav/shared_interests.html
       document.getElementById("discussion-comment").value = "";
     });
   </script>
-</body>
-</html>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const genre = 'programming'; // Example genre
+      const recommendationsList = document.getElementById("recommendations-list");
+
+      fetch(`http://127.0.0.1:8887/recommendations?genre=${genre}`, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data); // Handle the response data
+          recommendationsList.innerHTML = ""; // Clear previous recommendations
+          data.forEach(book => {
+              const option = document.createElement("option");
+              option.textContent = `${book.title} by ${book.author}`;
+              recommendationsList.appendChild(option);
+          });
+      })
+      .catch(error => console.error('Error fetching recommendations:', error));
+  });
+  </script>
+  
+  <div id="recommendationsContainer">
+    <select id="recommendations-list"></select>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Output: Add discussion comments to list and display
+        const discussionForm = document.getElementById("discussion-form");
+        discussionForm.addEventListener("submit", event => {
+            event.preventDefault();
+            const user = document.getElementById("discussion-user").value;
+            const comment = document.getElementById("discussion-comment").value;
+
+            // Store discussion in list
+            discussions.push({ user, comment });
+
+            // Display the new comment in the list
+            const commentList = document.getElementById("comment-list");
+            const commentItem = document.createElement("li");
+            commentItem.textContent = `${user}: ${comment}`;
+            commentList.appendChild(commentItem);
+        });
+    });
+  </script>
+
+  <div id="comment-section">
+    <form id="discussion-form">
+        <input type="text" id="discussion-user" placeholder="Your name" required>
+        <textarea id="discussion-comment" placeholder="Your comment" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <ul id="comment-list"></ul>
+  </div>
