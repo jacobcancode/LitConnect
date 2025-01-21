@@ -1,0 +1,184 @@
+---
+toc: true
+layout: post
+description: CRUD
+title: CRUD
+permalink: /crud
+comments: true
+---
+
+<table>
+    <thead>
+      <tr>
+        <th><label for="name">Name</label></th>
+        <th><label for="uid">ID</label></th>
+        <th>Actions</th>
+    </tr>
+    <tr>
+        <td><input type="text" name="name" id="name" required></td>
+        <td><input type="text" name="uid" id="uid" required></td>
+        <td><button onclick="createUser()">Create</button></td>
+    </tr>
+    </thead>
+    <tbody id="table">
+      <!-- JavaScript generated data -->
+    </tbody>
+</table>
+
+<script>
+const data = [];
+
+function createUser() {
+    const nameValue = document.getElementById("name").value;
+    const uidValue = document.getElementById("uid").value;
+
+    const newUser = { name: nameValue, uid: uidValue };
+    data.push(newUser);
+
+    const table = document.getElementById("table");
+    const tr = document.createElement("tr");
+
+    const nameTd = document.createElement("td");
+    const uidTd = document.createElement("td");
+    const actionTd = document.createElement("td");
+
+    nameTd.innerHTML = newUser.name;
+    uidTd.innerHTML = newUser.uid;
+
+    const updateBtn = document.createElement('input');
+    updateBtn.type = "button";
+    updateBtn.className = "button";
+    updateBtn.value = "Update";
+    updateBtn.style = "margin-right:16px";
+    updateBtn.onclick = function () {
+      updateUser(newUser.uid);
+    };
+    actionTd.appendChild(updateBtn);
+
+    const deleteBtn = document.createElement('input');
+    deleteBtn.type = "button";
+    deleteBtn.className = "button";
+    deleteBtn.value = "Delete";
+    deleteBtn.style = "margin-right:16px";
+    deleteBtn.onclick = function () {
+      deleteUser(newUser.uid);
+    };
+    actionTd.appendChild(deleteBtn);
+
+    tr.appendChild(nameTd);
+    tr.appendChild(uidTd);
+    tr.appendChild(actionTd);
+
+    table.appendChild(tr);
+
+    document.getElementById("name").value = "";
+    document.getElementById("uid").value = "";
+
+    postUserToBackend(newUser);
+}
+
+function updateUser(userId) {
+    console.log("Update user with ID:", userId);
+    // Implementation of update logic can go here
+}
+
+function deleteUser(userId) {
+    const userIndex = data.findIndex(user => user.uid === userId);
+    if (userIndex !== -1) {
+        data.splice(userIndex, 1);
+
+        const table = document.getElementById("table");
+        const rows = table.getElementsByTagName("tr");
+        for (let i = 0; i < rows.length; i++) {
+            const cells = rows[i].getElementsByTagName("td");
+            if (cells.length > 1 && cells[1].innerText === userId) {
+                table.deleteRow(i);
+                break;
+            }
+        }
+
+        fetch(`http://localhost:8887/api/crud/${userId}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to delete user from the server');
+            }
+        })
+        .then(data => {
+            console.log('User deleted:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    } else {
+        console.error(`User with UID ${userId} not found.`);
+    }
+}
+
+function postUserToBackend(user) {
+  fetch('http://localhost:8887/api/crud', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+function fetchUsers() {
+    fetch('http://localhost:8887/api/crud')
+        .then(response => response.json())
+        .then(data => {
+            const table = document.getElementById("table");
+            table.innerHTML = "";  // Clear previous data
+
+            data.forEach(user => {
+                const tr = document.createElement("tr");
+                const name = document.createElement("td");
+                const uid = document.createElement("td");
+                const action = document.createElement("td");
+
+                name.innerHTML = user.name;
+                uid.innerHTML = user.uid;
+
+                const updateBtn = document.createElement('input');
+                updateBtn.type = "button";
+                updateBtn.className = "button";
+                updateBtn.value = "Update";
+                updateBtn.style = "margin-right:16px";
+                updateBtn.onclick = function () {
+                  updateUser(user.uid);
+                };
+                action.appendChild(updateBtn);
+
+                const deleteBtn = document.createElement('input');
+                deleteBtn.type = "button";
+                deleteBtn.className = "button";
+                deleteBtn.value = "Delete";
+                deleteBtn.style = "margin-right:16px";
+                deleteBtn.onclick = function () {
+                  deleteUser(user.uid);
+                };
+                action.appendChild(deleteBtn);
+
+                tr.appendChild(name);
+                tr.appendChild(uid);
+                tr.appendChild(action);
+
+                table.appendChild(tr);
+            });
+        });
+}
+
+window.onload = fetchUsers;
+</script>

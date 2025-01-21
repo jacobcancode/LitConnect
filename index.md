@@ -85,6 +85,7 @@ menu: nav/home.html
     .book3 { background-color: #32CD32; height: 140px; width: 40px; left: 140px; } /* Personalized Reading List */
     .book4 { background-color: #FFD700; height: 100px; width: 55px; left: 220px; } /* About Creators */
 
+    
     .monitor {
     width: 800px;  
     height: 500px; 
@@ -157,6 +158,8 @@ menu: nav/home.html
     <a href="{{site.baseurl}}/backend_s" class="book book4">About Creators</a>
     <p id="pointCounter">Points: 0</p>
   </div>
+
+  <a href="{{site.baseurl}}/crud">CRUD api</a>
 
   <div class="content">
     <h2 class="menu-item">Discover your next favorite book and connect with fellow readers from around the world.</h2>
