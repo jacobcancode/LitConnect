@@ -12,26 +12,132 @@ comments: true
     <title>Manage Sections</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f3f4f7, #e9ecef);
+            margin: 0;
+            padding: 0;
+            color: #333;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 2.5rem;
+            color: #4CAF50;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px auto;
+            gap: 15px;
             padding: 10px;
+        }
+
+        .form-container input {
+            width: 250px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-container input:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+            outline: none;
+        }
+
+        .form-container .button {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-container .button:hover {
+            background: linear-gradient(135deg, #43A047, #4CAF50);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
             text-align: left;
         }
-        .form-container {
-            margin-bottom: 20px;
+
+        th {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
         }
+
+        td {
+            border-bottom: 1px solid #ddd;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+            transition: background-color 0.2s ease;
+        }
+
         .button {
-            padding: 8px 12px;
-            margin-left: 5px;
+            padding: 8px 15px;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
             cursor: pointer;
+            font-size: 0.95rem;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .button.delete {
+            background: linear-gradient(135deg, #E53935, #EF5350);
+        }
+
+        .button.delete:hover {
+            background: linear-gradient(135deg, #C62828, #E53935);
+        }
+
+        .button.edit {
+            background: linear-gradient(135deg, #FFA726, #FFB74D);
+        }
+
+        .button.edit:hover {
+            background: linear-gradient(135deg, #FB8C00, #FFA726);
         }
     </style>
 </head>
@@ -72,8 +178,8 @@ comments: true
                             <td>${section.name}</td>
                             <td>${section.theme || ''}</td>
                             <td>
-                                <button class="button" onclick="editSection(${section.id}, '${section.name}', '${section.theme || ''}')">Edit</button>
-                                <button class="button" onclick="deleteSection(${section.id})">Delete</button>
+                                <button class="button edit" onclick="editSection(${section.id}, '${section.name}', '${section.theme || ''}')">Edit</button>
+                                <button class="button delete" onclick="deleteSection(${section.id})">Delete</button>
                             </td>
                         </tr>`;
                         tableBody.innerHTML += row;
