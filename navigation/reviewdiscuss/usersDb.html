@@ -1,0 +1,202 @@
+---
+toc: true
+layout: post
+description: frontend to connect to database
+title: usersDb
+permalink: /usersDb
+comments: true
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            color: #2c3e50;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #2c3e50;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        /* Form Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 12px;
+            border: 1px solid #dcdde1;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+        }
+
+        input:focus {
+            border-color: #74b9ff;
+            outline: none;
+            box-shadow: 0 0 8px rgba(116, 185, 255, 0.5);
+        }
+
+        button {
+            padding: 12px;
+            font-size: 16px;
+            color: #ffffff;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #6c5ce7, #0984e3);
+            box-shadow: 0 4px 8px rgba(108, 92, 231, 0.4);
+        }
+
+        /* User List Styles */
+        .users {
+            margin-top: 20px;
+        }
+
+        .user {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            background: #1c2833; /* Darker background for user box */
+            border: 1px solid #2c3e50; /* Very dark blue border */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #ffffff; /* White text color */
+        }
+
+        .user:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgb(0, 0, 0, 0.1);
+        }
+
+        .user span {
+            font-weight: bold;
+            color: #74b9ff; /* Light blue color for span */
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h1>User Management</h1>
+
+    <!-- Form to Create a User -->
+    <form id="userForm">
+      <input type="text" id="name" placeholder="Name" required />
+      <input type="number" id="age" placeholder="Age" required />
+      <input type="number" id="userId" placeholder="User ID" required />
+      <button type="submit">Add User</button>
+    </form>
+
+    <button id="fetchUsers">Fetch All Users</button>
+
+    <!-- Display Users -->
+    <div class="users" id="usersContainer"></div>
+  </div>
+
+  <script>
+    const apiUrl = 'http://localhost:3001/usersDb'; // Backend API endpoint
+
+    // Create a new user
+    document.getElementById('userForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const age = parseInt(document.getElementById('age').value, 10);
+      const userId = parseInt(document.getElementById('userId').value, 10);
+
+      const data = { name, age, user_id: userId };
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          alert('User added successfully');
+          document.getElementById('userForm').reset();
+          fetchUsers(); // Refresh the user list
+        } else {
+          alert(`Error: ${result.error || result.message}`);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    });
+
+    // Fetch all users
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'GET',
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error fetching users: ${response.statusText}`);
+        }
+
+        const users = await response.json();
+        const usersContainer = document.getElementById('usersContainer');
+        usersContainer.innerHTML = '';
+
+        if (users.length === 0) {
+          usersContainer.textContent = 'No users found.';
+          return;
+        }
+
+        users.forEach((user) => {
+          const div = document.createElement('div');
+          div.classList.add('user');
+          div.innerHTML = `
+            <p>Name: <span>${user.name}</span></p>
+            <p>Age: <span>${user.age}</span></p>
+            <p>User ID: <span>${user.user_id}</span></p>
+          `;
+          usersContainer.appendChild(div);
+        });
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    // Event listener for fetching users
+    document.getElementById('fetchUsers').addEventListener('click', fetchUsers);
+
+    // Initial fetch to display users on page load
+    fetchUsers();
+  </script>
+</body>
+</html>

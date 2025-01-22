@@ -160,6 +160,7 @@ menu: nav/home.html
   </div>
 
   <a href="{{site.baseurl}}/crud">CRUD api</a>
+  <a href="{{site.baseurl}}/usersDb">User Database</a>
 
   <div class="content">
     <h2 class="menu-item">Discover your next favorite book and connect with fellow readers from around the world.</h2>
