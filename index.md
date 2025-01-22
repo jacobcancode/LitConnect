@@ -156,10 +156,8 @@ menu: nav/home.html
     <a href="{{site.baseurl}}/voteforthegoat/home" class="book book2">Moderators Picks</a>
     <a href="{{site.baseurl}}/backend_a" class="book book3">Personalized</a>
     <a href="{{site.baseurl}}/backend_s" class="book book4">About Creators</a>
-    <p id="pointCounter">Points: 0</p>
   </div>
 
-  <a href="{{site.baseurl}}/crud">CRUD api</a>
   <a href="{{site.baseurl}}/usersDb">User Database</a>
 
   <div class="content">
@@ -213,37 +211,6 @@ menu: nav/home.html
   </footer>
 
 <script>
-
-// Function to fetch points from the backend
-function loadPoints() {
-  fetch('http://localhost:8887/api/points')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      const points = document.getElementById('pointCounter');
-      
-      // Check if points element is found
-      if (points) {
-        // Check if 'points' exists in the data
-        if (data && data.points !== undefined) {
-          points.innerText = `Points: ${data.points}`;
-        } else {
-          console.error("Data does not contain 'points'");
-        }
-      } else {
-        console.error("Element with id 'pointCounter' not found");
-      }
-    })
-    .catch(error => {
-      console.error('Error fetching points:', error);
-    });
-}
-
-
     // Function to fetch preferences from the backend
     function loadPreferences() {
       fetch('http://localhost:8887/api/preferences')
@@ -278,8 +245,6 @@ function loadPoints() {
 
   // Load preferences when the page is loaded
   window.onload = loadPreferences;
-  // Load points when the page is loaded
-  window.onload = loadPoints;
 </script>
 </body>
 </html>
