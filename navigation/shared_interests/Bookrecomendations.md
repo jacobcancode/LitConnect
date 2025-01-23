@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const recommendationsContainer = document.getElementById("recommendations-container");
     const addBookForm = document.getElementById("add-book-form");
 
-    function fetchBook() {
-        fetch(`http://127.0.0.1:8887/api/Book?genre=${genre}`, {
+    function fetchBooks() {
+        fetch(`http://127.0.0.1:8887/api/book?genre=${genre}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 bookElement.innerHTML = `
                     <h3>${book.title}</h3>
                     <p>${book.author}</p>
+                    <p>${book.genre}</p>
                     <button data-id="${book.id}" class="delete-book">Delete</button>
                 `;
                 recommendationsContainer.appendChild(bookElement);
@@ -64,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(data => {
-            fetchBook(); // Refresh the book list
+            fetchBooks(); // Refresh the book list
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
@@ -82,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            fetchBook(); // Refresh the book list
+            fetchBooks(); // Refresh the book list
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
@@ -99,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
         addBook(book);
     });
 
-    fetchBook(); // Initial fetch to load books
+    fetchBooks(); // Initial fetch to load books
 });
 </script>
 
