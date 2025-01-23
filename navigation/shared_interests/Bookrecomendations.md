@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const addBookForm = document.getElementById("add-book-form");
 
     function fetchBooks() {
-        fetch(`http://127.0.0.1:8887/api/books?genre=${genre}`, {
+        fetch(`http://127.0.0.1:8887/api/booking?genre=${genre}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function addBook(book) {
-        fetch('http://127.0.0.1:8887/api/books', {
+        fetch('http://127.0.0.1:8887/api/booking', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function deleteBook(bookId) {
-        fetch(`http://127.0.0.1:8887/api/books/${bookId}`, {
+        fetch(`http://127.0.0.1:8887/api/booking/${bookId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -102,24 +102,6 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchBooks(); // Initial fetch to load books
 });
 </script>
-
-<style>
-.book {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #f9f9f9;
-}
-.book h3 {
-    margin: 0 0 5px;
-    color: #333;
-}
-.book p {
-    margin: 0;
-    color: #555;
-}
-</style>
 
 <div id="recommendations-container">
     <p>Loading book recommendations...</p>
