@@ -1,7 +1,7 @@
 ---
 layout: page 
 title: Book Recommendations
-permalink: /bookrecomendations
+permalink: /bookrecommendations
 search_exclude: true
 show_reading_time: false 
 ---
@@ -9,88 +9,98 @@ show_reading_time: false
 document.addEventListener('DOMContentLoaded', function() {
     const genre = 'programming'; // Example genre
     const recommendationsContainer = document.getElementById("recommendations-container");
-
-    fetch(`http://127.0.0.1:8887/api/books?genre=${genre}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data) // Handle the response data
-        recommendationsContainer.innerHTML = ""; // Clear previous recommendations
-        data.forEach(book => {
-            const bookDiv = document.createElement("div")
-            bookDiv.classList.add("book");
-
-            bookDiv.innerHTML = `
-                <h3>${book.title}</h3>
-                <p><strong>Author:</strong> ${book.author}</p>
-                <button class="delete-book" data-title="${book.title}">Delete</button
-            `;
-            recommendationsContainer.appendChild(bookDiv);
-        });
-
-        // Add event listeners to delete buttons
-        document.querySelectorAll('.delete-book').forEach(button => {
-            button.addEventListener('click', function() 
-                const title = this.getAttribute('data-title');
-                deleteBook(title);
-            });
-        });
-    })
-    .catch(error => console.error('Error fetching recommendations:', error));
-
-    // Add book form submission
     const addBookForm = document.getElementById("add-book-form");
-    addBookForm.addEventListener("submit", async function(event) {
+
+    function fetchBooks() {
+        fetch(`http://127.0.0.1:8887/api/books?genre=${genre}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            recommendationsContainer.innerHTML = ''; // Clear any existing content
+            data.forEach(book => {
+                const bookElement = document.createElement('div');
+                bookElement.innerHTML = `
+                    <h3>${book.title}</h3>
+                    <p>${book.author}</p>
+                    <button data-id="${book.id}" class="delete-book">Delete</button>
+                `;
+                recommendationsContainer.appendChild(bookElement);
+            });
+
+            document.querySelectorAll('.delete-book').forEach(button => {
+                button.addEventListener('click', function() {
+                    const bookId = this.getAttribute('data-id');
+                    deleteBook(bookId);
+                });
+            });
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            recommendationsContainer.innerHTML = '<p>Failed to load book recommendations.</p>';
+        });
+    }
+
+    function addBook(book) {
+        fetch('http://127.0.0.1:8887/api/books', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(book)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            fetchBooks(); // Refresh the book list
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function deleteBook(bookId) {
+        fetch(`http://127.0.0.1:8887/api/books/${bookId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            fetchBooks(); // Refresh the book list
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    addBookForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        const title = document.getElementById("book-title").value;
-        const author = document.getElementById("book-author").value;
-        const genre = document.getElementById("book-genre").value;
-
-        const newBook = {
-            title,
-            author,
-            genre
+        const book = {
+            title: document.getElementById('book-title').value,
+            author: document.getElementById('book-author').value,
+            genre: document.getElementById('book-genre').value
         };
-
-        await addBook(newBook);
-
-        // Clear the form
-        addBookForm.reset();
-
-        // Optionally, refresh the recommendations list
-        // fetchRecommendations();
+        addBook(book);
     });
+
+    fetchBooks(); // Initial fetch to load books
 });
-
-async function addBook(book) {
-    const response = await fetch('http://127.0.0.1:8887/api/books', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(book)
-    });
-    const data = await response.json();
-    console.log(data);
-}
-
-async function deleteBook(title) {
-    const response = await fetch(`http://127.0.0.1:8887/api/books?title=${encodeURIComponent(title)}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-    const data = await response.json();
-    console.log(data);
-
-    // Optionally, refresh the recommendations list
-    // fetchRecommendations();
-}
 </script>
 
 <style>
@@ -111,7 +121,9 @@ async function deleteBook(title) {
 }
 </style>
 
-<div id="recommendations-container"></div>
+<div id="recommendations-container">
+    <p>Loading book recommendations...</p>
+</div>
 
 <h2>Add a New Book</h2>
 <form id="add-book-form">
