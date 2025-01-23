@@ -1,6 +1,6 @@
 ---
 layout: page 
-title: Book Reading List
+title: Book Recommendations
 permalink: /bookrecomendations
 search_exclude: true
 show_reading_time: false 
