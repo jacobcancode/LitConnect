@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const addBookForm = document.getElementById("add-book-form");
 
     function fetchBook() {
-        fetch(`http://127.0.0.1:8887/api/booking?genre=${genre}`, {
+        fetch(`http://127.0.0.1:8887/api/Booking?genre=${genre}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function addBook(book) {
-        fetch('http://127.0.0.1:8887/api/booking', {
+        fetch('http://127.0.0.1:8887/api/Booking', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function deleteBook(bookId) {
-        fetch(`http://127.0.0.1:8887/api/booking/${bookId}`, {
+        fetch(`http://127.0.0.1:8887/api/Booking/${bookId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
