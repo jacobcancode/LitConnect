@@ -1,11 +1,10 @@
 ---
 layout: page 
-title: Book Recommendations
+title: Book Reading List
 permalink: /bookrecomendations
 search_exclude: true
 show_reading_time: false 
 ---
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const genre = 'programming'; // Example genre
@@ -19,17 +18,26 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data); // Handle the response data
+        console.log(data) // Handle the response data
         recommendationsContainer.innerHTML = ""; // Clear previous recommendations
         data.forEach(book => {
-            const bookDiv = document.createElement("div");
+            const bookDiv = document.createElement("div")
             bookDiv.classList.add("book");
 
             bookDiv.innerHTML = `
                 <h3>${book.title}</h3>
                 <p><strong>Author:</strong> ${book.author}</p>
+                <button class="delete-book" data-title="${book.title}">Delete</button
             `;
             recommendationsContainer.appendChild(bookDiv);
+        });
+
+        // Add event listeners to delete buttons
+        document.querySelectorAll('.delete-book').forEach(button => {
+            button.addEventListener('click', function() 
+                const title = this.getAttribute('data-title');
+                deleteBook(title);
+            });
         });
     })
     .catch(error => console.error('Error fetching recommendations:', error));
@@ -68,6 +76,20 @@ async function addBook(book) {
     });
     const data = await response.json();
     console.log(data);
+}
+
+async function deleteBook(title) {
+    const response = await fetch(`http://127.0.0.1:8887/api/books?title=${encodeURIComponent(title)}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    const data = await response.json();
+    console.log(data);
+
+    // Optionally, refresh the recommendations list
+    // fetchRecommendations();
 }
 </script>
 
