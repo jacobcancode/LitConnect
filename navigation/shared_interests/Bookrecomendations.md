@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const recommendationsContainer = document.getElementById("recommendations-container");
     const addBookForm = document.getElementById("add-book-form");
 
-    function fetchBooks() {
+    function fetchBook() {
         fetch(`http://127.0.0.1:8887/api/booking?genre=${genre}`, {
             method: 'GET',
             headers: {
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(data => {
-            fetchBooks(); // Refresh the book list
+            fetchBook(); // Refresh the book list
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            fetchBooks(); // Refresh the book list
+            fetchBook(); // Refresh the book list
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
         addBook(book);
     });
 
-    fetchBooks(); // Initial fetch to load books
+    fetchBook(); // Initial fetch to load books
 });
 </script>
 
