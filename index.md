@@ -157,7 +157,7 @@ menu: nav/home.html
     <p id="pointCounter">Points: 0</p>
   </div>
 
-  <a href="{{site.baseurl}}/crud">CRUD api</a>
+  <a href="{{site.baseurl}}/usersDb">CRUD api</a>
 
   <div class="content">
     <h2 class="menu-item">Discover your next favorite book and connect with fellow readers from around the world.</h2>
