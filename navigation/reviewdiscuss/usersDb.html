@@ -121,7 +121,7 @@ comments: true
         <!-- Form to Create a User -->
         <form id="userForm">
             <input type="text" id="name" placeholder="Name" required />
-            <input type="number" id="age" placeholder="Age" required />
+            <input type="text" id="fav_book" placeholder="Fav_Book" required />
             <input type="number" id="userId" placeholder="User ID" required />
             <button type="submit">Add User</button>
         </form>
@@ -130,7 +130,7 @@ comments: true
         <form id="updateUserForm">
             <input type="number" id="updateUserId" placeholder="User ID to Update" required />
             <input type="text" id="updateName" placeholder="New Name (optional)" />
-            <input type="number" id="updateAge" placeholder="New Age (optional)" />
+            <input type="text" id="updateFavBook" placeholder="New Fav_Book (optional)" />
             <button type="submit">Update User</button>
         </form>
 
@@ -148,10 +148,10 @@ comments: true
             e.preventDefault();
 
             const name = document.getElementById('name').value;
-            const age = parseInt(document.getElementById('age').value, 10);
+            const fav_book = document.getElementById('fav_book').value;
             const userId = parseInt(document.getElementById('userId').value, 10);
 
-            const data = { name, age, user_id: userId };
+            const data = { name, fav_book, user_id: userId };
 
             try {
                 const response = await fetch(apiUrl, {
@@ -181,16 +181,16 @@ comments: true
 
             const userId = parseInt(document.getElementById('updateUserId').value, 10);
             const name = document.getElementById('updateName').value.trim() || null;
-            const age = document.getElementById('updateAge').value ? parseInt(document.getElementById('updateAge').value, 10) : null;
+            const fav_book = document.getElementById('updateFavBook').value ? parseInt(document.getElementById('updateFavBook').value, 10) : null;
 
-            if (!userId || (!name && !age)) {
+            if (!userId || (!name && !fav_book)) {
                 alert('Please provide a User ID and at least one field to update.');
                 return;
             }
 
             const data = {};
             if (name) data.name = name;
-            if (age) data.age = age;
+            if (fav_book) data.fav_book = fav_book;
 
             try {
                 const response = await fetch(`${apiUrl}/${userId}`, {
@@ -239,7 +239,7 @@ comments: true
                     div.classList.add('user');
                     div.innerHTML = `
                         <p>Name: <span>${user.name}</span></p>
-                        <p>Age: <span>${user.age}</span></p>
+                        <p>Fav_Book: <span>${user.fav_book}</span></p>
                         <p>User ID: <span>${user.user_id}</span></p>
                         <button onclick="deleteUser(${user.user_id})">Delete</button>
                     `;
