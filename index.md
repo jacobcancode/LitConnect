@@ -154,10 +154,9 @@ menu: nav/home.html
     <a href="{{site.baseurl}}/voteforthegoat/home" class="book book2">Moderators Picks</a>
     <a href="{{site.baseurl}}/backend_a" class="book book3">Personalized</a>
     <a href="{{site.baseurl}}/backend_s" class="book book4">About Creators</a>
-    <p id="pointCounter">Points: 0</p>
   </div>
 
-  <a href="{{site.baseurl}}/usersDb">CRUD api</a>
+  <a href="{{site.baseurl}}/usersDb">usersDb</a>
 
   <div class="content">
     <h2 class="menu-item">Discover your next favorite book and connect with fellow readers from around the world.</h2>
