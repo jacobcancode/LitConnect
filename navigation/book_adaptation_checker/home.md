@@ -113,12 +113,22 @@ permalink: /bookadaptationchecker
 </div>
 
 <script>
+    const pythonURI = (() => {
+        if (location.hostname === "localhost") {
+            return "http://localhost:8887";
+        } else if (location.hostname === "127.0.0.1") {
+            return "http://127.0.0.1:8887";
+        } else {
+            return "https://flask2025.nighthawkcodingsociety.com"; 
+        }
+    })();
+
     document.getElementById('searchButton').addEventListener('click', async () => {
         const title = document.getElementById('searchInput').value;
         const resultContainer = document.getElementById('resultContainer');
         
         try {
-            const response = await fetch(`http://127.0.0.1:8887/movies/search?title=${encodeURIComponent(title)}`);
+            const response = await fetch(`${pythonURI}/movies/search?title=${encodeURIComponent(title)}`);
             const contentType = response.headers.get('content-type');
             if (!contentType || !contentType.includes('application/json')) {
                 throw new Error('Unexpected response format');
@@ -138,24 +148,20 @@ permalink: /bookadaptationchecker
     document.getElementById('getAllMoviesButton').addEventListener('click', async () => {
         const resultContainer = document.getElementById('resultContainer');
 
-        try {
-            const response = await fetch('http://127.0.0.1:8887/movies');
+       const response = await fetch(`${pythonURI}/movies`);
             const data = await response.json();
             
             resultContainer.innerHTML = '<h3>All Movies:</h3>';
             data.forEach(movie => {
                 resultContainer.innerHTML += `<p>${movie.title}</p>`;
             });
-        } catch (error) {
-            resultContainer.innerHTML = `<p>Error fetching data: ${error.message}</p>`;
-        }
     });
 
     document.getElementById('getAllBooksButton').addEventListener('click', async () => {
         const tableBody = document.getElementById('table');
 
         try {
-            const response = await fetch('http://127.0.0.1:8887/api/books');
+            const response = await fetch(`${pythonURI}/api/books`);
             const data = await response.json();
             
             tableBody.innerHTML = ''; // Clear existing rows
@@ -201,7 +207,7 @@ permalink: /bookadaptationchecker
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:8887/api/books', {
+            const response = await fetch(`${pythonURI}/api/books`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -224,7 +230,7 @@ permalink: /bookadaptationchecker
     function deleteBook(bookId) {
         const resultContainer = document.getElementById('resultContainer');
 
-        fetch(`http://127.0.0.1:8887/api/books/${bookId}`, {
+        fetch(`${pythonURI}/api/books/${bookId}`,{
             method: 'DELETE'
         })
         .then(response => {
@@ -245,7 +251,7 @@ permalink: /bookadaptationchecker
     function updateBook(bookId) {
         const newTitle = prompt("Enter new title for the book:");
         if (newTitle) {
-            fetch(`http://127.0.0.1:8887/api/books/${bookId}`, {
+            fetch(`${pythonURI}/api/books/${bookId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
