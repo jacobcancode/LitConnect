@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>${book.author}</p>
                     <p>${book.genre}</p>
                     <button data-id="${book.id}" class="delete-book">Delete</button>
+                    <button class="update-book" data-id="${book.id}">Update Book</button>
                 `;
                 recommendationsContainer.appendChild(bookElement);
             });
@@ -41,6 +42,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 button.addEventListener('click', function() {
                     const bookId = this.getAttribute('data-id');
                     deleteBook(bookId);
+                });
+            });
+
+            document.querySelectorAll('.update-book').forEach(button => {
+                button.addEventListener('click', function() {
+                    const bookId = this.getAttribute('data-id');
+                    const updatedBook = {
+                        title: 'New Title', // Replace with actual title
+                        author: 'New Author', // Replace with actual author
+                        genre: 'New Genre' // Replace with actual genre
+                    };
+
+                    fetch(`http://127.0.0.1:8887/api/book/${bookId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(updatedBook)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            console.error('Error:', data.error);
+                        } else {
+                            console.log('Success:', data);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
                 });
             });
         })
