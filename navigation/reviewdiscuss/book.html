@@ -162,7 +162,7 @@ comments: true
 
         // Function to fetch preferences from the backend
         function loadPreferences() {
-            fetch('http://localhost:8887/api/preferences')  // Adjust URL if needed
+            fetch('http://127.0.0.1:8887/api/preferences')  // Adjust URL if needed
             .then(response => response.json())
             .then(data => {
                 // Update the page with the preferences
