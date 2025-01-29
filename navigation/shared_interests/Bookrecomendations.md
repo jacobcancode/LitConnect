@@ -132,7 +132,41 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     fetchBooks(); // Initial fetch to load books
+
+    document.getElementById('updateBookButton').addEventListener('click', () => {
+        const bookId = prompt("Enter the ID of the book you want to update:");
+        if (bookId) {
+            updateBook(bookId);
+        }
+    });
 });
+
+ function updateBook(bookId) {
+        const newTitle = prompt("Enter new title for the book:");
+        if (newTitle) {
+            fetch(`${pythonURI}/api/book/${bookId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title: newTitle })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultContainer = document.getElementById('resultContainer');
+                if (data) {
+                    resultContainer.innerHTML = `<p>Book updated successfully: ${data.title}</p>`;
+                    document.getElementById('getAllBooksButton').click(); // Refresh the book list
+                }
+            })
+            .catch(error => {
+                const resultContainer = document.getElementById('resultContainer');
+                resultContainer.innerHTML = `<p>Error updating book: ${error.message}</p>`;
+            });
+        }
+    }
+</script>
+
 </script>
 
 <div id="recommendations-container">
