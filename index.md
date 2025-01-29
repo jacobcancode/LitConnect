@@ -204,6 +204,11 @@ menu: nav/home.html
             <img src="{{site.baseurl}}/images/App-Logos/Database.png" alt="Database">
             <span>Database</span>
         </a>
+
+        <a href="{{site.baseurl}}/blogs" class="button">
+            <img src="{{site.baseurl}}/images/App-Logos/Database.png" alt="Database">
+            <span>Deployment Blog</span>
+        </a>
     </div>
   </div>
 
