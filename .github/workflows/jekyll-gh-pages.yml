@@ -50,8 +50,12 @@ jobs:
       - name: Build with Jekyll
         run: |
           bundle exec jekyll build  # Build your Jekyll site
+            
       - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v3  
+        with:
+          artifact-name: jekyll-site  
+
 
   # Deployment job
   deploy:
