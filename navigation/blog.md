@@ -87,6 +87,6 @@ permalink: /blogs/
 
     <p>By adhering to this structured deployment process and assigning clear roles, the team can ensure a reliable and efficient software release cycle. With Ahaan, Jacob, Noah, and Arnav managing key aspects, our deployment pipeline is robust and effective.</p>
 
-
+<img src="{{site.baseurl}}/images/deployment.png" alt="idk">
 </body>
 </html>
