@@ -119,7 +119,7 @@ permalink: /bookadaptationchecker
         } else if (location.hostname === "127.0.0.1") {
             return "http://127.0.0.1:8887";
         } else {
-            return "https://flask2025.nighthawkcodingsociety.com"; 
+            return "https://ahaanv19.github.io/LitConnect/bookadaptationchecker"; 
         }
     })();
 
