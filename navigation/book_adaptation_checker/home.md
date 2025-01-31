@@ -113,7 +113,7 @@ permalink: /bookadaptationchecker
 </div>
 
 <script>
-    const pythonURI = (() => {
+    const pythonURI = (() => { // pythonURI definition
         if (location.hostname === "localhost") {
             return "http://localhost:8887";
         } else if (location.hostname === "127.0.0.1") {
