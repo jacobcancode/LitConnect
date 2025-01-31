@@ -5,13 +5,6 @@ search_exclude: true
 permalink: /blogs/
 ---
 
----
-layout: blogs
-title: Comprehensive Software Deployment Guide
-search_exclude: true
-permalink: /blogs/deployment-guide/
----
-
 <html>
 <body>
     <hr>
