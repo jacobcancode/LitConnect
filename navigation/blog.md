@@ -30,7 +30,7 @@ permalink: /blogs/
 
 3. **Find Your EC2 Public IP**
    - Go to **Instances → Your Instance → Details**
-   - Copy **Public IPv4 Address** (e.g., `18.234.56.78`)
+   - Copy **Public IPv4 Address** 
 
 ### 🔹 **Step 1.2: Accessing EC2 via SSH**
 
@@ -91,7 +91,7 @@ git clone https://github.com/ahaanvaidyanathan/my_flask_backend.git my_backend
 cd my_backend
 ```
 
-3. **Create `.env` File** (DO NOT COMMIT THIS FILE!)
+3. **Create `.env` File** (WE DO NOT COMMIT THIS FILE!)
 ```sh
 touch .env
 nano .env
@@ -173,7 +173,7 @@ server {
     server_name YOUR_DOMAIN_OR_IP;
 
     location / {
-        proxy_pass http://localhost:8087;
+        proxy_pass http://localhost:8887;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
     }
@@ -195,7 +195,7 @@ sudo systemctl restart nginx
 3. **Create an A Record:**
    - Name: `@`
    - Type: `A`
-   - Value: `YOUR_INSTANCE_IP`
+   - Value: `OUR_INSTANCE_IP`
 
 ---
 
@@ -208,7 +208,7 @@ docker logs -f CONTAINER_ID
 
 ### 🔹 **Check Application Health**
 ```sh
-curl http://YOUR_DOMAIN_OR_IP
+curl http://OUR_DOMAIN_OR_IP
 ```
 
 ### 🔹 **Monitor Performance**
