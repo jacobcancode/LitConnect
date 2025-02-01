@@ -121,6 +121,8 @@ permalink: /blogs/
     <p>By following this structured deployment strategy, teams can enhance efficiency, reduce downtime, and ensure a smooth software release process. The division of responsibilities among Ahaan, Jacob, Noah, and Arnav fosters a streamlined and collaborative workflow, leading to high-quality deployments.</p>
 
     <img src="{{site.baseurl}}/images/d.png" alt="Deployment Process Overview">
+     <img src="{{site.baseurl}}/images/a.png" alt="Deployment Process Overview">
+    
 </body>
 </html>
 
