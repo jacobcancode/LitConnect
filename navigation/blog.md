@@ -4,127 +4,237 @@ title: Blogs
 search_exclude: true
 permalink: /blogs/
 ---
+# 📢 **Team Deployment Guide: Ultra-Detailed Step-by-Step**
 
-<html>
-<body>
-    <hr>
+> **Welcome to the official deployment guide for our project!** 🚀 This guide provides an exhaustive step-by-step walkthrough for deploying our backend to AWS using EC2, Docker, and Cockpit. 
 
-    <h1>Comprehensive Software Deployment Guide</h1>
-    <p>Efficient and structured deployment processes are critical to ensuring seamless software releases. This guide provides an in-depth overview of best practices, tools, and responsibilities across all deployment stages, from planning to continuous monitoring.</p>
+---
 
-    <h2>Step 1: Planning and Preparation</h2>
-    <p>Effective deployment begins with meticulous planning. This phase ensures all prerequisites are met and responsibilities are clearly assigned.</p>
-    <ul>
-        <li><strong>Understand Project Requirements:</strong> Conduct a thorough analysis of the application’s functionality, dependencies, and user expectations. This includes:
-            <ul>
-                <li>Defining project goals and scope.</li>
-                <li>Identifying infrastructure needs (servers, databases, cloud services).</li>
-                <li>Outlining security and compliance considerations.</li>
-            </ul>
-        </li>
-        <li><strong>Set Up Deployment Environment:</strong> Establish and configure the necessary environments:
-            <ul>
-                <li><strong>Development:</strong> Local setup for coding and initial testing.</li>
-                <li><strong>Staging:</strong> A pre-production environment that closely mimics production.</li>
-                <li><strong>Production:</strong> The live application environment.</li>
-            </ul>
-        </li>
-        <li><strong>Assign Deployment Roles:</strong> Clearly define responsibilities to streamline execution.
-            <div class="roles">
-                <ul>
-                    <li><strong>Primary Deployment Admin:</strong> <em>Ahaan</em> – Oversees the entire deployment lifecycle, ensures adherence to best practices, and resolves critical issues.</li>
-                    <li><strong>Secondary Deployment Admins:</strong>
-                        <ul>
-                            <li><strong>Jacob:</strong> Monitors server performance, assists in issue resolution, and ensures staging-to-production consistency.</li>
-                            <li><strong>Noah:</strong> Manages deployment documentation, automation scripts, and ensures compliance with deployment standards.</li>
-                            <li><strong>Arnav:</strong> Conducts final testing, validates deployments, and performs post-deployment quality assurance.</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </li>
-    </ul>
+## 📌 **Step 1: Initial Setup and Accessing AWS EC2**
 
-    <h2>Step 2: Building and Packaging</h2>
-    <ul>
-        <li><strong>Version Control:</strong> Ensure all code is merged into the designated deployment branch (e.g., main or release branch) and is fully tested.</li>
-        <li><strong>Dependency Management:</strong> Install and verify required dependencies:
-            <ul>
-                <li>Node.js projects: <code>npm install</code> or <code>yarn install</code></li>
-                <li>Python projects: <code>pip install -r requirements.txt</code></li>
-                <li>Java projects: <code>mvn install</code></li>
-            </ul>
-        </li>
-        <li><strong>Compilation and Asset Optimization:</strong> Convert source code into a production-ready format:
-            <ul>
-                <li>Minify JavaScript and CSS files using Webpack, Vite, or Gulp.</li>
-                <li>Optimize images and static assets.</li>
-            </ul>
-        </li>
-        <li><strong>Automated Testing:</strong> Execute test suites to ensure stability:
-            <ul>
-                <li>Unit tests using Jest, Mocha, or PyTest.</li>
-                <li>Integration tests for API and database functionality.</li>
-                <li>End-to-end tests using Cypress or Selenium.</li>
-            </ul>
-        </li>
-    </ul>
+### 🔹 **Step 1.1: Get Your AWS EC2 Credentials**
 
-    <h2>Step 3: Deployment to Staging</h2>
-    <ul>
-        <li><strong>Push Code to Staging Server:</strong> Deploy code to the staging environment using CI/CD pipelines like GitHub Actions, Jenkins, or GitLab CI.</li>
-        <li><strong>Perform Staging Tests:</strong>
-            <ul>
-                <li>Validate UI responsiveness and layout consistency.</li>
-                <li>Test database integrity and API connections.</li>
-                <li>Conduct performance and load testing.</li>
-                <li>Check security vulnerabilities using tools like OWASP ZAP.</li>
-            </ul>
-        </li>
-        <li><strong>Team Review:</strong> Collaborate to identify and resolve issues before proceeding to production.</li>
-    </ul>
+1. **Access AWS EC2 Console:**
+   - Navigate to [AWS EC2 Dashboard](https://console.aws.amazon.com/ec2/).
+   - Ensure you are using the correct AWS region (e.g., `us-west-1`).
+   
+2. **Locate or Create an EC2 Instance:**
+   - If you already have an instance running, find its **Public IPv4 Address** under **Instances**.
+   - If you need to create a new one:
+     - Click **Launch Instance**
+     - Choose **Ubuntu 22.04 LTS**
+     - Select instance type: `t2.micro` (free-tier eligible)
+     - Configure key pair (download `.pem` file!)
+     - Allow inbound traffic (ports `22`, `8080`, `443`, etc.)
+     - Click **Launch**
 
-    <h2>Step 4: Final Review and Approval</h2>
-    <ul>
-        <li><strong>Code Review:</strong> Ensure all code follows best practices, security guidelines, and maintains consistency.</li>
-        <li><strong>Approval Process:</strong> The primary deployment admin (Ahaan) provides the final go-ahead for production deployment upon successful staging validation.</li>
-    </ul>
+3. **Find Your EC2 Public IP**
+   - Go to **Instances → Your Instance → Details**
+   - Copy **Public IPv4 Address** (e.g., `18.234.56.78`)
 
-    <h2>Step 5: Production Deployment</h2>
-    <ul>
-        <li><strong>Backup Production Environment:</strong> Create database snapshots and server backups to facilitate rollback if necessary.</li>
-        <li><strong>Deploy Code:</strong> Utilize deployment automation tools such as:
-            <ul>
-                <li>Docker containers</li>
-                <li>AWS Elastic Beanstalk</li>
-                <li>Azure App Service</li>
-                <li>Vercel or Netlify (for frontend applications)</li>
-            </ul>
-        </li>
-        <li><strong>Real-time Monitoring:</strong> Use logging and monitoring tools like Datadog, New Relic, or Prometheus to track system performance and detect anomalies.</li>
-    </ul>
+### 🔹 **Step 1.2: Accessing EC2 via SSH**
 
-    <h2>Step 6: Post-Deployment Verification</h2>
-    <ul>
-        <li><strong>Functional Validation:</strong> Ensure core functionalities such as authentication, API calls, and data retrieval work as expected.</li>
-        <li><strong>Stakeholder Communication:</strong> Inform relevant stakeholders of the successful deployment and provide access details.</li>
-        <li><strong>User Feedback:</strong> Gather feedback to identify usability issues and address post-release bugs.</li>
-    </ul>
+💡 **Use Cockpit for easier management:** [Cockpit Backdoor](https://cockpit.stu.nighthawkcodingsociety.com/)
 
-    <h2>Step 7: Continuous Monitoring and Maintenance</h2>
-    <ul>
-        <li><strong>Issue Resolution:</strong> Promptly address reported bugs and security vulnerabilities.</li>
-        <li><strong>Performance Optimization:</strong> Analyze logs, database queries, and network requests to improve efficiency.</li>
-        <li><strong>Documentation Updates:</strong> Maintain deployment logs and update process documentation with lessons learned.</li>
-    </ul>
+Alternatively, use SSH:
+```sh
+ssh -i /path/to/my-key.pem ubuntu@YOUR_INSTANCE_IP
+```
+Example:
+```sh
+ssh -i ~/.ssh/aws_key.pem ubuntu@18.234.56.78
+```
 
-    <p>By following this structured deployment strategy, teams can enhance efficiency, reduce downtime, and ensure a smooth software release process. The division of responsibilities among Ahaan, Jacob, Noah, and Arnav fosters a streamlined and collaborative workflow, leading to high-quality deployments.</p>
+✅ **Success Check:** You should now be inside the EC2 terminal!
 
-    <img src="{{site.baseurl}}/images/d.png" alt="Deployment Process Overview">
-     <img src="{{site.baseurl}}/images/a.png" alt="Deployment Process Overview">
+---
+
+## 📌 **Step 2: Initial Server Setup**
+
+1. **Update & Upgrade Packages**
+```sh
+sudo apt update && sudo apt upgrade -y
+```
+
+2. **Install Required Software**
+```sh
+sudo apt install -y git docker.io docker-compose
+```
+
+3. **Start & Enable Docker**
+```sh
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+
+4. **Verify Docker Installation**
+```sh
+docker --version
+```
+✅ **Expected Output:** `Docker version XX.XX.XX`
+
+---
+
+## 📌 **Step 3: Clone & Configure Project**
+
+1. **Clone Your Repository**
+```sh
+git clone https://github.com/YOUR_USERNAME/YOUR_BACKEND_REPO.git my_backend
+```
+Example:
+```sh
+git clone https://github.com/ahaanvaidyanathan/my_flask_backend.git my_backend
+```
+
+2. **Navigate into the Project**
+```sh
+cd my_backend
+```
+
+3. **Create `.env` File** (DO NOT COMMIT THIS FILE!)
+```sh
+touch .env
+nano .env
+```
+💡 **Example `.env` structure:**
+```
+SECRET_KEY=supersecretkey
+DATABASE_URL=postgresql://user:password@localhost/dbname
+DEBUG=True
+```
+Press `CTRL + X`, then `Y`, then `Enter` to save.
+
+4. **Initialize Database**
+```sh
+./scripts/db_init.py
+```
+
+---
+
+## 📌 **Step 4: Run Your Application with Docker**
+
+1. **Build Docker Image**
+```sh
+docker-compose build
+```
+
+2. **Run Docker Containers in Detached Mode**
+```sh
+docker-compose up -d
+```
+
+3. **Verify Running Containers**
+```sh
+docker ps
+```
+✅ **Look for your application and its assigned port.**
+
+4. **Test if the Server is Running**
+```sh
+curl localhost:8087
+```
+✅ **If successful, you'll see an HTTP response from your Flask backend.**
+
+---
+
+## 📌 **Step 5: Expose the Application to the Internet**
+
+1. **Find Your Instance’s Public IP**
+```sh
+echo $(curl -s ifconfig.me)
+```
+✅ **Copy the output and use it to test in a browser!**
+
+2. **Allow Traffic on Port 8087 (or Your Port)**
+```sh
+sudo ufw allow 8087/tcp
+sudo ufw enable
+```
+
+3. **Test Access from Your Machine**
+```sh
+curl http://YOUR_INSTANCE_IP:8087
+```
+✅ **Expected: Flask server response.**
+
+4. **Set Up Reverse Proxy (Optional, for Nginx Support)**
+```sh
+sudo apt install nginx -y
+```
+
+5. **Configure Nginx**
+```sh
+sudo nano /etc/nginx/sites-available/my_backend
+```
+💡 **Example Nginx Config:**
+```
+server {
+    listen 80;
+    server_name YOUR_DOMAIN_OR_IP;
+
+    location / {
+        proxy_pass http://localhost:8087;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+```
+
+6. **Enable & Restart Nginx**
+```sh
+sudo ln -s /etc/nginx/sites-available/my_backend /etc/nginx/sites-enabled/
+sudo systemctl restart nginx
+```
+
+---
+
+## 📌 **Step 6: Route53 Domain Setup (Optional)**
+
+1. **Go to [AWS Route 53](https://console.aws.amazon.com/route53/)**
+2. **Register a domain name**
+3. **Create an A Record:**
+   - Name: `@`
+   - Type: `A`
+   - Value: `YOUR_INSTANCE_IP`
+
+---
+
+## 📌 **Step 7: Post-Deployment Checks & Monitoring**
+
+### 🔹 **Check Logs**
+```sh
+docker logs -f CONTAINER_ID
+```
+
+### 🔹 **Check Application Health**
+```sh
+curl http://YOUR_DOMAIN_OR_IP
+```
+
+### 🔹 **Monitor Performance**
+Use [Cockpit Backdoor](https://cockpit.stu.nighthawkcodingsociety.com/) for system health and logs.
+
+---
+
+## 📌 **Final Notes & Security Best Practices**
+
+✅ **DO NOT commit `.env` files or sensitive credentials.**
+
+✅ **Ensure `ufw` firewall allows only necessary ports.**
+
+✅ **Use `systemctl` to restart services if issues arise.**
+```sh
+sudo systemctl restart docker nginx
+```
+
+✅ **Regularly check logs & server health via Cockpit.**
+
+---
+
+<img src="{{site.baseurl}}/images/d.png" alt="Deployment Process Overview">
     
-</body>
-</html>
+<img src="{{site.baseurl}}/images/a.png" alt="Deployment Process Overview">
+    
 
 
 
