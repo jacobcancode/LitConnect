@@ -6,13 +6,107 @@ permalink: /blogs/
 ---
 # 📢 **LitConnect Deployment Guide: Step-by-Step**
 
-> **Welcome to the official deployment guide for our project!** 🚀 This guide provides an exhaustive step-by-step walkthrough for deploying our backend to AWS using EC2, Docker, and Cockpit. It demonstrates the exact steps we will follow in order for succesful deployment. Diagrams at the bottom.
+> **Welcome to the official deployment guide for our project!** 🚀 This guide provides an exhaustive step-by-step walkthrough for deploying our backend to AWS using EC2, Docker, and Cockpit. It demonstrates the exact steps we will follow in order for succesful deployment. Diagrams at the bottom, and the first three steps are the crucial ones. 
 
 ---
 
-## 📌 **Step 1: Initial Setup and Accessing AWS EC2**
+## 📌 **Step 1: Clone & Configure Project**
 
-### 🔹 **Step 1.1: Get Your AWS EC2 Credentials**
+1. **Clone Your Repository**
+```sh
+git clone https://github.com/YOUR_USERNAME/YOUR_BACKEND_REPO.git my_backend
+```
+Example:
+```sh
+git clone https://github.com/Ahaanv19/sprint4_flocker_backend.git
+```
+
+2. **Navigate into the Project**
+```sh
+cd my_backend
+```
+
+3. **Create `.env` File** (WE DO NOT COMMIT THIS FILE!)
+```sh
+touch .env
+nano .env
+```
+💡 **Example `.env` structure: We will decide on a password and username just our example**
+```
+SECRET_KEY=supersecretkey
+DATABASE_URL=postgresql://user:password@localhost/dbname
+DEBUG=True
+```
+Press `CTRL + X`, then `Y`, then `Enter` to save.
+
+4. **Initialize Database**
+```sh
+./scripts/db_init.py
+```
+
+---
+
+## 📌 **Step 2: Run Your Application with Docker**
+
+1. **Build Docker Image**
+```sh
+docker-compose build
+```
+
+2. **Run Docker Containers in Detached Mode**
+```sh
+docker-compose up -d
+```
+
+3. **Verify Running Containers**
+```sh
+docker ps
+```
+✅ **Look for your application and its assigned port.**
+
+4. **Test if the Server is Running**
+```sh
+curl localhost:8805
+```
+✅ **If successful, you'll see an HTTP response from your Flask backend.**
+
+---
+
+
+
+## 📌 **Step 3: Post-Deployment Checks & Monitoring**
+
+### 🔹 **Check Logs**
+```sh
+docker logs -f CONTAINER_ID
+```
+
+### 🔹 **Check Application Health**
+```sh
+curl http://OUR_DOMAIN_OR_IP
+```
+
+### 🔹 **Monitor Performance**
+Use [Cockpit Backdoor](https://cockpit.stu.nighthawkcodingsociety.com/) for system health and logs.
+
+---
+
+<img src="{{site.baseurl}}/images/d.png" alt="Deployment Process Overview">
+    
+<img src="{{site.baseurl}}/images/a.png" alt="Deployment Process Overview">
+
+## 📌 **Final Notes, Security Best Practices, & Reference Steps for Future Use**
+
+✅ **WE DO NOT commit `.env` files or sensitive credentials.**
+
+✅ **Regularly check logs & server health via Cockpit.**
+
+## Reference Steps Below 
+**These steps are for our reference, focus only on the steps 1,2, and 3, these steps can possibly causes issues but is still useful for future reference. DO NOT WITHOUT PERMISSION USE THESE STEPS!!!**
+
+## 📌 **Reference Step: Initial Setup and Accessing AWS EC2**
+
+### 🔹 **: Get Your AWS EC2 Credentials**
 
 1. **Access AWS EC2 Console:**
    - Navigate to [AWS EC2 Dashboard](https://console.aws.amazon.com/ec2/).
@@ -49,7 +143,7 @@ ssh -i ~/.ssh/aws_key.pem ubuntu@18.234.56.78
 
 ---
 
-## 📌 **Step 2: Initial Server Setup**
+## 📌**Reference Step: Initial Server Setup**
 
 1. **Update & Upgrade Packages**
 ```sh
@@ -75,69 +169,19 @@ docker --version
 
 ---
 
-## 📌 **Step 3: Clone & Configure Project**
 
-1. **Clone Your Repository**
-```sh
-git clone https://github.com/YOUR_USERNAME/YOUR_BACKEND_REPO.git my_backend
-```
-Example:
-```sh
-git clone https://github.com/Ahaanv19/sprint4_flocker_backend.git
-```
+## 📌 **Reference Step: Route Setup: Route53 Domain Setup (Optional)**
 
-2. **Navigate into the Project**
-```sh
-cd my_backend
-```
+1. **Go to [AWS Route 53](https://console.aws.amazon.com/route53/)**
+2. **Register a domain name**
+3. **Create an A Record:**
+   - Name: `@`
+   - Type: `A`
+   - Value: `OUR_INSTANCE_IP`
 
-3. **Create `.env` File** (WE DO NOT COMMIT THIS FILE!)
-```sh
-touch .env
-nano .env
-```
-💡 **Example `.env` structure: We will decide on a password and username just our example**
-```
-SECRET_KEY=supersecretkey
-DATABASE_URL=postgresql://user:password@localhost/dbname
-DEBUG=True
-```
-Press `CTRL + X`, then `Y`, then `Enter` to save.
-
-4. **Initialize Database**
-```sh
-./scripts/db_init.py
-```
-
----
-
-## 📌 **Step 4: Run Your Application with Docker**
-
-1. **Build Docker Image**
-```sh
-docker-compose build
-```
-
-2. **Run Docker Containers in Detached Mode**
-```sh
-docker-compose up -d
-```
-
-3. **Verify Running Containers**
-```sh
-docker ps
-```
-✅ **Look for your application and its assigned port.**
-
-4. **Test if the Server is Running**
-```sh
-curl localhost:8805
-```
-✅ **If successful, you'll see an HTTP response from your Flask backend.**
-
----
-
-## 📌 **Step 5: Expose the Application to the Internet**
+   
+   
+   ## 📌**Reference Step Expose the Application to the Internet**
 
 1. **Find Your Instance’s Public IP**
 ```sh
@@ -180,61 +224,7 @@ server {
 }
 ```
 
-6. **Enable & Restart Nginx**
-```sh
-sudo ln -s /etc/nginx/sites-available/my_backend /etc/nginx/sites-enabled/
-sudo systemctl restart nginx
-```
 
----
-
-## 📌 **Step 6: Route53 Domain Setup (Optional)**
-
-1. **Go to [AWS Route 53](https://console.aws.amazon.com/route53/)**
-2. **Register a domain name**
-3. **Create an A Record:**
-   - Name: `@`
-   - Type: `A`
-   - Value: `OUR_INSTANCE_IP`
-
----
-
-## 📌 **Step 7: Post-Deployment Checks & Monitoring**
-
-### 🔹 **Check Logs**
-```sh
-docker logs -f CONTAINER_ID
-```
-
-### 🔹 **Check Application Health**
-```sh
-curl http://OUR_DOMAIN_OR_IP
-```
-
-### 🔹 **Monitor Performance**
-Use [Cockpit Backdoor](https://cockpit.stu.nighthawkcodingsociety.com/) for system health and logs.
-
----
-
-## 📌 **Final Notes & Security Best Practices**
-
-✅ **WE DO NOT commit `.env` files or sensitive credentials.**
-
-✅ **Ensure `ufw` firewall allows only necessary ports.**
-
-✅ **Use `systemctl` to restart services if issues arise.**
-```sh
-sudo systemctl restart docker nginx
-```
-
-✅ **Regularly check logs & server health via Cockpit.**
-
----
-
-<img src="{{site.baseurl}}/images/d.png" alt="Deployment Process Overview">
-    
-<img src="{{site.baseurl}}/images/a.png" alt="Deployment Process Overview">
-    
 
 
 
