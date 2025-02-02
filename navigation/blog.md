@@ -89,11 +89,16 @@ curl http://OUR_DOMAIN_OR_IP
 ### 🔹 **Monitor Performance**
 Use [Cockpit Backdoor](https://cockpit.stu.nighthawkcodingsociety.com/) for system health and logs.
 
----
+### Test you DNS server
+**You can test in any terminal (MacOs, WSL, or AWS).  Be sure it command returns IP address in answer section. Example result below**
 
+<img src="{{site.baseurl}}/images/e.png" alt="Deployment Process Overview">
+
+## Deployment Diagram and Ubuntu
 <img src="{{site.baseurl}}/images/d.png" alt="Deployment Process Overview">
     
 <img src="{{site.baseurl}}/images/a.png" alt="Deployment Process Overview">
+
 
 ## 📌 **Final Notes, Security Best Practices, & Reference Steps for Future Use**
 
@@ -179,9 +184,13 @@ docker --version
    - Type: `A`
    - Value: `OUR_INSTANCE_IP`
 
+#### This is an example, DON'T USE ANY INFO BESIDES VALUE, just use for example
+
+<img src="{{site.baseurl}}/images/h.png" alt="Deployment Process Overview">
+
    
    
-   ## 📌**Reference Step Expose the Application to the Internet**
+## 📌**Reference Step Expose the Application to the Internet**
 
 1. **Find Your Instance’s Public IP**
 ```sh
