@@ -4,9 +4,9 @@ title: Blogs
 search_exclude: true
 permalink: /blogs/
 ---
-# 📢 **Team Deployment Guide: Ultra-Detailed Step-by-Step**
+# 📢 **LitConnect Deployment Guide: Step-by-Step**
 
-> **Welcome to the official deployment guide for our project!** 🚀 This guide provides an exhaustive step-by-step walkthrough for deploying our backend to AWS using EC2, Docker, and Cockpit. 
+> **Welcome to the official deployment guide for our project!** 🚀 This guide provides an exhaustive step-by-step walkthrough for deploying our backend to AWS using EC2, Docker, and Cockpit. It demonstrates the exact steps we will follow in order for succesful deployment. Diagrams at the bottom.
 
 ---
 
@@ -16,7 +16,7 @@ permalink: /blogs/
 
 1. **Access AWS EC2 Console:**
    - Navigate to [AWS EC2 Dashboard](https://console.aws.amazon.com/ec2/).
-   - Ensure you are using the correct AWS region (e.g., `us-west-1`).
+   - Ensuring we are using the correct AWS region (e.g., `us-west-1`).
    
 2. **Locate or Create an EC2 Instance:**
    - If you already have an instance running, find its **Public IPv4 Address** under **Instances**.
@@ -83,7 +83,7 @@ git clone https://github.com/YOUR_USERNAME/YOUR_BACKEND_REPO.git my_backend
 ```
 Example:
 ```sh
-git clone https://github.com/ahaanvaidyanathan/my_flask_backend.git my_backend
+git clone https://github.com/Ahaanv19/sprint4_flocker_backend.git
 ```
 
 2. **Navigate into the Project**
@@ -96,7 +96,7 @@ cd my_backend
 touch .env
 nano .env
 ```
-💡 **Example `.env` structure:**
+💡 **Example `.env` structure: We will decide on a password and username just our example**
 ```
 SECRET_KEY=supersecretkey
 DATABASE_URL=postgresql://user:password@localhost/dbname
@@ -131,7 +131,7 @@ docker ps
 
 4. **Test if the Server is Running**
 ```sh
-curl localhost:8087
+curl localhost:8805
 ```
 ✅ **If successful, you'll see an HTTP response from your Flask backend.**
 
@@ -145,15 +145,15 @@ echo $(curl -s ifconfig.me)
 ```
 ✅ **Copy the output and use it to test in a browser!**
 
-2. **Allow Traffic on Port 8087 (or Your Port)**
+2. **Allow Traffic on Port 8805 (Our specfied port number)**
 ```sh
-sudo ufw allow 8087/tcp
+sudo ufw allow 8805/tcp
 sudo ufw enable
 ```
 
 3. **Test Access from Your Machine**
 ```sh
-curl http://YOUR_INSTANCE_IP:8087
+curl http://OUR_INSTANCE_IP:8805
 ```
 ✅ **Expected: Flask server response.**
 
@@ -173,7 +173,7 @@ server {
     server_name YOUR_DOMAIN_OR_IP;
 
     location / {
-        proxy_pass http://localhost:8887;
+        proxy_pass http://localhost:8805;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
     }
@@ -218,7 +218,7 @@ Use [Cockpit Backdoor](https://cockpit.stu.nighthawkcodingsociety.com/) for syst
 
 ## 📌 **Final Notes & Security Best Practices**
 
-✅ **DO NOT commit `.env` files or sensitive credentials.**
+✅ **WE DO NOT commit `.env` files or sensitive credentials.**
 
 ✅ **Ensure `ufw` firewall allows only necessary ports.**
 
