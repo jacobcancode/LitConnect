@@ -14,6 +14,12 @@ if (location.hostname === "localhost") {
 } else {
         javaURI = "http://127.0.0.1:8887";
 }
+export var pythonURI;
+if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+    pythonURI = "http://localhost:8005";  // Same URI for localhost or 127.0.0.1
+} else {
+    pythonURI = "https://flask2025.nighthawkcodingsociety.com";
+}
 
 export const fetchOptions = {
     method: 'GET', // *GET, POST, PUT, DELETE, etc.

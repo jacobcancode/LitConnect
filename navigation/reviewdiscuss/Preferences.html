@@ -115,7 +115,7 @@ comments: true
 
   <script>
     function loadPreferences() {
-      fetch('http://127.0.0.1:8887/api/preferences')
+      fetch('http://127.0.0.1:8005/api/preferences')
         .then(response => response.json())
         .then(data => {
           document.getElementById('menu').innerText = `Menu Color: ${data.menu}`;
@@ -137,7 +137,7 @@ comments: true
     }
 
     function updatePreferences(updatedData) {
-      fetch('http://127.0.0.1:8887/api/preferences', {
+      fetch('http://127.0.0.1:8005/api/preferences', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
