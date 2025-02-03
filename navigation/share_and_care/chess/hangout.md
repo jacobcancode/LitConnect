@@ -399,7 +399,7 @@ function botResponse() {
 
     <script type="module">
         // Import server URI and standard fetch options
-        const pythonURI = "https://flocker.nighthawkcodingsociety.com";
+        const pythonURI = "https://litconnect.stu.nighthawkcodingsociety.com";
         const fetchOptions = {
             headers: {
                 'Authorization': 'Bearer YOUR_AUTH_TOKEN' // Replace with actual auth token if required

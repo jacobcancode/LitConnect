@@ -367,7 +367,7 @@ for (var i = 0; i < collapsibles.length; i++) {
 
 // Fetch groups for dropdown selection
 async function fetchGroups() {
-    const pythonURI = "https://flocker.nighthawkcodingsociety.com";
+    const pythonURI = "https://litconnect.stu.nighthawkcodingsociety.com";
     const fetchOptions = {
         headers: {
             'Authorization': 'Bearer YOUR_AUTH_TOKEN'
