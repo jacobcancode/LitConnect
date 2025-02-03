@@ -114,13 +114,13 @@ permalink: /bookadaptationchecker
 
 <script>
     const pythonURI = (() => { // pythonURI definition
-        if (location.hostname === "localhost") {
-            return "http://localhost:8887";
-        } else if (location.hostname === "127.0.0.1") {
-            return "http://127.0.0.1:8887";
-        } else {
-            return "https://ahaanv19.github.io/LitConnect/"; 
-        }
+     if (location.hostname === "localhost") {
+        pythonURI = "http://localhost:8005";
+     } else if (location.hostname === "127.0.0.1") {
+        pythonURI = "http://127.0.0.1:8005";
+    } else {
+        pythonURI = "http://127.0.0.1:8005";
+    }
     })();
 
     document.getElementById('searchButton').addEventListener('click', async () => {

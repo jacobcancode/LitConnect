@@ -50,7 +50,7 @@ In this Zone, view the book of the week, with the moderators' honest review and 
 <script>
     // Function to fetch preferences from the backend
     function loadPreferences() {
-        fetch('http://127.0.0.1:8887/api/preferences')  // Adjust URL if needed
+        fetch('http://127.0.0.1:8005/api/preferences')  // Adjust URL if needed
         .then(response => response.json())
         .then(data => {
             // Update the page with the preferences

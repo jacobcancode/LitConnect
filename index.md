@@ -221,7 +221,7 @@ menu: nav/home.html
 <script>
     // Function to fetch preferences from the backend
     function loadPreferences() {
-      fetch('http://127.0.0.1:8887/api/preferences')
+      fetch('http://127.0.0.1:8005/api/preferences')
         .then(response => response.json())
         .then(data => {
           const menuElement = document.getElementById('menu');
