@@ -113,15 +113,14 @@ permalink: /bookadaptationchecker
 </div>
 
 <script>
-    const pythonURI = (() => { // pythonURI definition
-     if (location.hostname === "localhost") {
-        pythonURI = "http://localhost:8005";
-     } else if (location.hostname === "127.0.0.1") {
-        pythonURI = "http://127.0.0.1:8005";
+    export var pythonURI;
+    if (location.hostname === "localhost") {
+            pythonURI = "http://localhost:8005";
+    } else if (location.hostname === "127.0.0.1") {
+            pythonURI = "http://127.0.0.1:8005";
     } else {
-        pythonURI = "https://litconnect.stu.nighthawkcodingsociety.com";
+            pythonURI = "https://litconnect.stu.nighthawkcodingsociety.com";
     }
-    })();
 
     document.getElementById('searchButton').addEventListener('click', async () => {
         const title = document.getElementById('searchInput').value;
