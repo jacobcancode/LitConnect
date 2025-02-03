@@ -4,7 +4,7 @@ if (location.hostname === "localhost") {
 } else if (location.hostname === "127.0.0.1") {
         pythonURI = "http://127.0.0.1:8005";
 } else {
-        pythonURI = "http://127.0.0.1:8005";
+        pythonURI = "https://flask2025.nighthawkcodingsociety.com";
 }
 export var javaURI;
 if (location.hostname === "localhost") {
@@ -13,12 +13,6 @@ if (location.hostname === "localhost") {
         javaURI = "http://127.0.0.1:8005"; //rey
 } else {
         javaURI = "http://127.0.0.1:8005";
-}
-export var pythonURI;
-if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-    pythonURI = "http://localhost:8005";  // Same URI for localhost or 127.0.0.1
-} else {
-    pythonURI = "https://flask2025.nighthawkcodingsociety.com";
 }
 
 export const fetchOptions = {
