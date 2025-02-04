@@ -5,6 +5,7 @@ permalink: /tb
 comments: true
 ---
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -162,12 +163,12 @@ comments: true
         </tbody>
     </table>
 
-    <script>
-        const apiUrl = 'http://127.0.0.1:8103/sections';  // Changed to port 8103
+    <script type="module">
+        import { pythonURI } from './assets/js/api/config.js'; // Adjust the path to match your directory structure
 
         // Fetch and display sections
         function fetchSections() {
-            fetch(apiUrl)
+            fetch(`${pythonURI}/sections`)
                 .then(response => response.json())
                 .then(data => {
                     const tableBody = document.getElementById('sectionsTable');
@@ -198,7 +199,7 @@ comments: true
                 return;
             }
 
-            fetch(apiUrl, {
+            fetch(`${pythonURI}/sections`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, theme })
@@ -222,7 +223,7 @@ comments: true
         function deleteSection(id) {
             if (!confirm('Are you sure you want to delete this section?')) return;
 
-            fetch(`${apiUrl}/${id}`, {
+            fetch(`${pythonURI}/sections/${id}`, {
                 method: 'DELETE'
             })
                 .then(response => {
@@ -245,7 +246,7 @@ comments: true
                 return;
             }
 
-            fetch(`${apiUrl}/${id}`, {
+            fetch(`${pythonURI}/sections/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: newName.trim(), theme: newTheme ? newTheme.trim() : '' })
