@@ -66,7 +66,7 @@ docker ps
 
 4. **Test if the Server is Running**
 ```sh
-curl localhost:8005
+curl localhost:8103
 ```
 ✅ **If successful, you'll see an HTTP response from your Flask backend.**
 
@@ -198,15 +198,15 @@ echo $(curl -s ifconfig.me)
 ```
 ✅ **Copy the output and use it to test in a browser!**
 
-2. **Allow Traffic on Port 8005 (Our specfied port number)**
+2. **Allow Traffic on Port 8103 (Our specfied port number)**
 ```sh
-sudo ufw allow 8005/tcp
+sudo ufw allow 8103/tcp
 sudo ufw enable
 ```
 
 3. **Test Access from Your Machine**
 ```sh
-curl http://OUR_INSTANCE_IP:8005
+curl http://OUR_INSTANCE_IP:8103
 ```
 ✅ **Expected: Flask server response.**
 

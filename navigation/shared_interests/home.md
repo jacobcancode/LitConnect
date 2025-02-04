@@ -240,7 +240,7 @@ menu: nav/shared_interests.html
       const genre = 'programming'; // Example genre
       const recommendationsList = document.getElementById("recommendations-list");
 
-      fetch(`http://127.0.0.1:8005/recommendations?genre=${genre}`, {
+      fetch(`http://127.0.0.1:8103/recommendations?genre=${genre}`, {
           method: 'GET',
           headers: {
               'Content-Type': 'application/json'

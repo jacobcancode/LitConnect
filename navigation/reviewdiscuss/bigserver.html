@@ -56,11 +56,11 @@ comments: true
       try {
         // API URLs for all 5 people
         const apiUrls = [
-          'http://127.0.0.1:8005/api/ahaan',
-          'http://127.0.0.1:8005/api/noah',
-          'http://127.0.0.1:8005/api/arnav',
-          'http://127.0.0.1:8005/api/jacob',
-          'http://127.0.0.1:8005/api/james'
+          'http://127.0.0.1:8103/api/ahaan',
+          'http://127.0.0.1:8103/api/noah',
+          'http://127.0.0.1:8103/api/arnav',
+          'http://127.0.0.1:8103/api/jacob',
+          'http://127.0.0.1:8103/api/james'
         ];
 
         // Start building the display string for all people
@@ -92,7 +92,7 @@ comments: true
 
     // Function to fetch preferences from the backend
   function loadPreferences() {
-    fetch('http://127.0.0.1:8005/api/preferences')  // Adjust URL if needed
+    fetch('http://127.0.0.1:8103/api/preferences')  // Adjust URL if needed
       .then(response => response.json())
       .then(data => {
         // Update the page with the preferences

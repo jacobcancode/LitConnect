@@ -1,18 +1,18 @@
 export var pythonURI;
 if (location.hostname === "localhost") {
-        pythonURI = "http://localhost:8005";
+        pythonURI = "http://localhost:8103";
 } else if (location.hostname === "127.0.0.1") {
-        pythonURI = "http://127.0.0.1:8005";
+        pythonURI = "http://127.0.0.1:8103";
 } else {
         pythonURI = "https://litconnect.stu.nighthawkcodingsociety.com";
 }
 export var javaURI;
 if (location.hostname === "localhost") {
-        javaURI = "http://localhost:8005";
+        javaURI = "http://localhost:8103";
 } else if (location.hostname === "127.0.0.1") {
-        javaURI = "http://127.0.0.1:8005"; //rey
+        javaURI = "http://127.0.0.1:8103"; //rey
 } else {
-        javaURI = "http://127.0.0.1:8005";
+        javaURI = "http://127.0.0.1:8103";
 }
 
 export const fetchOptions = {

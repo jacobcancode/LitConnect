@@ -422,7 +422,7 @@ Our group has chosen to focus on discussions about which drinks should be added 
             const reasoning = document.getElementById('reasoningText').value;
             if (reasoning.trim()) {
                 // Send vote and reasoning to backend
-                fetch('http://127.0.0.1:8005/api/vote', {
+                fetch('http://127.0.0.1:8103/api/vote', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -452,7 +452,7 @@ Our group has chosen to focus on discussions about which drinks should be added 
             const suggestion = document.getElementById('suggestionInput').value;
             if (suggestion.trim()) {
                 // Send suggestion to backend
-                fetch('http://127.0.0.1:8005/api/suggest', {
+                fetch('http://127.0.0.1:8103/api/suggest', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -475,7 +475,7 @@ Our group has chosen to focus on discussions about which drinks should be added 
             }
         }
         function showResults() {
-            fetch('http://127.0.0.1:8005/api/results')
+            fetch('http://127.0.0.1:8103/api/results')
                 .then(response => response.json())
                 .then(data => {
                     console.log('Current voting results:', data);
@@ -486,7 +486,7 @@ Our group has chosen to focus on discussions about which drinks should be added 
                 });
         }
         function refreshResults() {
-            fetch('http://127.0.0.1:8005/api/results')
+            fetch('http://127.0.0.1:8103/api/results')
                 .then(response => response.json())
                 .then(data => {
                     displayResults(data);
