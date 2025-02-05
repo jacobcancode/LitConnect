@@ -50,13 +50,13 @@ show_reading_time: false
         <h1 id="pythonTitle">User Login (Python/Flask)</h1>
         <form id="pythonForm" onsubmit="pythonLogin(); return false;">
             <p>
-                <label>
+                <label for="uid">
                     GitHub ID:
                     <input type="text" name="uid" id="uid" required>
                 </label>
             </p>
             <p>
-                <label>
+                <label for="password">
                     Password:
                     <input type="password" name="password" id="password" required>
                 </label>
@@ -67,6 +67,7 @@ show_reading_time: false
             <p id="message" style="color: red;"></p>
         </form>
     </div>
+</div> 
     <div class="signup-card">
         <h1 id="signupTitle">Sign Up</h1>
         <form id="signupForm" onsubmit="signup(); return false;">
@@ -97,11 +98,11 @@ show_reading_time: false
 </div>
 
 <script type="module">
-    import { login, pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
+    import { login, pythonURI, fetchOptions } from '/portfolio_2025/assets/js/api/config.js';
 
     // Function to handle Python login
     window.pythonLogin = function() {
-        const options = {
+        const options = {   
             URL: `${pythonURI}/api/authenticate`,
             callback: pythonDatabase,
             message: "message",
