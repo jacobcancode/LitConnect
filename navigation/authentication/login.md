@@ -3,8 +3,10 @@ layout: page
 title: Login
 permalink: /login
 search_exclude: true
+menu: nav/home.html
 show_reading_time: false 
 ---
+
 <style>
 .login-container {
     display: flex;
@@ -50,13 +52,13 @@ show_reading_time: false
         <h1 id="pythonTitle">User Login (Python/Flask)</h1>
         <form id="pythonForm" onsubmit="pythonLogin(); return false;">
             <p>
-                <label for="uid">
+                <label>
                     GitHub ID:
                     <input type="text" name="uid" id="uid" required>
                 </label>
             </p>
             <p>
-                <label for="password">
+                <label>
                     Password:
                     <input type="password" name="password" id="password" required>
                 </label>
@@ -67,8 +69,7 @@ show_reading_time: false
             <p id="message" style="color: red;"></p>
         </form>
     </div>
-</div> 
-<div class="signup-card">
+    <div class="signup-card">
         <h1 id="signupTitle">Sign Up</h1>
         <form id="signupForm" onsubmit="signup(); return false;">
             <p>
@@ -90,25 +91,19 @@ show_reading_time: false
                 </label>
             </p>
             <p>
-                <label>
-                    <input type="checkbox" name="kasmNeeded" id="kasmNeeded">
-                    Kasm Server Needed
-                </label>
-            </p>
-            <p>
                 <button type="submit">Sign Up</button>
             </p>
             <p id="signupMessage" style="color: green;"></p>
         </form>
     </div>
-</div> 
+</div>
 
 <script type="module">
-    import { login, pythonURI, fetchOptions } from '/portfolio_2025/assets/js/api/config.js';
+    import { login, pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
 
     // Function to handle Python login
     window.pythonLogin = function() {
-        const options = {   
+        const options = {
             URL: `${pythonURI}/api/authenticate`,
             callback: pythonDatabase,
             message: "message",
@@ -122,16 +117,22 @@ show_reading_time: false
         login(options);
     }
 
-    window.signup = function() { // use window for  global function
+    // Function to handle signup
+    window.signup = function() {
+        const signupButton = document.querySelector(".signup-card button");
+
+        // Disable the button and change its color
+        signupButton.disabled = true;
+        signupButton.style.backgroundColor = '#d3d3d3'; // Light gray to indicate disabled state
+
         const signupOptions = {
             URL: `${pythonURI}/api/user`,
             method: "POST",
             cache: "no-cache",
-            body: { // has the elements we need to create a user
-                name: document.getElementById("name").value, // use form elements and format them to be sent to the backend, where the data will be processsed
+            body: {
+                name: document.getElementById("name").value,
                 uid: document.getElementById("signupUid").value,
                 password: document.getElementById("signupPassword").value,
-                kasm_server_needed: document.getElementById("kasmNeeded").checked,
             }
         };
 
@@ -151,16 +152,20 @@ show_reading_time: false
         .then(data => {
             document.getElementById("signupMessage").textContent = "Signup successful!";
             // Optionally redirect to login page or handle as needed
+            // window.location.href = '{{site.baseurl}}/profile';
         })
         .catch(error => {
             console.error("Signup Error:", error);
             document.getElementById("signupMessage").textContent = `Signup Error: ${error.message}`;
+            // Re-enable the button if there is an error
+            signupButton.disabled = false;
+            signupButton.style.backgroundColor = ''; // Reset to default color
         });
     }
 
     // Function to fetch and display Python data
     function pythonDatabase() {
-        const URL = `${pythonURI}/api/id`;
+        const URL = `${pythonURI}/api/user`;
 
         fetch(URL, fetchOptions)
             .then(response => {
@@ -178,8 +183,12 @@ show_reading_time: false
             });
     }
 
-    // Call relevant database functions on the page load
+    // Check for cookies and call relevant database functions on page load
     window.onload = function() {
-         pythonDatabase();
+        // Check if user is authenticated by checking cookies or local storage
+        const isAuthenticated = document.cookie.includes('auth_token'); // Example check
+        if (isAuthenticated) {
+            pythonDatabase();
+        }
     };
 </script>
