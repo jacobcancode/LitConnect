@@ -254,5 +254,4 @@ menu: nav/home.html
   // Load preferences when the page is loaded
   window.onload = loadPreferences;
 </script>
-</body>
-</html>
+
