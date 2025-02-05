@@ -12,151 +12,261 @@ comments: true
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Sections</title>
+    <title>User Management</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f3f4f7, #e9ecef);
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            color: #333;
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            color: #2c3e50;
         }
 
         h1 {
             text-align: center;
-            margin-top: 20px;
-            font-size: 2.5rem;
-            color: #4CAF50;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 2rem;
         }
 
-        .form-container {
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #2c3e50;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        form {
             display: flex;
-            justify-content: center;
-            margin: 20px auto;
+            flex-direction: column;
             gap: 15px;
-            padding: 10px;
+            margin-bottom: 20px;
         }
 
-        .form-container input {
-            width: 250px;
+        input {
             padding: 12px;
-            border: 1px solid #ccc;
+            border: 1px solid #dcdde1;
             border-radius: 8px;
-            font-size: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: border 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .form-container input:focus {
-            border-color: #4CAF50;
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
-            outline: none;
-        }
-
-        .form-container .button {
-            padding: 12px 25px;
-            background: linear-gradient(135deg, #4CAF50, #66BB6A);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .form-container .button:hover {
-            background: linear-gradient(135deg, #43A047, #4CAF50);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        table {
-            width: 90%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: left;
-        }
-
-        th {
-            background: linear-gradient(135deg, #4CAF50, #66BB6A);
-            color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-
-        td {
-            border-bottom: 1px solid #ddd;
-            font-size: 1rem;
-            color: #555;
-        }
-
-        tr:nth-child(even) {
+            font-size: 16px;
+            transition: all 0.3s ease;
             background-color: #f9f9f9;
         }
 
-        tr:hover {
-            background-color: #f1f1f1;
-            transition: background-color 0.2s ease;
+        input:focus {
+            border-color: #74b9ff;
+            outline: none;
+            box-shadow: 0 0 8px rgba(116, 185, 255, 0.5);
+        }
+
+        button {
+            padding: 12px;
+            font-size: 16px;
+            color: #ffffff;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #6c5ce7, #0984e3);
+            box-shadow: 0 4px 8px rgba(108, 92, 231, 0.4);
+        }
+
+        .users {
+            margin-top: 20px;
+        }
+
+        .user {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            background: #1c2833;
+            border: 1px solid #2c3e50;
+            color: #ffffff;
+        }
+
+        .user:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgb(0, 0, 0, 0.1);
+        }
+
+        .user span {
+            font-weight: bold;
+            color: #74b9ff;
+        }
+
+        .user button {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .user button:hover {
+            background: #c0392b;
         }
     </style>
 </head>
 <body>
-    <h1>Manage Sections</h1>
-    <div class="form-container">
-        <input type="text" id="sectionName" placeholder="Enter section name" />
-        <input type="text" id="sectionTheme" placeholder="Enter section theme (optional)" />
-        <button class="button" onclick="addSection()">Add Section</button>
+    <div class="container">
+        <h1>Users' Favorite Books</h1>
+
+        <!-- Form to Create a User -->
+        <form id="userForm">
+            <input type="text" id="name" placeholder="Name" required />
+            <input type="text" id="fav_book" placeholder="Fav_Book" required />
+            <input type="number" id="userId" placeholder="User ID" required />
+            <button type="submit">Add User</button>
+        </form>
+
+        <!-- Form to Update a User -->
+        <form id="updateUserForm">
+            <input type="number" id="updateUserId" placeholder="User ID to Update" required />
+            <input type="text" id="updateName" placeholder="New Name (optional)" />
+            <input type="text" id="updateFavBook" placeholder="New Fav_Book (optional)" />
+            <button type="submit">Update User</button>
+        </form>
+
+        <button id="fetchUsers">Fetch All Users</button>
+
+        <!-- Display Users -->
+        <div class="users" id="usersContainer"></div>
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Section Name</th>
-                <th>Theme</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="sectionsTable">
-        </tbody>
-    </table>
+
     <script type="module">
-        import { pythonURI } from './assets/js/api/config.js';
-        const apiUrl = `${pythonURI}/sections`;
-
-        function fetchSections() {
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    const tableBody = document.getElementById('sectionsTable');
-                    tableBody.innerHTML = '';
-                    data.forEach(section => {
-                        const row = `<tr>
-                            <td>${section.id}</td>
-                            <td>${section.name}</td>
-                            <td>${section.theme || ''}</td>
-                            <td>
-                                <button class="button edit" onclick="editSection(${section.id}, '${section.name}', '${section.theme || ''}')">Edit</button>
-                                <button class="button delete" onclick="deleteSection(${section.id})">Delete</button>
-                            </td>
-                        </tr>`;
-                        tableBody.innerHTML += row;
-                    });
-                })
-                .catch(error => console.error('Error fetching sections:', error));
-        }
-
-        window.onload = fetchSections;
-    </script>
+        import { pythonURI } from './assets/js/api/config.js'; // Ensure correct path
+    
+        const apiUrl = `${pythonURI}/usersDb`;
+    
+        // Create a new user
+        document.getElementById('userForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+    
+            const name = document.getElementById('name').value;
+            const fav_book = document.getElementById('fav_book').value;
+            const userId = parseInt(document.getElementById('userId').value, 10);
+    
+            const data = { name, fav_book, user_id: userId };
+    
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+    
+                const result = await response.json();
+                if (response.ok) {
+                    alert('User added successfully');
+                    document.getElementById('userForm').reset();
+                    fetchUsers();
+                } else {
+                    alert(`Error: ${result.error || result.message}`);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    
+        // Update an existing user
+        document.getElementById('updateUserForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+    
+            const userId = parseInt(document.getElementById('updateUserId').value, 10);
+            const name = document.getElementById('updateName').value.trim() || null;
+            const fav_book = document.getElementById('updateFavBook').value.trim() || null;
+    
+            if (!userId || (!name && !fav_book)) {
+                alert('Please provide a User ID and at least one field to update.');
+                return;
+            }
+    
+            const data = {};
+            if (name) data.name = name;
+            if (fav_book) data.fav_book = fav_book;
+    
+            try {
+                const response = await fetch(`${apiUrl}/${userId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+    
+                const result = await response.json();
+                if (response.ok) {
+                    alert('User updated successfully');
+                    document.getElementById('updateUserForm').reset();
+                    fetchUsers();
+                } else {
+                    alert(`Error: ${result.error || result.message}`);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    
+        // Fetch all users
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch(apiUrl);
+    
+                if (!response.ok) {
+                    throw new Error(`Error fetching users: ${response.statusText}`);
+                }
+    
+                const users = await response.json();
+                const usersContainer = document.getElementById('usersContainer');
+                usersContainer.innerHTML = '';
+    
+                if (users.length === 0) {
+                    usersContainer.textContent = 'No users found.';
+                    return;
+                }
+    
+                users.forEach((user) => {
+                    const div = document.createElement('div');
+                    div.classList.add('user');
+                    div.innerHTML = `
+                        <p>Name: <span>${user.name}</span></p>
+                        <p>Fav_Book: <span>${user.fav_book}</span></p>
+                        <p>User ID: <span>${user.user_id}</span></p>
+                        <button onclick="deleteUser(${user.user_id})">Delete</button>
+                    `;
+                    usersContainer.appendChild(div);
+                });
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+    
+        // Delete a user
+        window.deleteUser = async (userId) => {
+            try {
+                const response = await fetch(`${apiUrl}/${userId}`, {
+                    method: 'DELETE',
+                });
+    
+                const result = await response.json();
+                if (response.ok) {
+                    alert('User deleted successfully');
+                    fetchUsers();
+                } else {
+                    alert(`Error: ${result.error || result.message}`);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+    
+        document.getElementById('fetchUsers').addEventListener('click', fetchUsers);
+        fetchUsers();
+    </script>    
 </body>
 </html>
