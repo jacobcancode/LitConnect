@@ -113,9 +113,11 @@ comments: true
     <button class="color-button" id="changeMenu">Change Menu Color</button>
   </div>
 
-  <script>
+  <script type="module">
+    import { pythonURI } from './assets/js/api/config.js'; // Adjust the path if needed
+
     function loadPreferences() {
-      fetch('http://127.0.0.1:8103/api/preferences')
+      fetch(`${pythonURI}/preferences`)
         .then(response => response.json())
         .then(data => {
           document.getElementById('menu').innerText = `Menu Color: ${data.menu}`;
@@ -137,7 +139,7 @@ comments: true
     }
 
     function updatePreferences(updatedData) {
-      fetch('http://127.0.0.1:8103/api/preferences', {
+      fetch(`${pythonURI}/preferences`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -171,5 +173,3 @@ comments: true
     window.onload = loadPreferences;
   </script>
 
-</body>
-</html>

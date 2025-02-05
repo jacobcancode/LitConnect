@@ -140,28 +140,28 @@ comments: true
         <div class="users" id="usersContainer"></div>
     </div>
 
-    <script>
-        const apiUrl = 'http://127.0.0.1:8103/usersDb'; // Backend API endpoint
-
+    <script type="module">
+        import { pythonURI } from './assets/js/api/config.js'; // Ensure correct path
+    
+        const apiUrl = `${pythonURI}/usersDb`;
+    
         // Create a new user
         document.getElementById('userForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-
+    
             const name = document.getElementById('name').value;
             const fav_book = document.getElementById('fav_book').value;
             const userId = parseInt(document.getElementById('userId').value, 10);
-
+    
             const data = { name, fav_book, user_id: userId };
-
+    
             try {
                 const response = await fetch(apiUrl, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data),
                 });
-
+    
                 const result = await response.json();
                 if (response.ok) {
                     alert('User added successfully');
@@ -174,33 +174,31 @@ comments: true
                 console.error('Error:', error);
             }
         });
-
+    
         // Update an existing user
         document.getElementById('updateUserForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-
+    
             const userId = parseInt(document.getElementById('updateUserId').value, 10);
             const name = document.getElementById('updateName').value.trim() || null;
-            const fav_book = document.getElementById('updateFavBook').value ? parseInt(document.getElementById('updateFavBook').value, 10) : null;
-
+            const fav_book = document.getElementById('updateFavBook').value.trim() || null;
+    
             if (!userId || (!name && !fav_book)) {
                 alert('Please provide a User ID and at least one field to update.');
                 return;
             }
-
+    
             const data = {};
             if (name) data.name = name;
             if (fav_book) data.fav_book = fav_book;
-
+    
             try {
                 const response = await fetch(`${apiUrl}/${userId}`, {
                     method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data),
                 });
-
+    
                 const result = await response.json();
                 if (response.ok) {
                     alert('User updated successfully');
@@ -213,27 +211,25 @@ comments: true
                 console.error('Error:', error);
             }
         });
-
+    
         // Fetch all users
         const fetchUsers = async () => {
             try {
-                const response = await fetch(apiUrl, {
-                    method: 'GET',
-                });
-
+                const response = await fetch(apiUrl);
+    
                 if (!response.ok) {
                     throw new Error(`Error fetching users: ${response.statusText}`);
                 }
-
+    
                 const users = await response.json();
                 const usersContainer = document.getElementById('usersContainer');
                 usersContainer.innerHTML = '';
-
+    
                 if (users.length === 0) {
                     usersContainer.textContent = 'No users found.';
                     return;
                 }
-
+    
                 users.forEach((user) => {
                     const div = document.createElement('div');
                     div.classList.add('user');
@@ -249,14 +245,14 @@ comments: true
                 console.error('Error:', error);
             }
         };
-
+    
         // Delete a user
-        const deleteUser = async (userId) => {
+        window.deleteUser = async (userId) => {
             try {
                 const response = await fetch(`${apiUrl}/${userId}`, {
                     method: 'DELETE',
                 });
-
+    
                 const result = await response.json();
                 if (response.ok) {
                     alert('User deleted successfully');
@@ -268,10 +264,9 @@ comments: true
                 console.error('Error:', error);
             }
         };
-
-        // Fetch users on page load
+    
         document.getElementById('fetchUsers').addEventListener('click', fetchUsers);
         fetchUsers();
-    </script>
+    </script>    
 </body>
 </html>
