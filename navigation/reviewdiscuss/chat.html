@@ -8,6 +8,15 @@ comments: true
 ---
 
 
+---
+toc: true
+layout: post
+description: Moderator's Discussion
+title: Have fun discussing with your peers!!
+permalink: /pull
+comments: true
+---
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -81,8 +90,10 @@ comments: true
         </div>
     </div>
 
-    <script>
-        const apiBaseUrl = "http://localhost:8103/api/chats";
+    <script type="module">
+        import { pythonURI } from './assets/js/api/config.js'; // Ensure this path matches your project structure
+
+        const apiBaseUrl = `${pythonURI}/api/chats`;
         const chatMessages = document.getElementById("chat-messages");
         const chatForm = document.getElementById("chat-form");
 
@@ -143,4 +154,3 @@ comments: true
     </script>
 </body>
 </html>
-
