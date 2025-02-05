@@ -112,15 +112,8 @@ permalink: /bookadaptationchecker
   </table>
 </div>
 
-<script>
-    export var pythonURI;
-    if (location.hostname === "localhost") {
-            pythonURI = "http://localhost:8103";
-    } else if (location.hostname === "127.0.0.1") {
-            pythonURI = "http://127.0.0.1:8103";
-    } else {
-            pythonURI = "https://litconnect.stu.nighthawkcodingsociety.com";
-    }
+<script type="module">
+    import { pythonURI } from "./assets/js/api/config.js";
 
     document.getElementById('searchButton').addEventListener('click', async () => {
         const title = document.getElementById('searchInput').value;
