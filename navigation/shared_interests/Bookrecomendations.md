@@ -29,119 +29,25 @@ document.addEventListener('DOMContentLoaded', function() {
             data.forEach(book => {
                 const bookElement = document.createElement('div');
                 bookElement.innerHTML = `
-                    <h3>${book.title}</h3>
-                    <p>${book.author}</p>
-                    <p>${book.genre}</p>
-                    <button data-id="${book.id}" class="delete-book">Delete</button>
-                    <button class="update-book" data-id="${book.id}">Update Book</button>
+                    <p>${book.title}</p>
+                    <button onclick="showUpdateForm('${book.id}')">Update Book</button>
                 `;
                 recommendationsContainer.appendChild(bookElement);
-            });
-
-            document.querySelectorAll('.delete-book').forEach(button => {
-                button.addEventListener('click', function() {
-                    const bookId = this.getAttribute('data-id');
-                    deleteBook(bookId);
-                });
-            });
-
-            document.querySelectorAll('.update-book').forEach(button => {
-                button.addEventListener('click', function() {
-                    const bookId = this.getAttribute('data-id');
-                    const updatedBook = {
-                        title: 'New Title', // Replace with actual title
-                        author: 'New Author', // Replace with actual author
-                        genre: 'New Genre' // Replace with actual genre
-                    };
-
-                    fetch(`http://127.0.0.1:8103/api/book/${bookId}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(updatedBook)
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.error) {
-                            console.error('Error:', data.error);
-                        } else {
-                            console.log('Success:', data);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('There was a problem with the fetch operation:', error);
-                    });
-                });
             });
         })
         .catch(error => {
             console.error('Error fetching books:', error);
-            recommendationsContainer.innerHTML = '<p>Failed to load book recommendations.</p>';
         });
     }
 
-    function addBook(book) {
-        fetch('http://127.0.0.1:8103/api/book', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(book)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            fetchBooks(); // Refresh the book list
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
+    function showUpdateForm(bookId) {
+        const updateFormContainer = document.getElementById('updateFormContainer');
+        updateFormContainer.style.display = 'block';
+        updateFormContainer.dataset.bookId = bookId;
     }
 
-    function deleteBook(bookId) {
-        fetch(`http://127.0.0.1:8103/api/book/${bookId}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            fetchBooks(); // Refresh the book list
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
-    }
-
-    addBookForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const book = {
-            title: document.getElementById('book-title').value,
-            author: document.getElementById('book-author').value,
-            genre: document.getElementById('book-genre').value
-        };
-        addBook(book);
-    });
-
-    fetchBooks(); // Initial fetch to load books
-
-    document.getElementById('updateBookButton').addEventListener('click', () => {
-        const bookId = prompt("Enter the ID of the book you want to update:");
-        if (bookId) {
-            updateBook(bookId);
-        }
-    });
-});
-
- function updateBook(bookId) {
+    function updateBook() {
+        const bookId = document.getElementById('updateFormContainer').dataset.bookId;
         const newTitle = document.getElementById('newTitleInput').value;
         if (newTitle) {
             fetch(`https://litconnect.stu.nighthawkcodingsociety.com/booking/api/book/${bookId}`, {
@@ -156,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const resultContainer = document.getElementById('resultContainer');
                 if (data) {
                     resultContainer.innerHTML = `<p>Book updated successfully: ${data.title}</p>`;
-                    document.getElementById('getAllBooksButton').click(); // Refresh the book list
+                    fetchBooks(); // Refresh the book list
                 }
             })
             .catch(error => {
@@ -166,42 +72,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    fetchBooks();
+});
 </script>
 
-<div id="recommendations-container">
-    <p>Loading book recommendations...</p>
+<div id="resultContainer"></div>
+<div id="updateFormContainer" style="display:none;">
+    <input type="text" id="newTitleInput" placeholder="Enter new title for the book">
+    <button onclick="updateBook()">Submit</button>
 </div>
-
-<h2>Add a New Book</h2>
-<form id="add-book-form">
-    <label for="book-title">Title:</label>
-    <input type="text" id="book-title" name="title" required>
-    <br>
-    <label for="book-author">Author:</label>
-    <input type="text" id="book-author" name="author" required>
-    <br>
-    <label for="book-genre">Genre:</label>
-    <input type="text" id="book-genre" name="genre" required>
-    <br>
-    <button type="submit">Add Book</button>
-</form>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Recommendations</title>
-</head>
-<body>
-    <div id="resultContainer"></div>
-    <button id="updateBookButton" onclick="showUpdateForm('bookId')">Update Book</button>
-    <div id="updateFormContainer" style="display:none;">
-        <input type="text" id="newTitleInput" placeholder="Enter new title for the book">
-        <button onclick="updateBook('bookId')">Submit</button>
-    </div>
-
-
-
-    
-</html>
+<div id="recommendations-container"></div>
