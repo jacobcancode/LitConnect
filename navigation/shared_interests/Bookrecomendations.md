@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const addBookForm = document.getElementById("add-book-form");
 
     function fetchBooks() {
-        fetch(`http://127.0.0.1:8103/api/book?genre=${genre}`, {
+        fetch(`https://litconnect.stu.nighthawkcodingsociety.com/booking/api/book?genre=${genre}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         })
         .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
+            console.error('Error fetching books:', error);
             recommendationsContainer.innerHTML = '<p>Failed to load book recommendations.</p>';
         });
     }
@@ -142,9 +142,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
  function updateBook(bookId) {
-        const newTitle = prompt("Enter new title for the book:");
+        const newTitle = document.getElementById('newTitleInput').value;
         if (newTitle) {
-            fetch(`${pythonURI}/api/book/${bookId}`, {
+            fetch(`https://litconnect.stu.nighthawkcodingsociety.com/booking/api/book/${bookId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -185,3 +185,23 @@ document.addEventListener('DOMContentLoaded', function() {
     <br>
     <button type="submit">Add Book</button>
 </form>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendations</title>
+</head>
+<body>
+    <div id="resultContainer"></div>
+    <button id="updateBookButton" onclick="showUpdateForm('bookId')">Update Book</button>
+    <div id="updateFormContainer" style="display:none;">
+        <input type="text" id="newTitleInput" placeholder="Enter new title for the book">
+        <button onclick="updateBook('bookId')">Submit</button>
+    </div>
+
+
+
+    
+</html>
