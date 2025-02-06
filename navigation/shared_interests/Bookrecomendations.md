@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const recommendationsContainer = document.getElementById("recommendations-container");
     const addBookForm = document.getElementById("add-book-form");
 
-    function fetchBooks() {
+    function getBooks() {
         fetch(`https://litconnect.stu.nighthawkcodingsociety.com/booking/api/book?genre=${genre}`, {
             method: 'GET',
             headers: {
@@ -48,63 +48,44 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.update-book').forEach(button => {
                 button.addEventListener('click', function() {
                     const bookId = this.getAttribute('data-id');
-                    const updatedBook = {
-                        title: 'New Title', // Replace with actual title
-                        author: 'New Author', // Replace with actual author
-                        genre: 'New Genre' // Replace with actual genre
-                    };
-
-                    fetch(`http://127.0.0.1:8103/api/book/${bookId}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(updatedBook)
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.error) {
-                            console.error('Error:', data.error);
-                        } else {
-                            console.log('Success:', data);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('There was a problem with the fetch operation:', error);
-                    });
+                    showUpdateForm(bookId);
                 });
             });
         })
         .catch(error => {
             console.error('Error fetching books:', error);
-            recommendationsContainer.innerHTML = '<p>Failed to load book recommendations.</p>';
         });
     }
 
-    function addBook(book) {
-        fetch('http://127.0.0.1:8103/api/book', {
+    function addBook(event) {
+        event.preventDefault();
+        const title = document.getElementById('titleInput').value;
+        const author = document.getElementById('authorInput').value;
+        const genre = document.getElementById('genreInput').value;
+
+        fetch(`https://litconnect.stu.nighthawkcodingsociety.com/booking/api/book`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(book)
+            body: JSON.stringify({ title, author, genre })
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            fetchBooks(); // Refresh the book list
+            const resultContainer = document.getElementById('resultContainer');
+            if (data) {
+                resultContainer.innerHTML = `<p>Book added successfully: ${data.title}</p>`;
+                getBooks(); // Refresh the book list
+            }
         })
         .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
+            const resultContainer = document.getElementById('resultContainer');
+            resultContainer.innerHTML = `<p>Error adding book: ${error.message}</p>`;
         });
     }
 
     function deleteBook(bookId) {
-        fetch(`http://127.0.0.1:8103/api/book/${bookId}`, {
+        fetch(`https://litconnect.stu.nighthawkcodingsociety.com/booking/api/book/${bookId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -114,34 +95,29 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            fetchBooks(); // Refresh the book list
+            return response.json();
+        })
+        .then(data => {
+            const resultContainer = document.getElementById('resultContainer');
+            if (data) {
+                resultContainer.innerHTML = `<p>Book deleted successfully</p>`;
+                getBooks(); // Refresh the book list
+            }
         })
         .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
+            const resultContainer = document.getElementById('resultContainer');
+            resultContainer.innerHTML = `<p>Error deleting book: ${error.message}</p>`;
         });
     }
 
-    addBookForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const book = {
-            title: document.getElementById('book-title').value,
-            author: document.getElementById('book-author').value,
-            genre: document.getElementById('book-genre').value
-        };
-        addBook(book);
-    });
+    function showUpdateForm(bookId) {
+        const updateFormContainer = document.getElementById('updateFormContainer');
+        updateFormContainer.style.display = 'block';
+        updateFormContainer.dataset.bookId = bookId;
+    }
 
-    fetchBooks(); // Initial fetch to load books
-
-    document.getElementById('updateBookButton').addEventListener('click', () => {
-        const bookId = prompt("Enter the ID of the book you want to update:");
-        if (bookId) {
-            updateBook(bookId);
-        }
-    });
-});
-
- function updateBook(bookId) {
+    function updateBook() {
+        const bookId = document.getElementById('updateFormContainer').dataset.bookId;
         const newTitle = document.getElementById('newTitleInput').value;
         if (newTitle) {
             fetch(`https://litconnect.stu.nighthawkcodingsociety.com/booking/api/book/${bookId}`, {
@@ -156,9 +132,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 const resultContainer = document.getElementById('resultContainer');
                 if (data) {
                     resultContainer.innerHTML = `<p>Book updated successfully: ${data.title}</p>`;
-                    document.getElementById('getAllBooksButton').click(); // Refresh the book list
+                    getBooks(); // Refresh the book list
                 }
             })
+            .catch(error => {
+                const resultContainer = document.getElementById('resultContainer');
+                resultContainer.innerHTML = `<p>Error updating book: ${error.message}</p>`;
+            });
+        }
+    }
+
+    addBookForm.addEventListener('submit', addBook);
+    getBooks();
+});
+</script>
+
+<div id="resultContainer"></div>
+<div id="updateFormContainer" style="display:none;">
+    <input type="text" id="newTitleInput" placeholder="Enter new title for the book">
+    <button onclick="updateBook()">Submit</button>
+</div>
+<div id="recommendations-container"></div>
+<form id="add-book-form">
+    <input type="text" id="titleInput" placeholder="Title">
+    <input type="text" id="authorInput" placeholder="Author">
+    <input type="text" id="genreInput" placeholder="Genre">
+    <button type="submit">Add Book</button>
+</form>     })
             .catch(error => {
                 const resultContainer = document.getElementById('resultContainer');
                 resultContainer.innerHTML = `<p>Error updating book: ${error.message}</p>`;
