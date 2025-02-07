@@ -12,7 +12,7 @@ if (location.hostname === "localhost") {
 } else if (location.hostname === "127.0.0.1") {
         javaURI = "http://127.0.0.1:8103"; //rey
 } else {
-        javaURI = "http://127.0.0.1:8103";
+        javaURI = "https://litconnect.stu.nighthawkcodingsociety.com";
 }
 
 export const fetchOptions = {
