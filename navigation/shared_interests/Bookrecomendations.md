@@ -5,13 +5,15 @@ permalink: /bookrecommendations
 search_exclude: true
 show_reading_time: false 
 ---
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const baseUrl = 'https://litconnect.stu.nighthawkcodingsociety.com/booking/api/book';
+<script type="module">
+import { pythonURI } from "./assets/js/api/config.js"; // Import the URI from the config file
 
-    // GET function to fetch books by genre
-    function getBooks(genre) {
-        fetch(`${baseUrl}?genre=${genre}`, {
+document.addEventListener('DOMContentLoaded', function() {
+    const baseUrl = pythonURI;  // Use the imported URI for API calls
+
+    // GET function to fetch books from the database
+    function getBooks() {
+        fetch(baseUrl, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -22,19 +24,20 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Error:', error));
     }
 
-    // Function to display books
+    // Function to display books in the UI
     function displayBooks(books) {
         const resultContainer = document.getElementById('resultContainer');
-        resultContainer.innerHTML = '';
+        resultContainer.innerHTML = ''; // Clear the previous list of books
         books.forEach(book => {
             const bookElement = document.createElement('div');
             bookElement.textContent = `${book.title} by ${book.author}`;
 
-            // Add buttons for updating and deleting each book
+            // Add Update button
             const updateButton = document.createElement('button');
             updateButton.textContent = 'Update';
             updateButton.onclick = () => showUpdateForm(book.id, book.title);
 
+            // Add Delete button
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
             deleteButton.onclick = () => deleteBook(book.id);
@@ -45,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Function to show the update form
+    // Show the update form with pre-filled data
     function showUpdateForm(bookId, currentTitle) {
         const updateFormContainer = document.getElementById('updateFormContainer');
         updateFormContainer.style.display = 'block';
@@ -57,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
-    // POST function to add a new book
+    // POST function to add a new book to the database
     function addBook(book) {
         fetch(baseUrl, {
             method: 'POST',
@@ -68,13 +71,13 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
-            getBooks('all'); // Refresh book list after adding a new one
+            console.log('Book added:', data);
+            getBooks(); // Refresh the book list after adding a new one
         })
         .catch(error => console.error('Error:', error));
     }
 
-    // PUT function to update an existing book
+    // PUT function to update an existing book in the database
     function updateBook(bookId, updatedBook) {
         fetch(`${baseUrl}/${bookId}`, {
             method: 'PUT',
@@ -85,14 +88,14 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Updated book:', data);
-            // Refresh the books list after update
-            getBooks('all');
+            console.log('Book updated:', data);
+            getBooks(); // Refresh the book list after updating a book
+            document.getElementById('updateFormContainer').style.display = 'none'; // Hide update form
         })
         .catch(error => console.error('Error:', error));
     }
 
-    // DELETE function to remove a book
+    // DELETE function to remove a book from the database
     function deleteBook(bookId) {
         fetch(`${baseUrl}/${bookId}`, {
             method: 'DELETE',
@@ -102,17 +105,16 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Deleted book:', data);
-            // Refresh the books list after deletion
-            getBooks('all');
+            console.log('Book deleted:', data);
+            getBooks(); // Refresh the book list after deleting a book
         })
         .catch(error => console.error('Error:', error));
     }
 
-    // Fetch books on page load
-    getBooks('all'); // Replace 'all' with the desired genre if needed
+    // Fetch books when the page loads
+    getBooks(); // Replace 'all' with the desired genre if needed
 
-    // Adding a new book when the add book button is clicked
+    // Add a new book when the Add Book button is clicked
     document.getElementById('addBookButton').addEventListener('click', function() {
         const newTitle = document.getElementById('newBookTitle').value;
         const newAuthor = document.getElementById('newBookAuthor').value;
@@ -149,4 +151,9 @@ document.addEventListener('DOMContentLoaded', function() {
     <div id="resultContainer"></div>
 
     <!-- Update Book Form -->
-    <div id="updateFormContainer" style
+    <div id="updateFormContainer" style="display:none;">
+        <input type="text" id="newTitleInput" placeholder="Enter new title for the book">
+        <button id="updateBookButton">Submit</button>
+    </div>
+</body>
+</html>
