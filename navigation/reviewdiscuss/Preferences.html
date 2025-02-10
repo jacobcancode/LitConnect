@@ -114,10 +114,10 @@ comments: true
   </div>
 
   <script type="module">
-    import { pythonURI } from './assets/js/api/config.js'; // Adjust the path if needed
+    const apiUrl = "https://litconnect.stu.nighthawkcodingsociety.com/preferences"
 
     function loadPreferences() {
-      fetch(`${pythonURI}/preferences`)
+      fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
           document.getElementById('menu').innerText = `Menu Color: ${data.menu}`;
@@ -139,7 +139,7 @@ comments: true
     }
 
     function updatePreferences(updatedData) {
-      fetch(`${pythonURI}/preferences`, {
+      fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
