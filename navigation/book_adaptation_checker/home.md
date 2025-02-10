@@ -140,13 +140,23 @@ permalink: /bookadaptationchecker
     document.getElementById('getAllMoviesButton').addEventListener('click', async () => {
         const resultContainer = document.getElementById('resultContainer');
 
-       const response = await fetch(`${pythonURI}/movies`);
+        try {
+            const response = await fetch(`${pythonURI}/movies`);
             const data = await response.json();
-            
+            console.log(data); // Inspect the data structure
+
             resultContainer.innerHTML = '<h3>All Movies:</h3>';
-            data.forEach(movie => {
-                resultContainer.innerHTML += `<p>${movie.title}</p>`;
-            });
+            if (Array.isArray(data)) {
+                data.forEach(movie => {
+                    resultContainer.innerHTML += `<p>${movie.title}</p>`;
+                });
+            } else {
+                resultContainer.innerHTML += `<p>No movies found or unexpected data format.</p>`;
+            }
+        } catch (error) {
+            resultContainer.innerHTML = `<p>Error fetching data: ${error.message}</p>`;
+            console.error(error); // Log the error for further investigation
+        }
     });
 
     document.getElementById('getAllBooksButton').addEventListener('click', async () => {
@@ -157,33 +167,37 @@ permalink: /bookadaptationchecker
             const data = await response.json();
             
             tableBody.innerHTML = ''; // Clear existing rows
-            data.forEach(book => {
-                const tr = document.createElement('tr');
+            if (Array.isArray(data)) {
+                data.forEach(book => {
+                    const tr = document.createElement('tr');
 
-                const idCell = document.createElement('td');
-                const titleCell = document.createElement('td');
-                const actionCell = document.createElement('td');
+                    const idCell = document.createElement('td');
+                    const titleCell = document.createElement('td');
+                    const actionCell = document.createElement('td');
 
-                idCell.innerText = book.id;
-                titleCell.innerText = book.title;
+                    idCell.innerText = book.id;
+                    titleCell.innerText = book.title;
 
-                // Create Update button
-                const updateBtn = document.createElement('button');
-                updateBtn.innerText = 'Update';
-                updateBtn.onclick = () => updateBook(book.id);
+                    // Create Update button
+                    const updateBtn = document.createElement('button');
+                    updateBtn.innerText = 'Update';
+                    updateBtn.onclick = () => updateBook(book.id);
 
-                // Create Delete button
-                const deleteBtn = document.createElement('button');
-                deleteBtn.innerText = 'Delete';
-                deleteBtn.onclick = () => deleteBook(book.id);
+                    // Create Delete button
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.innerText = 'Delete';
+                    deleteBtn.onclick = () => deleteBook(book.id);
 
-                actionCell.appendChild(updateBtn);
-                actionCell.appendChild(deleteBtn);
-                tr.appendChild(idCell);
-                tr.appendChild(titleCell);
-                tr.appendChild(actionCell);
-                tableBody.appendChild(tr);
-            });
+                    actionCell.appendChild(updateBtn);
+                    actionCell.appendChild(deleteBtn);
+                    tr.appendChild(idCell);
+                    tr.appendChild(titleCell);
+                    tr.appendChild(actionCell);
+                    tableBody.appendChild(tr);
+                });
+            } else {
+                resultContainer.innerHTML = `<p>No books found or unexpected data format.</p>`;
+            }
         } catch (error) {
             resultContainer.innerHTML = `<p>Error fetching data: ${error.message}</p>`;
         }
@@ -222,7 +236,7 @@ permalink: /bookadaptationchecker
     function deleteBook(bookId) {
         const resultContainer = document.getElementById('resultContainer');
 
-        fetch(`${pythonURI}/api/books/${bookId}`,{
+        fetch(`${pythonURI}/api/books/${bookId}`, {
             method: 'DELETE'
         })
         .then(response => {
