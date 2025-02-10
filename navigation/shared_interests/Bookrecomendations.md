@@ -29,8 +29,32 @@ document.addEventListener('DOMContentLoaded', function() {
         books.forEach(book => {
             const bookElement = document.createElement('div');
             bookElement.textContent = `${book.title} by ${book.author}`;
+
+            // Add buttons for updating and deleting each book
+            const updateButton = document.createElement('button');
+            updateButton.textContent = 'Update';
+            updateButton.onclick = () => showUpdateForm(book.id, book.title);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = () => deleteBook(book.id);
+
+            bookElement.appendChild(updateButton);
+            bookElement.appendChild(deleteButton);
             resultContainer.appendChild(bookElement);
         });
+    }
+
+    // Function to show the update form
+    function showUpdateForm(bookId, currentTitle) {
+        const updateFormContainer = document.getElementById('updateFormContainer');
+        updateFormContainer.style.display = 'block';
+        document.getElementById('newTitleInput').value = currentTitle;
+        document.getElementById('updateBookButton').onclick = function() {
+            const newTitle = document.getElementById('newTitleInput').value;
+            const updatedBook = { title: newTitle };
+            updateBook(bookId, updatedBook);
+        };
     }
 
     // POST function to add a new book
@@ -57,7 +81,11 @@ document.addEventListener('DOMContentLoaded', function() {
             body: JSON.stringify(updatedBook)
         })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => {
+            console.log('Updated book:', data);
+            // Refresh the books list after update
+            getBooks('all');
+        })
         .catch(error => console.error('Error:', error));
     }
 
@@ -70,7 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => {
+            console.log('Deleted book:', data);
+            // Refresh the books list after deletion
+            getBooks('all');
+        })
         .catch(error => console.error('Error:', error));
     }
 
@@ -78,20 +110,3 @@ document.addEventListener('DOMContentLoaded', function() {
     getBooks('all'); // Replace 'all' with the desired genre if needed
 });
 </script>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Recommendations</title>
-</head>
-<body>
-    <div id="resultContainer"></div>
-    <button id="updateBookButton" onclick="showUpdateForm('bookId')">Update Book</button>
-    <div id="updateFormContainer" style="display:none;">
-        <input type="text" id="newTitleInput" placeholder="Enter new title for the book">
-        <button onclick="updateBook('bookId')">Submit</button>
-    </div>
-</body>
-</html>
