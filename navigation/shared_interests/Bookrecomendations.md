@@ -67,7 +67,10 @@ document.addEventListener('DOMContentLoaded', function() {
             body: JSON.stringify(book)
         })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => {
+            console.log(data);
+            getBooks('all'); // Refresh book list after adding a new one
+        })
         .catch(error => console.error('Error:', error));
     }
 
@@ -108,5 +111,42 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fetch books on page load
     getBooks('all'); // Replace 'all' with the desired genre if needed
+
+    // Adding a new book when the add book button is clicked
+    document.getElementById('addBookButton').addEventListener('click', function() {
+        const newTitle = document.getElementById('newBookTitle').value;
+        const newAuthor = document.getElementById('newBookAuthor').value;
+        if (newTitle && newAuthor) {
+            const newBook = { title: newTitle, author: newAuthor };
+            addBook(newBook);
+            document.getElementById('newBookTitle').value = '';
+            document.getElementById('newBookAuthor').value = '';
+        } else {
+            alert('Please enter both title and author.');
+        }
+    });
 });
 </script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendations</title>
+</head>
+<body>
+    <h1>Book Recommendations</h1>
+    
+    <!-- Add Book Form -->
+    <div>
+        <input type="text" id="newBookTitle" placeholder="Enter book title">
+        <input type="text" id="newBookAuthor" placeholder="Enter author name">
+        <button id="addBookButton">Add Book</button>
+    </div>
+
+    <h2>Books List:</h2>
+    <div id="resultContainer"></div>
+
+    <!-- Update Book Form -->
+    <div id="updateFormContainer" style
