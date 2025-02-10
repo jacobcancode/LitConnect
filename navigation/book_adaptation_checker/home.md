@@ -165,7 +165,8 @@ permalink: /bookadaptationchecker
         try {
             const response = await fetch(`${pythonURI}/api/books`);
             const data = await response.json();
-            
+            console.log(data); // Log the response data
+
             tableBody.innerHTML = ''; // Clear existing rows
             if (Array.isArray(data)) {
                 data.forEach(book => {
@@ -196,12 +197,15 @@ permalink: /bookadaptationchecker
                     tableBody.appendChild(tr);
                 });
             } else {
-                resultContainer.innerHTML = `<p>No books found or unexpected data format.</p>`;
+                console.error('Unexpected response format:', data); // Log unexpected data
+                tableBody.innerHTML = `<p>No books found or unexpected data format.</p>`;
             }
         } catch (error) {
-            resultContainer.innerHTML = `<p>Error fetching data: ${error.message}</p>`;
+            tableBody.innerHTML = `<p>Error fetching data: ${error.message}</p>`;
+            console.error(error); // Log the error for further investigation
         }
     });
+
 
     document.getElementById('createBookButton').addEventListener('click', async () => {
         const title = document.getElementById('book').value;
