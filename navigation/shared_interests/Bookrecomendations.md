@@ -18,8 +18,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => displayBooks(data))
         .catch(error => console.error('Error:', error));
+    }
+
+    // Function to display books
+    function displayBooks(books) {
+        const resultContainer = document.getElementById('resultContainer');
+        resultContainer.innerHTML = '';
+        books.forEach(book => {
+            const bookElement = document.createElement('div');
+            bookElement.textContent = `${book.title} by ${book.author}`;
+            resultContainer.appendChild(bookElement);
+        });
     }
 
     // POST function to add a new book
@@ -62,40 +73,11 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => console.log(data))
         .catch(error => console.error('Error:', error));
     }
+
+    // Fetch books on page load
+    getBooks('all'); // Replace 'all' with the desired genre if needed
 });
 </script>
-
-<div id="resultContainer"></div>
-<div id="updateFormContainer" style="display:none;">
-    <input type="text" id="newTitleInput" placeholder="Enter new title for the book">
-    <button onclick="updateBook()">Submit</button>
-</div>
-<div id="recommendations-container"></div>
-<form id="add-book-form">
-    <input type="text" id="titleInput" placeholder="Title">
-    <input type="text" id="authorInput" placeholder="Author">
-    <input type="text" id="genreInput" placeholder="Genre">
-    <button type="submit">Add Book</button>
-</form>    
-</script>
-
-<div id="recommendations-container">
-    <p>Loading book recommendations...</p>
-</div>
-
-<h2>Add a New Book</h2>
-<form id="add-book-form">
-    <label for="book-title">Title:</label>
-    <input type="text" id="book-title" name="title" required>
-    <br>
-    <label for="book-author">Author:</label>
-    <input type="text" id="book-author" name="author" required>
-    <br>
-    <label for="book-genre">Genre:</label>
-    <input type="text" id="book-genre" name="genre" required>
-    <br>
-    <button type="submit">Add Book</button>
-</form>
 
 <!DOCTYPE html>
 <html lang="en">
