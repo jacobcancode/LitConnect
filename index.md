@@ -220,6 +220,11 @@ menu: nav/home.html
             <img src="{{site.baseurl}}/images/windosfolder.png" alt="Literary Awards">
             <span>Manage Awards</span>
         </a>
+
+        <a href="{{site.baseurl}}/q" class="button">
+            <img src="{{site.baseurl}}/images/windosfolder.png" alt="Literary Awards">
+            <span>User Data</span>
+        </a>
     </div>
 </div>
 
