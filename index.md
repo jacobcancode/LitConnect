@@ -234,7 +234,7 @@ menu: nav/home.html
 
 <script>
     function loadPreferences() {
-      fetch('http://127.0.0.1:8103/api/preferences')
+      fetch('https://litconnect.stu.nighthawkcodingsociety.com/preferences')
         .then(response => response.json())
         .then(data => {
           const menuElement = document.getElementById('menu');
