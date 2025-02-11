@@ -15,7 +15,7 @@ menu: nav/home.html
       height: 100%;              
       margin: 0;                 
       padding: 0;                
-      background-color: #6a1b9a !important; /* Purple background for entire page */
+      background-color: #6a1b9a !important;
       font-family: 'Arial', sans-serif;
       color: #ffffff; 
       display: flex; 
@@ -87,9 +87,9 @@ menu: nav/home.html
       margin: 80px auto;  
       border-radius: 7.5px;
       display: flex;              
-      justify-content: space-between; /* Adjusted to space buttons evenly */
-      padding: 20px; /* Added padding */
-      box-sizing: border-box; /* Include padding in width/height */
+      justify-content: space-between; 
+      padding: 20px; 
+      box-sizing: border-box; 
     }
 
     .stand {
@@ -144,26 +144,25 @@ menu: nav/home.html
   </style>
 </head>
 
-  <div class="content">
-    <h3> Welcome to LitConnect, a social connectivity website made to foster engagement between readers. Click on the links on the monitor to view our main pages, or click the spines of the books to customize your experience! 
-    </h3>
-  </div>
+<div class="content">
+    <h3>Welcome to LitConnect, a social connectivity website made to foster engagement between readers. Click on the links on the monitor to view our main pages, or click the spines of the books to customize your experience!</h3>
+</div>
 
-  <div class="bookshelf">
+<div class="bookshelf">
     <a href="{{site.baseurl}}/preferences_2" class="book book1">Preferences</a>
     <a href="{{site.baseurl}}/voteforthegoat/home" class="book book2">Moderators Picks</a>
     <a href="{{site.baseurl}}/backend_a" class="book book3">Personalized</a>
     <a href="{{site.baseurl}}/backend_s" class="book book4">About Creators</a>
-  </div>
+</div>
 
-  <a href="{{site.baseurl}}/usersDb">usersDb</a>
+<a href="{{site.baseurl}}/usersDb">usersDb</a>
 
-  <div class="content">
+<div class="content">
     <h2 class="menu-item">Discover your next favorite book and connect with fellow readers from around the world.</h2>
     <img src="https://cdn.pixabay.com/photo/2024/04/19/12/13/ai-generated-8706226_640.png" alt="LitConnect Visual">
-  </div>
+</div>
 
-  <div class="monitor">
+<div class="monitor">
     <div class="stand"></div>
     <div class="base"></div>
 
@@ -210,16 +209,25 @@ menu: nav/home.html
             <span>Deployment Blog</span>
         </a>
     </div>
-  </div>
 
+    <div class="button-column">
+        <a href="{{site.baseurl}}/bookquotes" class="button">
+            <img src="{{site.baseurl}}/images/App-Logos/Quotes.png" alt="Book Quotes">
+            <span>Manage Quotes</span>
+        </a>
 
+        <a href="{{site.baseurl}}/literaryawards" class="button">
+            <img src="{{site.baseurl}}/images/windosfolder.png" alt="Literary Awards">
+            <span>Manage Awards</span>
+        </a>
+    </div>
+</div>
 
 <footer>
   <p>© 2024 LitConnect | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
 </footer>
 
 <script>
-    // Function to fetch preferences from the backend
     function loadPreferences() {
       fetch('http://127.0.0.1:8103/api/preferences')
         .then(response => response.json())
@@ -240,18 +248,15 @@ menu: nav/home.html
             p.style.color = data.text;
           });
 
-        // Change menu text color
-        let menuItems = document.querySelectorAll('.menu-item');
-        menuItems.forEach(item => {
-          item.style.color = data.menu;
-        });
+          let menuItems = document.querySelectorAll('.menu-item');
+          menuItems.forEach(item => {
+            item.style.color = data.menu;
+          });
       })
       .catch(error => {
         console.error('Error fetching preferences:', error);
       });
   }
 
-  // Load preferences when the page is loaded
   window.onload = loadPreferences;
 </script>
-
