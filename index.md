@@ -225,6 +225,11 @@ menu: nav/home.html
             <img src="{{site.baseurl}}/images/windosfolder.png" alt="Literary Awards">
             <span>User Data</span>
         </a>
+
+         <a href="{{site.baseurl}}/lib" class="button">
+            <img src="{{site.baseurl}}/images/App-Logos/Book_Recommendations.png" alt="Book Recommendations">
+            <span>Local Library's</span>
+        </a>
     </div>
 </div>
 
