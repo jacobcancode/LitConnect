@@ -11,7 +11,7 @@ comments: true
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Management</title>
+    <title>Dewy Management</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -34,7 +34,7 @@ comments: true
             padding: 8px;
             width: 100%;
         }
-        .user {
+        .dewy {
             display: flex;
             justify-content: space-between;
             background: #ddd;
@@ -46,36 +46,36 @@ comments: true
 </head>
 <body>
     <div class="container">
-        <h2>User Management</h2>
+        <h2>Dewy Management</h2>
         <input type="text" id="name" placeholder="Name">
         <input type="email" id="email" placeholder="Email">
-        <button onclick="addUser()">Add User</button>
+        <button onclick="addDewy()">Add Dewy</button>
 
-        <h3>Users</h3>
-        <div id="userList"></div>
+        <h3>Dewy Entries</h3>
+        <div id="dewyList"></div>
     </div>
 
     <script>
-        const API_URL = "https://litconnect.stu.nighthawkcodingsociety.com/api/dewey";
+        const API_URL = "https://litconnect.stu.nighthawkcodingsociety.com/api/dewy";
 
-        async function fetchUsers() {
+        async function fetchDewy() {
             const response = await fetch(API_URL);
-            const users = await response.json();
-            const userList = document.getElementById("userList");
-            userList.innerHTML = "";
+            const dewy = await response.json();
+            const dewyList = document.getElementById("dewyList");
+            dewyList.innerHTML = "";
 
-            users.forEach(user => {
-                const userDiv = document.createElement("div");
-                userDiv.className = "user";
-                userDiv.innerHTML = `
-                    <span>${user.name} - ${user.email}</span>
-                    <button onclick="deleteUser(${user.id})">Delete</button>
+            dewy.forEach(dewyEntry => {
+                const dewyDiv = document.createElement("div");
+                dewyDiv.className = "dewy";
+                dewyDiv.innerHTML = `
+                    <span>${dewyEntry.name} - ${dewyEntry.email}</span>
+                    <button onclick="deleteDewy(${dewyEntry.id})">Delete</button>
                 `;
-                userList.appendChild(userDiv);
+                dewyList.appendChild(dewyDiv);
             });
         }
 
-        async function addUser() {
+        async function addDewy() {
             const name = document.getElementById("name").value;
             const email = document.getElementById("email").value;
 
@@ -90,16 +90,16 @@ comments: true
                 body: JSON.stringify({ name, email })
             });
 
-            fetchUsers();
+            fetchDewy();
         }
 
-        async function deleteUser(id) {
+        async function deleteDewy(id) {
             await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-            fetchUsers();
+            fetchDewy();
         }
 
-        // Fetch users when the page loads
-        fetchUsers();
+        // Fetch dewy entries when the page loads
+        fetchDewy();
     </script>
 </body>
 </html>
