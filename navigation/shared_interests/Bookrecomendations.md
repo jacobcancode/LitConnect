@@ -54,7 +54,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         genre: 'New Genre' // Replace with actual genre
                     };
 
-                    fetch(`http://127.0.0.1:8103/api/book/${bookId}`, {
+                    const bookApiUrl = location.hostname === "localhost" || location.hostname === "127.0.0.1" 
+                        ? `http://127.0.0.1:8103/api/book/${bookId}` 
+                        : `https://litconnect.stu.nighthawkcodingsociety.com/api/book/${bookId}`;
+
+                    fetch(bookApiUrl, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'
