@@ -1,8 +1,8 @@
 {% block background %}
-    <script src="{{ url_for('static', filename='Animated Backgrounds/three.r119.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/three.r119.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/vanta.clouds2.min.js') }}"></script>
     <script>
-        VANTA.WAVES({
+        VANTA.CLOUDS2({
             el: "#body_background",
             mouseControls: true,
             touchControls: true,
@@ -10,14 +10,10 @@
             minHeight: 200.00,
             minWidth: 200.00,
             scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0xf87ac,
-            shininess: 0.00,
-            waveHeight: 40.00,
-            waveSpeed: 0.50,
-            zoom: 0.65
-          })
-          </script>
+            skyColor: 0x4087af,
+            cloudColor: 0x294572,
+})
+</script>
 {% endblock %}
 
 </html>
