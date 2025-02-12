@@ -6,7 +6,7 @@ search_exclude: true
 show_reading_time: false 
 ---
 <div class="section">
-  <h2>Suggest a book to be added to the list of Book Adaptations</h2>
+  <h2>Suggest a book to be added to your reading list</h2>
   <input type="text" id="book" placeholder="Enter book title" required>
   <button id="createBookButton">Create</button>
 
@@ -29,7 +29,7 @@ show_reading_time: false
 
 <script type="module">
     import { pythonURI } from "./assets/js/api/config.js";
-    
+
   document.getElementById('getAllBooksButton').addEventListener('click', async () => {
         const tableBody = document.getElementById('table');
 
