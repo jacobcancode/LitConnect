@@ -46,104 +46,97 @@ comments: true
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         const apiUrl = 'https://litconnect.stu.nighthawkcodingsociety.com/api/sections';
 
         // Fetch and display sections
         function fetchSections() {
-            $.get(apiUrl, function(sections) {
-                $('#sections-list').empty();
-                sections.forEach(section => {
-                    $('#sections-list').append(`
-                        <div>
-                            <h3>${section.name}</h3>
-                            <p>Theme: ${section.theme}</p>
-                        </div>
-                    `);
-                });
-            });
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(sections => {
+                    document.getElementById('sections-list').innerHTML = '';
+                    sections.forEach(section => {
+                        document.getElementById('sections-list').innerHTML += `
+                            <div>
+                                <h3>${section.name}</h3>
+                                <p>Theme: ${section.theme}</p>
+                            </div>
+                        `;
+                    });
+                })
+                .catch(error => console.error('Error fetching sections:', error));
         }
 
         // Create Section
         function createSection() {
-            const name = $('#create-name').val();
-            const theme = $('#create-theme').val();
+            const name = document.getElementById('create-name').value;
+            const theme = document.getElementById('create-theme').value;
 
             if (!name) {
                 alert('Section name is required!');
                 return;
             }
 
-            $.ajax({
-                url: apiUrl,
+            fetch(apiUrl, {
                 method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({ name, theme }),
-                success: function() {
-                    alert('Section created!');
-                    fetchSections();  // Refresh sections list
-                },
-                error: function() {
-                    alert('Error creating section!');
-                }
-            });
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, theme })
+            })
+            .then(response => response.json())
+            .then(() => {
+                alert('Section created!');
+                fetchSections();
+            })
+            .catch(() => alert('Error creating section!'));
         }
 
         // Update Section
         function updateSection() {
-            const id = $('#update-id').val();
-            const name = $('#update-name').val();
-            const theme = $('#update-theme').val();
+            const id = document.getElementById('update-id').value;
+            const name = document.getElementById('update-name').value;
+            const theme = document.getElementById('update-theme').value;
 
             if (!id) {
                 alert('Section ID is required!');
                 return;
             }
 
-            $.ajax({
-                url: apiUrl,
+            fetch(`${apiUrl}/${id}`, {
                 method: 'PUT',
-                contentType: 'application/json',
-                data: JSON.stringify({ id, name, theme }),
-                success: function() {
-                    alert('Section updated!');
-                    fetchSections();  // Refresh sections list
-                },
-                error: function() {
-                    alert('Error updating section!');
-                }
-            });
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, theme })
+            })
+            .then(response => response.json())
+            .then(() => {
+                alert('Section updated!');
+                fetchSections();
+            })
+            .catch(() => alert('Error updating section!'));
         }
 
         // Delete Section
         function deleteSection() {
-            const id = $('#delete-id').val();
+            const id = document.getElementById('delete-id').value;
 
             if (!id) {
                 alert('Section ID is required!');
                 return;
             }
 
-            $.ajax({
-                url: apiUrl,
+            fetch(`${apiUrl}/${id}`, {
                 method: 'DELETE',
-                contentType: 'application/json',
-                data: JSON.stringify({ id }),
-                success: function() {
-                    alert('Section deleted!');
-                    fetchSections();  // Refresh sections list
-                },
-                error: function() {
-                    alert('Error deleting section!');
-                }
-            });
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(() => {
+                alert('Section deleted!');
+                fetchSections();
+            })
+            .catch(() => alert('Error deleting section!'));
         }
 
         // Fetch sections when the page loads
-        $(document).ready(function() {
-            fetchSections();
-        });
+        document.addEventListener('DOMContentLoaded', fetchSections);
     </script>
 </body>
 </html>
