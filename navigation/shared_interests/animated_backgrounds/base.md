@@ -5,9 +5,16 @@ permalink: /relaxing
 menu: nav/shared_interests.html
 ---
 
-{% block background %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <script src="{{ url_for('static', filename='js/three.r119.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/vanta.clouds2.min.js') }}"></script>
+</head>
+<body>
     <script>
         VANTA.CLOUDS2({
             el: "#body_background",
@@ -19,8 +26,7 @@ menu: nav/shared_interests.html
             scale: 1.00,
             skyColor: 0x4087af,
             cloudColor: 0x294572,
-})
-</script>
-{% endblock %}
-
+        })
+    </script>
+</body>
 </html>
