@@ -5,7 +5,31 @@ permalink: /bookrecommendations
 search_exclude: true
 show_reading_time: false 
 ---
-<script>
+<div class="section">
+  <h2>Suggest a book to be added to the list of Book Adaptations</h2>
+  <input type="text" id="book" placeholder="Enter book title" required>
+  <button id="createBookButton">Create</button>
+
+  <h2>All Books</h2>
+  <button id="getAllBooksButton">List of Books</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="table">
+      <!-- JavaScript generated data -->
+    </tbody>
+  </table>
+</div>
+
+<script type="module">
+    import { pythonURI } from "./assets/js/api/config.js";
+    
   document.getElementById('getAllBooksButton').addEventListener('click', async () => {
         const tableBody = document.getElementById('table');
 
