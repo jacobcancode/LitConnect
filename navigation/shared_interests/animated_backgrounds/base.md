@@ -1,8 +1,7 @@
 ---
 layout: post 
-title: Book Club Hub
 search_exclude: true
-permalink: /bookclubuub
+permalink: /relaxing
 menu: nav/shared_interests.html
 ---
 
