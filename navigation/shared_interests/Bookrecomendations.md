@@ -65,12 +65,18 @@ show_reading_time: false
                     // Create Update button
                     const updateBtn = document.createElement('button');
                     updateBtn.innerText = 'Update';
-                    updateBtn.onclick = () => updateBook(book.id);
+                    updateBtn.onclick = () => {
+                        updateBook(book.id);
+                        refreshBookList();
+                    };
 
                     // Create Delete button
                     const deleteBtn = document.createElement('button');
                     deleteBtn.innerText = 'Delete';
-                    deleteBtn.onclick = () => deleteBook(book.id);
+                    deleteBtn.onclick = () => {
+                        deleteBook(book.id);
+                        refreshBookList();
+                    };
 
                     actionCell.appendChild(updateBtn);
                     actionCell.appendChild(deleteBtn);
@@ -170,5 +176,54 @@ show_reading_time: false
                 resultContainer.innerHTML = `<p>Error updating book: ${error.message}</p>`;
             });
         }
+    }
+
+    // Function to refresh the book list
+    function refreshBookList() {
+        // Clear the current book list
+        tableBody.innerHTML = '';
+
+        // Fetch the updated book list and render it
+        fetchBooks().then(books => {
+            books.forEach(book => {
+                // Render each book (similar to the existing code)
+                const tr = document.createElement('tr');
+                const idCell = document.createElement('td');
+                const titleCell = document.createElement('td');
+                const authorCell = document.createElement('td');
+                const genreCell = document.createElement('td');
+                const actionCell = document.createElement('td');
+
+                idCell.innerText = book.id;
+                titleCell.innerText = book.title;
+                authorCell.innerText = book.author;
+                genreCell.innerText = book.genre;
+
+                // Create Update button
+                const updateBtn = document.createElement('button');
+                updateBtn.innerText = 'Update';
+                updateBtn.onclick = () => {
+                    updateBook(book.id);
+                    refreshBookList();
+                };
+
+                // Create Delete button
+                const deleteBtn = document.createElement('button');
+                deleteBtn.innerText = 'Delete';
+                deleteBtn.onclick = () => {
+                    deleteBook(book.id);
+                    refreshBookList();
+                };
+
+                actionCell.appendChild(updateBtn);
+                actionCell.appendChild(deleteBtn);
+                tr.appendChild(idCell);
+                tr.appendChild(titleCell);
+                tr.appendChild(authorCell);
+                tr.appendChild(genreCell);
+                tr.appendChild(actionCell);
+                tableBody.appendChild(tr);
+            });
+        });
     }
 </script>
