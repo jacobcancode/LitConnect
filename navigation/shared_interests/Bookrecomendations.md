@@ -8,6 +8,8 @@ show_reading_time: false
 <div class="section">
   <h2>Suggest a book to be added to your reading list</h2>
   <input type="text" id="book" placeholder="Enter book title" required>
+  <input type="text" id="author" placeholder="Enter author" required>
+  <input type="text" id="genre" placeholder="Enter genre" required>
   <button id="createBookButton">Create</button>
 
   <h2>All Books</h2>
@@ -18,6 +20,8 @@ show_reading_time: false
       <tr>
         <th>ID</th>
         <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -34,127 +38,78 @@ show_reading_time: false
     loadAllBooks();
   });
 
-  document.getElementById('getAllBooksButton').addEventListener('click', async () => {
-        const tableBody = document.getElementById('booksTableBody');
+  async function loadAllBooks() {
+    const tableBody = document.getElementById('booksTableBody');
 
-        try {
-            const response = await fetch(`${pythonURI}/api/book`);
-            const data = await response.json();
-            console.log(data); // Log the response data
-
-            tableBody.innerHTML = ''; // Clear existing rows
-            if (Array.isArray(data)) {
-                data.forEach(book => {
-                    const tr = document.createElement('tr');
-
-                    const idCell = document.createElement('td');
-                    const titleCell = document.createElement('td');
-                    const actionCell = document.createElement('td');
-
-                    idCell.innerText = book.id;
-                    titleCell.innerText = book.title;
-
-                    // Create Update button
-                    const updateBtn = document.createElement('button');
-                    updateBtn.innerText = 'Update';
-                    updateBtn.onclick = () => updateBook(book.id);
-
-                    // Create Delete button
-                    const deleteBtn = document.createElement('button');
-                    deleteBtn.innerText = 'Delete';
-                    deleteBtn.onclick = () => deleteBook(book.id);
-
-                    actionCell.appendChild(updateBtn);
-                    actionCell.appendChild(deleteBtn);
-                    tr.appendChild(idCell);
-                    tr.appendChild(titleCell);
-                    tr.appendChild(actionCell);
-                    tableBody.appendChild(tr);
-                });
-            } else {
-                console.error('Unexpected response format:', data); // Log unexpected data
-                tableBody.innerHTML = `<p>No books found or unexpected data format.</p>`;
-            }
-        } catch (error) {
-            tableBody.innerHTML = `<p>Error fetching data: ${error.message}</p>`;
-            console.error(error); // Log the error for further investigation
-        }
-    });
-
-
-    document.getElementById('createBookButton').addEventListener('click', async () => {
-        const title = document.getElementById('book').value;
-        const resultContainer = document.getElementById('resultContainer');
-
-        if (!title) {
-            resultContainer.innerHTML = `<p>Please enter a book title.</p>`;
-            return;
-        }
-
-        try {
-            const response = await fetch(`${pythonURI}/api/book`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ title })
-            });
-
-            const data = await response.json();
-            if (response.ok) {
-                resultContainer.innerHTML = `<p>Book created: ${data.title}</p>`;
-                document.getElementById('getAllBooksButton').click(); // Refresh the book list
-            } else {
-                resultContainer.innerHTML = `<p>Error: ${data.error}</p>`;
-            }
-        } catch (error) {
-            resultContainer.innerHTML = `<p>Error creating book: ${error.message}</p>`;
-        }
-    });
-
-    function deleteBook(bookId) {
-        const resultContainer = document.getElementById('resultContainer');
-
-        fetch(`${pythonURI}/api/book/${bookId}`, {
-            method: 'DELETE'
-        })
-        .then(response => {
-            if (response.ok) {
-                resultContainer.innerHTML = `<p>Book deleted successfully.</p>`;
-                document.getElementById('getAllBooksButton').click(); // Refresh the book list
-            } else {
-                return response.json().then(data => {
-                    throw new Error(data.error);
-                });
-            }
-        })
-        .catch(error => {
-            resultContainer.innerHTML = `<p>Error deleting book: ${error.message}</p>`;
+    try {
+        const response = await fetch(`${pythonURI}/api/book`);
+        const data = await response.json();
+        tableBody.innerHTML = '';
+        data.forEach(book => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${book.id}</td>
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>${book.genre}</td>
+            <td>
+              <button onclick="editBook(${book.id})">Edit</button>
+              <button onclick="deleteBook(${book.id})">Delete</button>
+            </td>
+          `;
+          tableBody.appendChild(row);
         });
+    } catch (error) {
+        console.error('Error loading books:', error);
     }
+  }
 
-    function updateBook(bookId) {
-        const newTitle = prompt("Enter new title for the book:");
-        if (newTitle) {
-            fetch(`${pythonURI}/api/book/${bookId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ title: newTitle })
-            })
-            .then(response => response.json())
-            .then(data => {
-                const resultContainer = document.getElementById('resultContainer');
-                if (data) {
-                    resultContainer.innerHTML = `<p>Book updated successfully: ${data.title}</p>`;
-                    document.getElementById('getAllBooksButton').click(); // Refresh the book list
-                }
-            })
-            .catch(error => {
-                const resultContainer = document.getElementById('resultContainer');
-                resultContainer.innerHTML = `<p>Error updating book: ${error.message}</p>`;
+  document.getElementById('createBookButton').addEventListener('click', async () => {
+    const title = document.getElementById('book').value;
+    const author = document.getElementById('author').value;
+    const genre = document.getElementById('genre').value;
+
+    try {
+        const response = await fetch(`${pythonURI}/api/book`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title, author, genre })
+        });
+
+        if (response.ok) {
+            loadAllBooks();
+        } else {
+            console.error('Error adding book:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error adding book:', error);
+    }
+  });
+
+  function editBook(id) {
+    // Implement edit functionality
+  }
+
+  function deleteBook(id) {
+    const resultContainer = document.getElementById('resultContainer');
+
+    fetch(`${pythonURI}/api/book/${id}`, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (response.ok) {
+            resultContainer.innerHTML = `<p>Book deleted successfully.</p>`;
+            document.getElementById('getAllBooksButton').click(); // Refresh the book list
+        } else {
+            return response.json().then(data => {
+                throw new Error(data.error);
             });
         }
-    }
+    })
+    .catch(error => {
+        resultContainer.innerHTML = `<p>Error deleting book: ${error.message}</p>`;
+    });
+  }
 </script>
