@@ -162,10 +162,8 @@ comments: true
         </tbody>
     </table>
 
-    <script type="module">
-        import { pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
-
-        const apiUrl = pythonURI('/sections');
+    <script>
+        const apiUrl = 'https://litconnect.stu.nighthawkcodingsociety.com/sections';
 
         // Fetch and display sections
         function fetchSections() {
@@ -202,7 +200,7 @@ comments: true
 
             fetch(apiUrl, {
                 method: 'POST',
-                headers: fetchOptions.headers,
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, theme })
             })
                 .then(response => {
@@ -225,8 +223,7 @@ comments: true
             if (!confirm('Are you sure you want to delete this section?')) return;
 
             fetch(`${apiUrl}/${id}`, {
-                method: 'DELETE',
-                headers: fetchOptions.headers
+                method: 'DELETE'
             })
                 .then(response => {
                     if (!response.ok) {
@@ -250,7 +247,7 @@ comments: true
 
             fetch(`${apiUrl}/${id}`, {
                 method: 'PUT',
-                headers: fetchOptions.headers,
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: newName.trim(), theme: newTheme ? newTheme.trim() : '' })
             })
                 .then(response => {
