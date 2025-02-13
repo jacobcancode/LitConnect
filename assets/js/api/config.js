@@ -8,36 +8,36 @@ if (location.hostname === "localhost") {
 }
 export var javaURI;
 if (location.hostname === "localhost") {
-        javaURI = "http://localhost:8103";
+        javaURI = "http://localhost:8202";
 } else if (location.hostname === "127.0.0.1") {
-        javaURI = "http://127.0.0.1:8103"; //rey
+        javaURI = "http://127.0.0.1:8202"; //rey
 } else {
-        javaURI = "https://litconnect.stu.nighthawkcodingsociety.com";
+        javaURI = "https://flocker-j.nighthawkcodingsociety.com";
 }
 
 export const fetchOptions = {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'include', // include, same-origin, omit
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Origin': 'client' // New custom header to identify source
-        },
-    };
-    // User Login Function 
+    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'include', // include, same-origin, omit
+    headers: {
+        'Content-Type': 'application/json',
+        'X-Origin': 'client' // New custom header to identify source
+    },
+};
+// User Login Function 
 export function login(options) {
         // Modify the options to use the POST method and include the request body.
-                const requestOptions  = {
+        const requestOptions  = {
                 ...fetchOptions, // This will copy all properties from options
                 method: options.method, // Override the method property
                 cache: options.cache, // Set the cache property
                 body: JSON.stringify(options.body)
-};
+        };
 
         // Clear the message area
         document.getElementById(options.message).textContent = "";
-    
+
         // Fetch JWT
         fetch(options.URL, requestOptions)
         .then(response => {
