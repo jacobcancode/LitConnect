@@ -8,9 +8,9 @@ if (location.hostname === "localhost") {
 }
 export var javaURI;
 if (location.hostname === "localhost") {
-        javaURI = "http://localhost:8202";
+        javaURI = "http://localhost:8103";
 } else if (location.hostname === "127.0.0.1") {
-        javaURI = "http://127.0.0.1:8202"; //rey
+        javaURI = "http://127.0.0.1:8103"; //rey
 } else {
         javaURI = "https://flocker-j.nighthawkcodingsociety.com";
 }
