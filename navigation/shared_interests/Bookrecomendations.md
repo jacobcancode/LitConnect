@@ -21,8 +21,8 @@ show_reading_time: false
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody id="table">
-      <!-- JavaScript generated data -->
+    <tbody id="booksTableBody">
+      <!-- Books will be loaded here -->
     </tbody>
   </table>
 </div>
@@ -30,8 +30,12 @@ show_reading_time: false
 <script type="module">
     import { pythonURI } from "./assets/js/api/config.js";
 
+  document.addEventListener('DOMContentLoaded', function() {
+    loadAllBooks();
+  });
+
   document.getElementById('getAllBooksButton').addEventListener('click', async () => {
-        const tableBody = document.getElementById('table');
+        const tableBody = document.getElementById('booksTableBody');
 
         try {
             const response = await fetch(`${pythonURI}/api/book`);
