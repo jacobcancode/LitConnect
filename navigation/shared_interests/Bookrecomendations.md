@@ -8,6 +8,8 @@ show_reading_time: false
 <div class="section">
   <h2>Suggest a book to be added to your reading list</h2>
   <input type="text" id="book" placeholder="Enter book title" required>
+  <input type="text" id="author" placeholder="Enter author name" required>
+  <input type="text" id="genre" placeholder="Enter genre" required>
   <button id="createBookButton">Create</button>
 
   <h2>All Books</h2>
@@ -18,6 +20,8 @@ show_reading_time: false
       <tr>
         <th>ID</th>
         <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -49,25 +53,37 @@ show_reading_time: false
 
                     const idCell = document.createElement('td');
                     const titleCell = document.createElement('td');
+                    const authorCell = document.createElement('td');
+                    const genreCell = document.createElement('td');
                     const actionCell = document.createElement('td');
 
                     idCell.innerText = book.id;
                     titleCell.innerText = book.title;
+                    authorCell.innerText = book.author;
+                    genreCell.innerText = book.genre;
 
                     // Create Update button
                     const updateBtn = document.createElement('button');
                     updateBtn.innerText = 'Update';
-                    updateBtn.onclick = () => updateBook(book.id);
+                    updateBtn.onclick = () => {
+                        updateBook(book.id);
+                        refreshBookList();
+                    };
 
                     // Create Delete button
                     const deleteBtn = document.createElement('button');
                     deleteBtn.innerText = 'Delete';
-                    deleteBtn.onclick = () => deleteBook(book.id);
+                    deleteBtn.onclick = () => {
+                        deleteBook(book.id);
+                        refreshBookList();
+                    };
 
                     actionCell.appendChild(updateBtn);
                     actionCell.appendChild(deleteBtn);
                     tr.appendChild(idCell);
                     tr.appendChild(titleCell);
+                    tr.appendChild(authorCell);
+                    tr.appendChild(genreCell);
                     tr.appendChild(actionCell);
                     tableBody.appendChild(tr);
                 });
@@ -84,10 +100,12 @@ show_reading_time: false
 
     document.getElementById('createBookButton').addEventListener('click', async () => {
         const title = document.getElementById('book').value;
+        const author = document.getElementById('author').value;
+        const genre = document.getElementById('genre').value;
         const resultContainer = document.getElementById('resultContainer');
 
-        if (!title) {
-            resultContainer.innerHTML = `<p>Please enter a book title.</p>`;
+        if (!title || !author || !genre) {
+            resultContainer.innerHTML = `<p>Please enter all book details.</p>`;
             return;
         }
 
@@ -97,7 +115,7 @@ show_reading_time: false
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ title })
+                body: JSON.stringify({ title, author, genre })
             });
 
             const data = await response.json();
@@ -135,13 +153,15 @@ show_reading_time: false
 
     function updateBook(bookId) {
         const newTitle = prompt("Enter new title for the book:");
-        if (newTitle) {
+        const newAuthor = prompt("Enter new author for the book:");
+        const newGenre = prompt("Enter new genre for the book:");
+        if (newTitle && newAuthor && newGenre) {
             fetch(`${pythonURI}/api/book/${bookId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ title: newTitle })
+                body: JSON.stringify({ title: newTitle, author: newAuthor, genre: newGenre })
             })
             .then(response => response.json())
             .then(data => {
@@ -156,5 +176,54 @@ show_reading_time: false
                 resultContainer.innerHTML = `<p>Error updating book: ${error.message}</p>`;
             });
         }
+    }
+
+    // Function to refresh the book list
+    function refreshBookList() {
+        // Clear the current book list
+        tableBody.innerHTML = '';
+
+        // Fetch the updated book list and render it
+        fetchBooks().then(books => {
+            books.forEach(book => {
+                // Render each book (similar to the existing code)
+                const tr = document.createElement('tr');
+                const idCell = document.createElement('td');
+                const titleCell = document.createElement('td');
+                const authorCell = document.createElement('td');
+                const genreCell = document.createElement('td');
+                const actionCell = document.createElement('td');
+
+                idCell.innerText = book.id;
+                titleCell.innerText = book.title;
+                authorCell.innerText = book.author;
+                genreCell.innerText = book.genre;
+
+                // Create Update button
+                const updateBtn = document.createElement('button');
+                updateBtn.innerText = 'Update';
+                updateBtn.onclick = () => {
+                    updateBook(book.id);
+                    refreshBookList();
+                };
+
+                // Create Delete button
+                const deleteBtn = document.createElement('button');
+                deleteBtn.innerText = 'Delete';
+                deleteBtn.onclick = () => {
+                    deleteBook(book.id);
+                    refreshBookList();
+                };
+
+                actionCell.appendChild(updateBtn);
+                actionCell.appendChild(deleteBtn);
+                tr.appendChild(idCell);
+                tr.appendChild(titleCell);
+                tr.appendChild(authorCell);
+                tr.appendChild(genreCell);
+                tr.appendChild(actionCell);
+                tableBody.appendChild(tr);
+            });
+        });
     }
 </script>
