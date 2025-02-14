@@ -15,7 +15,7 @@ menu: nav/home.html
       height: 100%;              
       margin: 0;                 
       padding: 0;                
-      background-color: #6a1b9a !important;
+      background-color: #E07A5F !important;
       font-family: 'Arial', sans-serif;
       color: #ffffff; 
       display: flex; 
