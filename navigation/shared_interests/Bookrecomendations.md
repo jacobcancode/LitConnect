@@ -5,14 +5,6 @@ permalink: /bookrecommendations
 search_exclude: true
 show_reading_time: false 
 ---
-
----
-layout: page 
-title: Book Reading List
-permalink: /bookrecommendations
-search_exclude: true
-show_reading_time: false 
----
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const genre = 'programming'; // Example genre
