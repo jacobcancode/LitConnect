@@ -217,12 +217,12 @@ menu: nav/home.html
         </a>
 
         <a href="{{site.baseurl}}/literaryawards" class="button">
-            <img src="{{site.baseurl}}/images/windosfolder.png" alt="Literary Awards">
+            <img src="{{site.baseurl}}/images/App-Logos/Database.png" alt="Literary Awards">
             <span>Manage Awards</span>
         </a>
 
         <a href="{{site.baseurl}}/q" class="button">
-            <img src="{{site.baseurl}}/images/windosfolder.png" alt="Literary Awards">
+            <img src="{{site.baseurl}}/images/App-Logos/Database.png" alt="User Data">
             <span>User Data</span>
         </a>
 
