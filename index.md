@@ -79,18 +79,19 @@ menu: nav/home.html
     .book6 { background-color: #A2A378; height: 130px; width: 50px; left: 370px; } /* Olive Green */
 
     .monitor {
-      width: 800px;  
-      height: 500px; 
-      background-size: cover; 
-      background-position: center; 
-      border: 7.5px solid #2C4870; /* Very Dark Pastel Blue */
-      position: relative; 
-      margin: 80px auto;  
+      width: 800px;
+      height: 500px;
+      background-image: url('https://d7hftxdivxxvm.cloudfront.net/?quality=80&resize_to=width&src=https%3A%2F%2Fartsy-media-uploads.s3.amazonaws.com%2F2RNK1P0BYVrSCZEy_Sd1Ew%252F3417757448_4a6bdf36ce_o.jpg&width=910');
+      background-size: cover;
+      background-position: center;
+      border: 7.5px solid black;
+      position: relative;
+      margin: 80px auto;
       border-radius: 7.5px;
-      display: flex;              
-      justify-content: space-between; 
-      padding: 20px; 
-      box-sizing: border-box; 
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .stand {

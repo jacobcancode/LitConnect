@@ -8,35 +8,36 @@ menu: nav/vote_for_the_goat.html
 
 <style>
     body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #000;
-        color: #e0e0e0;
-        padding: 20px;
+      font-family: 'Arial', sans-serif;
+      background-color: #5D82B3 !important; /* Matching LitConnect home page */
+      color: #ffffff;
+      margin: 0;
+      padding: 20px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
-    h2, h3 {
-        color: #00d4ff;
-        margin-bottom: 10px;
-    }
-
-    p {
-        margin-bottom: 15px;
+    h1 {
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     }
 
     .group-theme {
-        background: #006633;
-        color: #e0e0e0;
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 8px 0 rgba(0, 212, 255, 0.2), 0 6px 20px 0 rgba(0, 212, 255, 0.19);
-        border: 1px solid #00d4ff;
+      background: rgba(44, 62, 80, 0.8);
+      color: #ffffff;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      text-align: center;
     }
-
-    .group-theme h3 {
-        margin-top: 0;
-    }
-</style>
+  </style>
 
 In this Zone, view the book of the week, with the moderators' honest review and rating out of 5 stars. Then you can enjoy disscussing with other readers in the discussion chat, sharing your thoughts and opionions on the moderators review, and have conversations with others about your own feelings. 
 
@@ -50,7 +51,7 @@ In this Zone, view the book of the week, with the moderators' honest review and 
 <script>
     // Function to fetch preferences from the backend
     function loadPreferences() {
-        fetch('http://127.0.0.1:8103/api/preferences')  // Adjust URL if needed
+        fetch('https://litconnect.stu.nighthawkcodingsociety.com/api/preferences')  // Adjust URL if needed
         .then(response => response.json())
         .then(data => {
             // Update the page with the preferences
