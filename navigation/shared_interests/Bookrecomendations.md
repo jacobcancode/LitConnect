@@ -3,8 +3,11 @@ layout: page
 title: Book Reading List
 permalink: /bookrecommendations
 search_exclude: true
-show_reading_time: false 
+show_reading_time: false
 ---
+
+<link rel="stylesheet" href="./assets/css/styles.css">
+
 <div class="section">
   <h2>Suggest a book to be added to your reading list</h2>
   <input type="text" id="book" placeholder="Enter book title" required>
@@ -29,6 +32,8 @@ show_reading_time: false
       <!-- Books will be loaded here -->
     </tbody>
   </table>
+
+  <div id="resultContainer"></div>
 </div>
 
 <script type="module">
