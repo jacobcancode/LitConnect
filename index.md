@@ -203,7 +203,7 @@ menu: nav/home.html
 
         <a href="{{site.baseurl}}/tb" class="button">
             <img src="{{site.baseurl}}/images/App-Logos/Database.png" alt="Database">
-            <span>Database</span>
+            <span>Genre Recommendations</span>
         </a>
 
         <a href="{{site.baseurl}}/blogs" class="button">
@@ -225,12 +225,12 @@ menu: nav/home.html
 
         <a href="{{site.baseurl}}/q" class="button">
             <img src="{{site.baseurl}}/images/App-Logos/Database.png" alt="User Data">
-            <span>User Data</span>
+            <span>Dewy Volunteer</span>
         </a>
 
          <a href="{{site.baseurl}}/lib" class="button">
             <img src="{{site.baseurl}}/images/App-Logos/Book_Recommendations.png" alt="Book Recommendations">
-            <span>Local Library's</span>
+            <span>Local Library Suggestions</span>
         </a>
     </div>
 </div>
