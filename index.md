@@ -155,7 +155,9 @@ menu: nav/home.html
     <a href="{{site.baseurl}}/backend_s" class="book book4">About Creators</a>
 </div>
 
-<a href="{{site.baseurl}}/favBooks">favBooks</a>
+<a href="{{site.baseurl}}/favBooks">Favorite Books</a>
+<br>
+<a href="{{site.baseurl}}/book_progress">Reading Tracker</a>
 
 <div class="content">
     <h2 class="menu-item">Discover your next favorite book and connect with fellow readers from around the world.</h2>
