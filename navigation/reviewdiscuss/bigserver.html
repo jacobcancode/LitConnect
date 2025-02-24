@@ -94,7 +94,7 @@ comments: true
 
     // Function to fetch preferences from the backend
     function loadPreferences() {
-      fetch('https://litconnect.stu.nighthawkcodingsociety.com/preferences')  // Adjust URL dynamically using pythonURI
+      fetch('https://litconnect.stu.nighthawkcodingsociety.com/api/preferences')  // Adjust URL dynamically using pythonURI
         .then(response => response.json())
         .then(data => {
           // Update the page with the preferences

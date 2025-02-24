@@ -3,8 +3,11 @@ layout: page
 title: Book Reading List
 permalink: /bookrecommendations
 search_exclude: true
-show_reading_time: false 
+show_reading_time: false
 ---
+
+<link rel="stylesheet" href="/assets/css/styles.css">
+
 <div class="section">
   <h2>Suggest a book to be added to your reading list</h2>
   <input type="text" id="book" placeholder="Enter book title" required>
@@ -29,13 +32,15 @@ show_reading_time: false
       <!-- Books will be loaded here -->
     </tbody>
   </table>
+
+  <div id="resultContainer"></div>
 </div>
 
 <script type="module">
     import { pythonURI } from "./assets/js/api/config.js";
 
-  document.addEventListener('DOMContentLoaded', function() {
-    loadAllBooks();
+  document.addEventListener('DOMContentLoaded', () => {
+    refreshBookList();
   });
 
   document.getElementById('getAllBooksButton').addEventListener('click', async () => {
@@ -65,16 +70,16 @@ show_reading_time: false
                     // Create Update button
                     const updateBtn = document.createElement('button');
                     updateBtn.innerText = 'Update';
-                    updateBtn.onclick = () => {
-                        updateBook(book.id);
+                    updateBtn.onclick = async () => {
+                        await updateBook(book.id);
                         refreshBookList();
                     };
 
                     // Create Delete button
                     const deleteBtn = document.createElement('button');
                     deleteBtn.innerText = 'Delete';
-                    deleteBtn.onclick = () => {
-                        deleteBook(book.id);
+                    deleteBtn.onclick = async () => {
+                        await deleteBook(book.id);
                         refreshBookList();
                     };
 
@@ -179,51 +184,57 @@ show_reading_time: false
     }
 
     // Function to refresh the book list
-    function refreshBookList() {
+    async function refreshBookList() {
         // Clear the current book list
+        const tableBody = document.getElementById('tableBody');
         tableBody.innerHTML = '';
 
         // Fetch the updated book list and render it
-        fetchBooks().then(books => {
-            books.forEach(book => {
-                // Render each book (similar to the existing code)
-                const tr = document.createElement('tr');
-                const idCell = document.createElement('td');
-                const titleCell = document.createElement('td');
-                const authorCell = document.createElement('td');
-                const genreCell = document.createElement('td');
-                const actionCell = document.createElement('td');
+        const books = await fetchBooks();
+        books.forEach(book => {
+            // Render each book (similar to the existing code)
+            const tr = document.createElement('tr');
+            const idCell = document.createElement('td');
+            const titleCell = document.createElement('td');
+            const authorCell = document.createElement('td');
+            const genreCell = document.createElement('td');
+            const actionCell = document.createElement('td');
 
-                idCell.innerText = book.id;
-                titleCell.innerText = book.title;
-                authorCell.innerText = book.author;
-                genreCell.innerText = book.genre;
+            idCell.innerText = book.id;
+            titleCell.innerText = book.title;
+            authorCell.innerText = book.author;
+            genreCell.innerText = book.genre;
 
-                // Create Update button
-                const updateBtn = document.createElement('button');
-                updateBtn.innerText = 'Update';
-                updateBtn.onclick = () => {
-                    updateBook(book.id);
-                    refreshBookList();
-                };
+            // Create Update button
+            const updateBtn = document.createElement('button');
+            updateBtn.innerText = 'Update';
+            updateBtn.onclick = async () => {
+                await updateBook(book.id);
+                refreshBookList();
+            };
 
-                // Create Delete button
-                const deleteBtn = document.createElement('button');
-                deleteBtn.innerText = 'Delete';
-                deleteBtn.onclick = () => {
-                    deleteBook(book.id);
-                    refreshBookList();
-                };
+            // Create Delete button
+            const deleteBtn = document.createElement('button');
+            deleteBtn.innerText = 'Delete';
+            deleteBtn.onclick = async () => {
+                await deleteBook(book.id);
+                refreshBookList();
+            };
 
-                actionCell.appendChild(updateBtn);
-                actionCell.appendChild(deleteBtn);
-                tr.appendChild(idCell);
-                tr.appendChild(titleCell);
-                tr.appendChild(authorCell);
-                tr.appendChild(genreCell);
-                tr.appendChild(actionCell);
-                tableBody.appendChild(tr);
-            });
+            actionCell.appendChild(updateBtn);
+            actionCell.appendChild(deleteBtn);
+            tr.appendChild(idCell);
+            tr.appendChild(titleCell);
+            tr.appendChild(authorCell);
+            tr.appendChild(genreCell);
+            tr.appendChild(actionCell);
+            tableBody.appendChild(tr);
         });
+    }
+
+    // Function to create a new book
+    async function createBook(book) {
+        await addBook(book);
+        refreshBookList();
     }
 </script>
