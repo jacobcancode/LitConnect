@@ -6,7 +6,7 @@ search_exclude: true
 show_reading_time: false
 ---
 
-<link rel="stylesheet" href="./assets/css/styles.css">
+<link rel="stylesheet" href="/assets/css/styles.css">
 
 <div class="section">
   <h2>Suggest a book to be added to your reading list</h2>

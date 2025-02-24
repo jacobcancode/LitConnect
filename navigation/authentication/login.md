@@ -20,7 +20,7 @@ show_reading_time: false
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 5px rgba(0, 98, 255, 0.3);
     margin-bottom: 20px;
     overflow-x: auto; /* Enable horizontal scrolling */
 }
@@ -35,7 +35,7 @@ show_reading_time: false
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 5px rgba(255, 254, 254, 0.3);
     margin-bottom: 20px;
     overflow-x: auto; /* Enable horizontal scrolling */
 }
