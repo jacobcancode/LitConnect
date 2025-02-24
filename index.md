@@ -15,7 +15,7 @@ menu: nav/home.html
       height: 100%;              
       margin: 0;                 
       padding: 0;                
-      background-color: #E07A5F !important;
+      background-color: #5D82B3 !important; /* Darker Blue */
       font-family: 'Arial', sans-serif;
       color: #ffffff; 
       display: flex; 
@@ -38,22 +38,22 @@ menu: nav/home.html
 
     footer {
       text-align: center;
-      background-color: #6a1b9a; 
+      background-color: #A0C4FF; /* Pastel Medium Blue */
       color: white;
       padding: 15px 10px;
       margin-top: 20px;
     }
 
     footer a {
-      color: #fff;
+      color: #87BFFF; /* Soft Light Blue */
       text-decoration: none;
       font-weight: bold;
     }
 
     .bookshelf {
-      width: 300px; 
+      width: 500px; 
       height: 20px;
-      background-color: #8B4513; 
+      background-color: #4F6B92; /* Darker Blue */
       margin: 50px auto; 
       margin-top: 200px;
       position: relative; 
@@ -62,7 +62,7 @@ menu: nav/home.html
     .book {
       position: absolute; 
       bottom: 20px; 
-      color: black !important; 
+      color: white !important; 
       text-align: center;
       font-weight: bold;
       padding: 10px;
@@ -71,18 +71,19 @@ menu: nav/home.html
       transform: rotate(180deg); 
     }
 
-    .book1 { background-color: #FF6347; height: 120px; width: 40px; left: 20px; }
-    .book2 { background-color: #4682B4; height: 100px; width: 60px; left: 80px; }
-    .book3 { background-color: #32CD32; height: 140px; width: 40px; left: 140px; }
-    .book4 { background-color: #FFD700; height: 100px; width: 55px; left: 220px; }
+    .book1 { background-color: #C47F5E; height: 120px; width: 40px; left: 20px; } /* Brown Leather */
+    .book2 { background-color: #D9A066; height: 100px; width: 60px; left: 90px; } /* Warm Tan */
+    .book3 { background-color: #B04F40; height: 140px; width: 40px; left: 160px; } /* Deep Red */
+    .book4 { background-color: #735D78; height: 100px; width: 55px; left: 230px; } /* Muted Purple */
+    .book5 { background-color: #4A7A8C; height: 110px; width: 50px; left: 300px; } /* Teal Blue */
+    .book6 { background-color: #A2A378; height: 130px; width: 50px; left: 370px; } /* Olive Green */
 
     .monitor {
       width: 800px;  
       height: 500px; 
-      background-image: url('https://d7hftxdivxxvm.cloudfront.net/?quality=80&resize_to=width&src=https%3A%2F%2Fartsy-media-uploads.s3.amazonaws.com%2F2RNK1P0BYVrSCZEy_Sd1Ew%252F3417757448_4a6bdf36ce_o.jpg&width=910'); 
       background-size: cover; 
       background-position: center; 
-      border: 7.5px solid black; 
+      border: 7.5px solid #2C4870; /* Very Dark Pastel Blue */
       position: relative; 
       margin: 80px auto;  
       border-radius: 7.5px;
@@ -99,7 +100,7 @@ menu: nav/home.html
       transform: translateX(-50%); 
       width: 40px; 
       height: 75px; 
-      background-color: black;
+      background-color: #2C4870; /* Dark Blue */
     }
 
     .base {
@@ -109,7 +110,7 @@ menu: nav/home.html
       transform: translateX(-50%); 
       width: 500px; 
       height: 20px; 
-      background-color: black; 
+      background-color: #2C4870; /* Dark Blue */
     }
 
     .button {
@@ -129,7 +130,7 @@ menu: nav/home.html
     .button span {
       display: block;         
       padding: 5px 0;           
-      color: black;              
+      color: white;              
     }
 
     .button-column {
@@ -140,7 +141,6 @@ menu: nav/home.html
       max-height: 90%; 
       justify-content: space-around; 
     }
-
   </style>
 </head>
 
@@ -153,11 +153,9 @@ menu: nav/home.html
     <a href="{{site.baseurl}}/voteforthegoat/home" class="book book2">Moderators Picks</a>
     <a href="{{site.baseurl}}/backend_a" class="book book3">Personalized</a>
     <a href="{{site.baseurl}}/backend_s" class="book book4">About Creators</a>
+    <a href="{{site.baseurl}}/favBooks" class="book book5">Favorite Books</a>
+    <a href="{{site.baseurl}}/book_progress" class="book book6">Reading Tracker</a>
 </div>
-
-<a href="{{site.baseurl}}/favBooks">Favorite Books</a>
-<br>
-<a href="{{site.baseurl}}/book_progress">Reading Tracker</a>
 
 <div class="content">
     <h2 class="menu-item">Discover your next favorite book and connect with fellow readers from around the world.</h2>
@@ -241,7 +239,7 @@ menu: nav/home.html
 
 <script>
     function loadPreferences() {
-      fetch('https://litconnect.stu.nighthawkcodingsociety.com/preferences')
+      fetch('https://litconnect.stu.nighthawkcodingsociety.com/api/preferences')
         .then(response => response.json())
         .then(data => {
           const menuElement = document.getElementById('menu');
