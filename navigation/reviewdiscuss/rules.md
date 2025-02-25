@@ -5,6 +5,19 @@ permalink: /moderator_picks
 comments: true
 ---
 
+<html>
+   <head>
+      <style>
+         body {
+            font-family: 'Arial', sans-serif;
+            background-color: #5D82B3 !important;
+         }
+      </style>
+   </head>
+   <body>
+   </body>
+</html>
+
 ### Community Rules
 
 1. **Be Respectful**  
