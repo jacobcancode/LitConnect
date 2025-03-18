@@ -153,7 +153,7 @@ menu: nav/home.html
     <a href="{{site.baseurl}}/preferences_2" class="book book1">Preferences</a>
     <a href="{{site.baseurl}}/voteforthegoat/home" class="book book2">Moderators Picks</a>
     <a href="{{site.baseurl}}/backend_a" class="book book3">Personalized</a>
-    <a href="{{site.baseurl}}/backend_s" class="book book4">About Creators</a>
+    <a href="{{site.baseurl}}/" class="book book4">About Creators</a>
     <a href="{{site.baseurl}}/favBooks" class="book book5">Favorite Books</a>
     <a href="{{site.baseurl}}/book_progress" class="book book6">Reading Tracker</a>
 </div>
@@ -172,12 +172,6 @@ menu: nav/home.html
             <img src="{{site.baseurl}}/images/App-Logos/Book_Club_Hub.png" alt="Book Club Hub">
             <span>Book Club Hub</span>
         </a>
-        
-        <a href="{{site.baseurl}}/create_and_compete/home" class="button">
-            <img src="{{site.baseurl}}/images/App-Logos/Authors_Spotlight.png" alt="Author Spotlight">
-            <span>Author Spotlight</span>
-        </a>
-        
         <a href="{{site.baseurl}}/cafe" class="button">
             <img src="{{site.baseurl}}/images/App-Logos/Cafe_Store_App_Logo.png" alt="Cafe Store">
             <span>Cafe Store</span>
@@ -196,18 +190,13 @@ menu: nav/home.html
         </a>
 
         <a href="{{site.baseurl}}/bookrecommendations" class="button">
-            <img src="{{site.baseurl}}/images/App-Logos/Book_Recommendations.png" alt="Book Recommendations">
+            <img src="{{site.baseurl}}/images/App-Logos/Book_Recommendations.png" alt="Reading List">
             <span>Book Recommendations</span>
         </a>
 
         <a href="{{site.baseurl}}/tb" class="button">
             <img src="{{site.baseurl}}/images/App-Logos/Database.png" alt="Database">
             <span>Genre Recommendations</span>
-        </a>
-
-        <a href="{{site.baseurl}}/blogs" class="button">
-            <img src="{{site.baseurl}}/images/App-Logos/Database.png" alt="Database">
-            <span>Deployment Blog</span>
         </a>
     </div>
 
@@ -220,11 +209,6 @@ menu: nav/home.html
         <a href="{{site.baseurl}}/literaryawards" class="button">
             <img src="{{site.baseurl}}/images/App-Logos/Database.png" alt="Literary Awards">
             <span>Manage Awards</span>
-        </a>
-
-        <a href="{{site.baseurl}}/q" class="button">
-            <img src="{{site.baseurl}}/images/App-Logos/Database.png" alt="User Data">
-            <span>Dewy Volunteer</span>
         </a>
 
          <a href="{{site.baseurl}}/lib" class="button">
