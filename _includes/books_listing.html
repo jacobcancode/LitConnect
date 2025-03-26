@@ -1,0 +1,157 @@
+<!-- Books Listing Template -->
+<div class="books-page transition-fade">
+  <div class="book-container">
+    <h1 class="book-title">Book Library</h1>
+    
+    <!-- Search Box -->
+    <div class="search-container">
+      <input type="text" id="book-search" placeholder="Search books by title, author, or genre..." class="search-input">
+      <button id="search-button" class="btn btn-primary">Search</button>
+    </div>
+    
+    <!-- Book Categories -->
+    <div class="categories-container">
+      <button class="btn category-btn active" data-category="all">All Books</button>
+      <button class="btn category-btn" data-category="fiction">Fiction</button>
+      <button class="btn category-btn" data-category="non-fiction">Non-Fiction</button>
+      <button class="btn category-btn" data-category="science">Science</button>
+      <button class="btn category-btn" data-category="history">History</button>
+    </div>
+    
+    <!-- Loading Indicator -->
+    <div id="loading-indicator" class="loading-container" style="display: none;">
+      <span class="loading"></span>
+      <p>Loading books...</p>
+    </div>
+    
+    <!-- Books Grid Container -->
+    <div id="books-container"></div>
+    
+    <!-- Pagination Container -->
+    <div id="pagination-container"></div>
+  </div>
+</div>
+
+<!-- Import our scripts -->
+<script type="module">
+  import { BookAPI, bookHelpers } from '/assets/js/api/books.js';
+  
+  // Initialize variables
+  const bookApi = new BookAPI();
+  let currentPage = 1;
+  const pageLimit = 12;
+  let currentCategory = 'all';
+  let searchQuery = '';
+  
+  // DOM elements
+  const booksContainer = document.getElementById('books-container');
+  const paginationContainer = document.getElementById('pagination-container');
+  const searchInput = document.getElementById('book-search');
+  const searchButton = document.getElementById('search-button');
+  const loadingIndicator = document.getElementById('loading-indicator');
+  const categoryButtons = document.querySelectorAll('.category-btn');
+  
+  // Load books on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    loadBooks();
+    
+    // Add event listeners
+    searchButton.addEventListener('click', handleSearch);
+    searchInput.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        handleSearch();
+      }
+    });
+    
+    // Category buttons
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Update active state
+        categoryButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        // Update category and reload books
+        currentCategory = button.dataset.category;
+        currentPage = 1;
+        loadBooks();
+      });
+    });
+  });
+  
+  // Handle search
+  function handleSearch() {
+    searchQuery = searchInput.value.trim();
+    currentPage = 1;
+    loadBooks();
+  }
+  
+  // Load books from API
+  async function loadBooks() {
+    try {
+      // Show loading indicator
+      loadingIndicator.style.display = 'flex';
+      booksContainer.innerHTML = '';
+      
+      // Build query based on filters
+      let endpoint = '';
+      let params = `?page=${currentPage}&limit=${pageLimit}`;
+      
+      if (searchQuery) {
+        endpoint = '/search';
+        params += `&q=${encodeURIComponent(searchQuery)}`;
+      }
+      
+      if (currentCategory && currentCategory !== 'all') {
+        params += `&category=${currentCategory}`;
+      }
+      
+      // Fetch data
+      const data = await bookApi.fetchWithRetry(
+        `${bookApi.baseUrl}${endpoint}${params}`,
+        { method: 'GET' },
+        true
+      );
+      
+      // Hide loading indicator
+      loadingIndicator.style.display = 'none';
+      
+      // Render books
+      if (data && data.books && data.books.length > 0) {
+        bookHelpers.renderBookGrid(data.books, 'books-container');
+        
+        // Initialize pagination
+        bookHelpers.initPagination(
+          data.total || data.books.length,
+          pageLimit,
+          currentPage,
+          'pagination-container',
+          (page) => {
+            currentPage = page;
+            loadBooks();
+          }
+        );
+      } else {
+        // Show no results message
+        booksContainer.innerHTML = `
+          <div class="no-results">
+            <h3>No books found</h3>
+            <p>Try adjusting your search or filters.</p>
+          </div>
+        `;
+      }
+    } catch (error) {
+      console.error('Error loading books:', error);
+      loadingIndicator.style.display = 'none';
+      booksContainer.innerHTML = `
+        <div class="error-message">
+          <h3>Something went wrong</h3>
+          <p>Unable to load books. Please try again later.</p>
+          <button class="btn btn-primary" onclick="loadBooks()">Retry</button>
+        </div>
+      `;
+    }
+  }
+</script>
+
+<!-- Add our enhanced JS for transitions and dark mode -->
+<script src="/assets/js/enhancements.js"></script> 
